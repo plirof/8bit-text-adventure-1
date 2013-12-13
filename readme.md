@@ -10,10 +10,10 @@ Files in this project:
 `game.html`
 `script.js`
 ####To Do List
-*Add Homepage
-*Make homepage direct user into `game.html`
-*Make homepage look awesome
-*Add prompts in the JS page
-*Add the `if/elseif` statements into the JS
-*Add instruction page
-*Have fun
+* Add Homepage
+* Make homepage direct user into `game.html`
+* Make homepage look awesome
+* Add prompts in the JS page
+* Add the `if/elseif` statements into the JS
+* Add instruction page
+* Have fun
