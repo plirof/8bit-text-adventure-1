@@ -13,12 +13,12 @@ Currently there is no one working on the HTML team (apart from me) so there is n
 * Make sure that each switch statement has a default branch with an error message.
 * Use the function `.toLowerCase()` to convert all strings to lower case
 * For example:
-*`var choice1 = prompt("Do you like bacon?");`
-*`if (choice1.toLowerCase === "yes") {document.write("Welcome")}`
+* `var choice1 = prompt("Do you like bacon?");`
+* `if (choice1.toLowerCase === "yes") {document.write("Welcome")}`
 
 * For the input, the prompt function shall be used.
 * For example:
-*`var choice1 = prompt("Do you run or hide?")`
+* `var choice1 = prompt("Do you run or hide?")`
 * For outputting text, `document.write()` shall be used instead of `console.log()`.
 * However, all questions shall be asked within the `prompt` or `confirm`.
 * Where appropriate, `confirm()` boxes shall be used.
