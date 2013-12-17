@@ -167,8 +167,6 @@ function timeCheck(timePassed){
         timeCount += timePassed;
 		checkDays();
     }
-	//Checks how many days the user has lived
-	if 
     //Checks and warns the user when it is night time, and adds one to nightCount
 	if (timeCount === 3) {
             console.log(">Night is approaching");
@@ -203,7 +201,7 @@ function printGameOver(status) {
         else if (status === "dead") {
             console.log(">You died!");
             console.log(">GAME OVER");
-        } else if (status === "exhaust" {
+        } else if (status === "exhaust") {
         }
 }
 
@@ -241,7 +239,7 @@ function fight(enemy,enemyHP) {
 //Time frame! If you spend 30 days on the island getting to the other island, you die of exhaustion. Use of && statements to make sure that the message only gets displayed once.
 function checkDays() {
         if (nightCount === 25 && timeCount === 0) {
-            cosole.log("You feel tired of exhaustion...");
+            cosole.log("You feel tired.");
         } else if (nightCount === 29 && timeCount === 0) {
 			console.log("Your body shakes, and you feel as if you cannot go on much longer...");
 		} else if (nightCount === 29 && timeCount === 3) {
