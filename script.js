@@ -78,11 +78,19 @@ function moveToHome(){
                                 break;
                         } else if (typeof userRaw != "string"){
                                 inputInvalid = true;
+<<<<<<< HEAD
                                 document.write(">Misunderstood command.<br>");
                         } else {
                         user = userRaw.toLowerCase();
                         inputInvalid = false;
                         document.write(user+"<br>");
+=======
+                                document.write(">Misunderstood command.");
+                        } else {
+                        user = userRaw.toLowerCase();
+                        inputInvalid = false;
+                        document.write(">"+user);
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
                         }
                 } while (inputInvalid);
                 
@@ -97,6 +105,7 @@ function moveToHome(){
                                 //Else, does all the other checks to see what the user has typed.
                 switch(user){
                         case 'help':
+<<<<<<< HEAD
                                 document.write(">Put your command in the prompt box. It could be anything, like loot [CONTAINER_NAME], examine [ITEM/PLACE_NAME], inv (short for inventory)[ITEM_NAME], or jump.<br>");
                                 document.write(">There are four types of things. For an example, the agave plants are ITEMs; you can put them in your inventory. the cave is a PLACE; you can go inside it.<br>"); 
                                 document.write(">CONTAINERs are lootable. You can get vital items from inside them.<br>");
@@ -109,21 +118,46 @@ function moveToHome(){
                         break;
                         case 'jump':
                                 document.write(">You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.<br>");
+=======
+                                document.write(">Put your command in the prompt box. It could be anything, like loot [CONTAINER_NAME], examine [ITEM/PLACE_NAME], inv (short for inventory)[ITEM_NAME], or jump.");
+                                document.write(">There are four types of things. For an example, the agave plants are ITEMs; you can put them in your inventory. the cave is a PLACE; you can go inside it."); 
+                                document.write(">CONTAINERs are lootable. You can get vital items from inside them.");
+                                document.write(">ENTITYs are humans or animals. You can kill other ENTITYs.");
+                                document.write(">If you use look around, you can see where everything is.");
+                        break;
+                        case 'look around':
+                                document.write(">The agaves and the banana trees are everywhere, in the north (n) is the generator, the boat is in the southeast (se), and the cave is in the west (w)");
+                                timeCheck();
+                        break;
+                        case 'jump':
+                                document.write(">You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.");
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
                                 timeCheck();
                         break;
                         case 'inv agave leaf':
                                 if (invCheck()) {
+<<<<<<< HEAD
                                         document.write(">Your pockets are full. You have to >drop [ITEM_NAME] before picking this item up<br>");
                                 }
                                 else {
                                         document.write(">You picked up a jagged agave leaf. This is a  weapon; However, it is only a 1/20 attack, not very good compared to a steel-tempered ulfberht.<br>");
+=======
+                                        document.write(">Your pockets are full. You have to >drop [ITEM_NAME] before picking this item up");
+                                }
+                                else {
+                                        document.write(">You picked up a jagged agave leaf. This is a  weapon; However, it is only a 1/20 attack, not very good compared to a steel-tempered ulfberht.");
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
                                         //Set hitpoints to 1, and set current weapon to agave leaf
                                         atk = [1, "agave leaf"];
                                         //Adds one to the time and checks it
                                         timeCheck();
                                         addInv("agave leaf");
+<<<<<<< HEAD
 										//Uncomment next line for debugging the add function
                                         //document.write(inv); 
+=======
+                                                                                document.write(inv); //DEBUG
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
                                 }   
                         break;
                         case "quit":
@@ -134,19 +168,31 @@ function moveToHome(){
                         
                         //Checks all the places that can be moved to next.
                         case "move to generator":
+<<<<<<< HEAD
                                 document.write("You walk over to the generator.<br>");
+=======
+                                document.write("You walk over to the generator.");
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
                                 currentPlace = "generator";
                                 moveToGenerator(); //Not implemented yet
                         break;
                         
                         case "move to cave":
+<<<<<<< HEAD
                                 document.write("You walk over to the cave.<br>");
+=======
+                                document.write("You walk over to the cave.");
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
                                 currentPlace = "cave";
                                 moveToCave(); //Not implemented yet
                         break;
                         default :
                                                         //If the user typed none of the above, logs "Misunderstood command."
+<<<<<<< HEAD
                                 document.write(">Misunderstood command.<br>");
+=======
+                                document.write(">Misunderstood command.");
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
                 }
                 } 
         }
@@ -171,10 +217,17 @@ function timeCheck(timePassed){
     }
     //Checks and warns the user when it is night time, and adds one to nightCount
         if (timeCount === 3) {
+<<<<<<< HEAD
             document.write(">Night is approaching<br>");
     } else if (timeCount >= 4) { 
             nightCount += 1;
             document.write(">It is night time. You have survived "+nightCount+" days<br>");
+=======
+            document.write(">Night is approaching");
+    } else if (timeCount >= 4) { 
+            nightCount += 1;
+            document.write(">It is night time. You have survived "+nightCount+" days");
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
             //Resets the timeCount back to 0;
             timeCount = 0;
                         checkDays();
@@ -198,11 +251,19 @@ function invCheck() {
 //Prints game over message to the user. Optional parameter "status"can be set to "dead"- if so, it prints the message ">You died!" and ">GAME OVER"
 function printGameOver(status) {
                 if (!status) {
+<<<<<<< HEAD
                         document.write(">GAME OVER<br>");
                 }
         else if (status === "dead") {
             document.write(">You died!<br>");
             document.write(">GAME OVER<br>");
+=======
+                        document.write(">GAME OVER");
+                }
+        else if (status === "dead") {
+            document.write(">You died!");
+            document.write(">GAME OVER");
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
         } else if (status === "exhaust") {
         }
 }
@@ -231,7 +292,11 @@ function remItem(item){
                 } 
         }
         //Will not be executed if a match has been found because it will be unreachable by the 'return' 
+<<<<<<< HEAD
         document.write("You don't have that item in your inventory.<br>");
+=======
+        document.write("You don't have that item in your inventory.");
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
 }
 
 //Fight! NOT YET IMPLEMENTED
@@ -243,18 +308,30 @@ function checkDays() {
         if (nightCount === 25 && timeCount === 0) {
             cosole.log("You feel tired.");
         } else if (nightCount === 29 && timeCount === 0) {
+<<<<<<< HEAD
                         document.write("Your body shakes, and you feel as if you cannot go on much longer...<br>");
                 } else if (nightCount === 29 && timeCount === 3) {
                         document.write("You start vomiting with pain and agony. You cannot survive for more than an hour<br>")
                 } else if (nightCount === 30) {
                         document.write("You crawl to a quiet place before you lay down and die.<br>")
+=======
+                        document.write("Your body shakes, and you feel as if you cannot go on much longer...");
+                } else if (nightCount === 29 && timeCount === 3) {
+                        document.write("You start vomiting with pain and agony. You cannot survive for more than an hour")
+                } else if (nightCount === 30) {
+                        document.write("You crawl to a quiet place before you lay down and die.")
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
                         printGameOver();
                 }
 }
 
 //END OF DEFINING AREA
 
+<<<<<<< HEAD
 document.write(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.<br>");
+=======
+document.write(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.");
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
 moveToHome();
         
 
@@ -262,4 +339,8 @@ moveToHome();
 //deluz@esedona.net - Gabriel de Luz (JS Dev)
 //mstaveleytaylor@gmail.com - Matthew Taylor (Project leader)
 //bobbie.rausch@icloud.com - Bram R. (JS dev)
+<<<<<<< HEAD
 //Add yours here!
+=======
+//Add yours here!
+>>>>>>> 506aff25866c9ec0aa8c37139676b878b44c8c34
