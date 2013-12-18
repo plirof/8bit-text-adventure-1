@@ -70,18 +70,19 @@ function moveToHome(){
                 do {
                         /*Code to detect if the user's input is a string. The string doesn't get converted to lower case until we are sure that userRaw IS a string, because if the user leaves it blank then
                         we will get an error because you cannot call .toLowerCase() on null.*/
-                        var userRaw = prompt("What is your move?", "(Suggestion: Use the help)");
+					document.write(">")
+                        var userRaw = prompt("What is your move?", "(Suggestion: Use the help)<br>");
                         if (userRaw === null) {
                                 printGameOver();
                                 cancel = true;
                                 break;
                         } else if (typeof userRaw != "string"){
                                 inputInvalid = true;
-                                console.log(">Misunderstood command.");
+                                document.write(">Misunderstood command.<br>");
                         } else {
                         user = userRaw.toLowerCase();
                         inputInvalid = false;
-                        console.log(">"+user);
+                        document.write(user+"<br>");
                         }
                 } while (inputInvalid);
                 
@@ -96,32 +97,33 @@ function moveToHome(){
                                 //Else, does all the other checks to see what the user has typed.
                 switch(user){
                         case 'help':
-                                console.log(">Put your command in the prompt box. It could be anything, like loot [CONTAINER_NAME], examine [ITEM/PLACE_NAME], inv (short for inventory)[ITEM_NAME], or jump.");
-                                console.log(">There are four types of things. For an example, the agave plants are ITEMs; you can put them in your inventory. the cave is a PLACE; you can go inside it."); 
-                                console.log(">CONTAINERs are lootable. You can get vital items from inside them.");
-                                console.log(">ENTITYs are humans or animals. You can kill other ENTITYs.");
-                                console.log(">If you use look around, you can see where everything is.");
+                                document.write(">Put your command in the prompt box. It could be anything, like loot [CONTAINER_NAME], examine [ITEM/PLACE_NAME], inv (short for inventory)[ITEM_NAME], or jump.<br>");
+                                document.write(">There are four types of things. For an example, the agave plants are ITEMs; you can put them in your inventory. the cave is a PLACE; you can go inside it.<br>"); 
+                                document.write(">CONTAINERs are lootable. You can get vital items from inside them.<br>");
+                                document.write(">ENTITYs are humans or animals. You can kill other ENTITYs.<br>");
+                                document.write(">If you use look around, you can see where everything is.<br>");
                         break;
                         case 'look around':
-                                console.log(">The agaves and the banana trees are everywhere, in the north (n) is the generator, the boat is in the southeast (se), and the cave is in the west (w)");
+                                document.write(">The agaves and the banana trees are everywhere, in the north (n) is the generator, the boat is in the southeast (se), and the cave is in the west (w)<br>");
                                 timeCheck();
                         break;
                         case 'jump':
-                                console.log(">You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.");
+                                document.write(">You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.<br>");
                                 timeCheck();
                         break;
                         case 'inv agave leaf':
                                 if (invCheck()) {
-                                        console.log(">Your pockets are full. You have to >drop [ITEM_NAME] before picking this item up");
+                                        document.write(">Your pockets are full. You have to >drop [ITEM_NAME] before picking this item up<br>");
                                 }
                                 else {
-                                        console.log(">You picked up a jagged agave leaf. This is a  weapon; However, it is only a 1/20 attack, not very good compared to a steel-tempered ulfberht.");
+                                        document.write(">You picked up a jagged agave leaf. This is a  weapon; However, it is only a 1/20 attack, not very good compared to a steel-tempered ulfberht.<br>");
                                         //Set hitpoints to 1, and set current weapon to agave leaf
-                                                                                atk = [1, "agave leaf"];
-                                                                                //Adds one to the time and checks it
+                                        atk = [1, "agave leaf"];
+                                        //Adds one to the time and checks it
                                         timeCheck();
                                         addInv("agave leaf");
-                                                                                console.log(inv); //DEBUG
+										//Uncomment next line for debugging the add function
+                                        //document.write(inv); 
                                 }   
                         break;
                         case "quit":
@@ -132,19 +134,19 @@ function moveToHome(){
                         
                         //Checks all the places that can be moved to next.
                         case "move to generator":
-                                console.log("You walk over to the generator.");
+                                document.write("You walk over to the generator.<br>");
                                 currentPlace = "generator";
                                 moveToGenerator(); //Not implemented yet
                         break;
                         
                         case "move to cave":
-                                console.log("You walk over to the cave.");
+                                document.write("You walk over to the cave.<br>");
                                 currentPlace = "cave";
                                 moveToCave(); //Not implemented yet
                         break;
                         default :
                                                         //If the user typed none of the above, logs "Misunderstood command."
-                                console.log(">Misunderstood command.");
+                                document.write(">Misunderstood command.<br>");
                 }
                 } 
         }
@@ -159,30 +161,30 @@ function moveToHome(){
 //Checks the current time and warns the user when it is approaching night. Optional parameter to change how much time has passed. Default set to 1.
 function timeCheck(timePassed){
     if (!timePassed) {
-		//If nothing was passed in the timePassed argument, it defaults to one.
-		timeCount += 1;
-		checkDays();
+                //If nothing was passed in the timePassed argument, it defaults to one.
+                timeCount += 1;
+                checkDays();
     } else {
         //If something was passed, += to timeCount.
         timeCount += timePassed;
-		checkDays();
+                checkDays();
     }
     //Checks and warns the user when it is night time, and adds one to nightCount
-	if (timeCount === 3) {
-            console.log(">Night is approaching");
+        if (timeCount === 3) {
+            document.write(">Night is approaching<br>");
     } else if (timeCount >= 4) { 
             nightCount += 1;
-            console.log(">It is night time. You have survived "+nightCount+" days");
+            document.write(">It is night time. You have survived "+nightCount+" days<br>");
             //Resets the timeCount back to 0;
             timeCount = 0;
-			checkDays();
+                        checkDays();
         }
         }
 
 //Checks if the user is alive (does not include necessary steps to break out of current function)
 function aliveCheck() {
         if (!alive) {
-                printGameOver("dead");   
+                printGameOver("dead<br>");   
         }
 }
 
@@ -195,12 +197,12 @@ function invCheck() {
 
 //Prints game over message to the user. Optional parameter "status"can be set to "dead"- if so, it prints the message ">You died!" and ">GAME OVER"
 function printGameOver(status) {
-		if (!status) {
-			console.log(">GAME OVER");
-		}
+                if (!status) {
+                        document.write(">GAME OVER<br>");
+                }
         else if (status === "dead") {
-            console.log(">You died!");
-            console.log(">GAME OVER");
+            document.write(">You died!<br>");
+            document.write(">GAME OVER<br>");
         } else if (status === "exhaust") {
         }
 }
@@ -229,7 +231,7 @@ function remItem(item){
                 } 
         }
         //Will not be executed if a match has been found because it will be unreachable by the 'return' 
-        console.log("You don't have that item in your inventory.");
+        document.write("You don't have that item in your inventory.<br>");
 }
 
 //Fight! NOT YET IMPLEMENTED
@@ -241,44 +243,23 @@ function checkDays() {
         if (nightCount === 25 && timeCount === 0) {
             cosole.log("You feel tired.");
         } else if (nightCount === 29 && timeCount === 0) {
-			console.log("Your body shakes, and you feel as if you cannot go on much longer...");
-		} else if (nightCount === 29 && timeCount === 3) {
-			console.log("You start vomiting with pain and agony. You cannot survive for more than an hour")
-		} else if (nightCount === 30) {
-			console.log("You crawl to a quiet place before you lay down and die.")
-			printGameOver();
-		}
+                        document.write("Your body shakes, and you feel as if you cannot go on much longer...<br>");
+                } else if (nightCount === 29 && timeCount === 3) {
+                        document.write("You start vomiting with pain and agony. You cannot survive for more than an hour<br>")
+                } else if (nightCount === 30) {
+                        document.write("You crawl to a quiet place before you lay down and die.<br>")
+                        printGameOver();
+                }
 }
 
 //END OF DEFINING AREA
 
-console.log(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.");
+document.write(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.<br>");
 moveToHome();
         
 
 //Emails:
 //deluz@esedona.net - Gabriel de Luz (JS Dev)
 //mstaveleytaylor@gmail.com - Matthew Taylor (Project leader)
-//bobbie.rausch@icloud.com - Bobbie R. (JS dev)
+//bobbie.rausch@icloud.com - Bram R. (JS dev)
 //Add yours here!
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
