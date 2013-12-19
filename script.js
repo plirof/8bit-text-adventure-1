@@ -278,6 +278,7 @@ function checkDays() {
 
 //END OF DEFINING AREA
 
+moveToHome();
 
 //Emails:
 //deluz@esedona.net - Gabriel de Luz (JS Dev)
