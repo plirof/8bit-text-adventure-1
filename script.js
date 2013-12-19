@@ -1,55 +1,3 @@
-
-/*
-    Better output message for help? You decide... I think it would make it more user friendly.
-        
-        Put your command in the prompt box. You can either:
-        
-        loot [CONTAINER] 
-        Loots the specified container.
-        
-        examine [ITEM/WEAPON/PLACE]
-        Examines the specified item or place name.
-        
-        inv [ITEM/WEAPON]
-        Short for inventory, adds the selected item or weapon to your inventory.
-        
-        drop [ITEM/WEAPON]
-        Drops the selected item or weapon. It must be in your inventory before you can drop it. If you drop a weapon then it will be removed from your invetory and you cannot kill with it.   
-        
-        jump
-        Makes your character jump.
-        
-        look around
-        Your character surveys the area. Using this, you can find things you wouldn't normally see.
-        
-        kill [ENTITY]
-                NOT YET IMPLEMENTED.
-        
-        quit
-        Quits the game.
-                
-                move to [PLACE]
-                Moves your character to the specified PLACE. Only some areas are acessible from other areas.
-        
-        Types of objects:
-        
-        ITEM
-        E.G agave plants are ITEMs. You can put them in your iventory, examine them, or drop them.
-                
-                WEAPON
-                Agave plants are also weapons...?
-        
-        PLACE
-        You can go inside these.
-        
-        CONTAINER
-        You can loot these and gain ITEMS.
-        
-        ENTITY
-        These are humans or animals. You can kill other ENTITYs.
-                
-        
-        */ 
 //VARIABLE AREA!!!!!!!!!!
 var timeCount = 0; //Counter for time of day. Time count 1 is morning, 2 midday, 3 evening, and when the counter gets to 4 nightCounter += 1
 var nightCount = 0; //Number of nights played.
@@ -64,25 +12,30 @@ var user = ""; //Defines a new empty variable which the user's input is going to
 //END OF VARIABLE AREA
         
         
-//DEFINING AREA!!!! THESE ARE FUNCTIONS AND ARE NOT ACTIVE UNTIL CALLED        
+//DEFINING AREA!!!! THESE ARE FUNCTIONS AND ARE NOT ACTIVE UNTIL CALLED
+function getInput() {
+	$(document).ready(function() {
+		$("input[name=command]").focus();		
+		var userRaw = $("input[name=command]").val();
+	});
+	return userRaw;
+}     
+function printStart() {
+	$(document).ready(function() {
+		$("#main").append(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.<br>");
+	});
+}
 //Move to home function
 function moveToHome(){
-        while(currentPlace === "home") {
-                do {	
-						$(document).ready(function() {
-						$("input").focus();
-						$("#main").append(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.<br>");
-						var userRaw = $("input[name=command]").val();
-						});
-				
+	printStart();
+    while(currentPlace === "home") {
+				do {	
+						
+						var userRaw = getInput()
                         /*Code to detect if the user's input is a string. The string doesn't get converted to lower case until we are sure that userRaw IS a string, because if the user leaves it blank then
                         we will get an error because you cannot call .toLowerCase() on null.*/
 
-                        if (userRaw === null) {
-                                printGameOver();
-                                cancel = true;
-                                break;
-                        } else if (typeof userRaw != "string"){
+                        if (typeof userRaw != "string" || !userRaw){
                                 inputInvalid = true;
                                 $('#main').append(">Misunderstood command.<br>");
                         } else {
@@ -95,11 +48,11 @@ function moveToHome(){
                 //If the user pressed cancel on the prompt box, break out of the current while loop.
                 if (cancel){
                         break;
-                }
-                                //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
-                                if (user.slice(0,5) === "drop ") {
-                                        remItem(user.slice(5));
-                                } else {
+            }
+            //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
+            if (user.slice(0,5) === "drop ") {
+                remItem(user.slice(5));
+            } else {
                                 //Else, does all the other checks to see what the user has typed.
                 switch(user){
                         case 'help':
@@ -167,16 +120,16 @@ function moveToHome(){
                                 $('#main').append(">Misunderstood command.<br>");
 
                 }
-                } 
-                });
-        }
-        //
+		} 
+    }
+ }
+
         
         
         
         
         
-}        
+        
 
 //Checks the current time and warns the user when it is approaching night. Optional parameter to change how much time has passed. Default set to 1.
 function timeCheck(timePassed){
