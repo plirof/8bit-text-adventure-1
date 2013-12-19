@@ -103,19 +103,19 @@ function moveToHome(){
                                 //Else, does all the other checks to see what the user has typed.
                 switch(user){
                         case 'help':
-                                document.write("loot [CONTAINER]<br>Loots the specified container.<br><br>");
-                                document.write("examine [ITEM/WEAPON/PLACE]<br>Examines the specified item or place name.<br><br>"); 
-                                document.write("inv [ITEM/WEAPON]<br>Short for inventory, adds the selected item or weapon to your inventory.<br><br>");
-                                document.write("drop [ITEM/WEAPON]<br>Drops the selected item or weapon. It must be in your inventory before you can drop it. If you drop a weapon then it will be removed from your invetory and you cannot kill with it.<br><br>");
-                                document.write("jump<br>Makes your character jump.<br>");
-                                document.write("look around<br>Your character surveys the area. Using this, you can find things you wouldn't normally see.<br><br>")
-                                document.write("move to [PLACE]<br>Moves your character to the specified PLACE. Only some areas are acessible from other areas.<br><br>")
-                                document.write("Types of objects:<br><br>")
-                                document.write("ITEM<br>E.G agave plants are ITEMs. You can put them in your iventory, examine them, or drop them.<br><br>")
-                                document.write("WEAPON<br>Agave plants are also weapons...?<br><br>")
-                                document.write("PLACE<br>You can go inside these.<br><br>")
-                                document.write("CONTAINER<br>You can loot these and gain ITEMS.<br><br>")
-                                document.write("ENTITY<br>These are humans or animals. You can kill other ENTITYs.<br>")
+                                $('#main').append("loot [CONTAINER]<br>Loots the specified container.<br><br>");
+                                $('#main').append("examine [ITEM/WEAPON/PLACE]<br>Examines the specified item or place name.<br><br>"); 
+                                $('#main').append("inv [ITEM/WEAPON]<br>Short for inventory, adds the selected item or weapon to your inventory.<br><br>");
+                                $('#main').append("drop [ITEM/WEAPON]<br>Drops the selected item or weapon. It must be in your inventory before you can drop it. If you drop a weapon then it will be removed from your invetory and you cannot kill with it.<br><br>");
+                                $('#main').append("jump<br>Makes your character jump.<br>");
+                                $('#main').append("look around<br>Your character surveys the area. Using this, you can find things you wouldn't normally see.<br><br>");
+                                $('#main').append("move to [PLACE]<br>Moves your character to the specified PLACE. Only some areas are acessible from other areas.<br><br>");
+                                $('#main').append("Types of objects:<br><br>");
+                                $('#main').append("ITEM<br>E.G agave plants are ITEMs. You can put them in your iventory, examine them, or drop them.<br><br>");
+                                $('#main').append("WEAPON<br>Agave plants are also weapons...?<br><br>");
+                                $('#main').append("PLACE<br>You can go inside these.<br><br>");
+                                $('#main').append("CONTAINER<br>You can loot these and gain ITEMS.<br><br>");
+                                $('#main').append("ENTITY<br>These are humans or animals. You can kill other ENTITYs.<br>");
                         break;
                         case 'look around':
                                 $("#main").append(">The agaves and the banana trees are everywhere, in the north (n) is the generator, the boat is in the southeast (se), and the cave is in the west (w)<br>");
