@@ -1,3 +1,4 @@
+
 /*
     Better output message for help? You decide... I think it would make it more user friendly.
         
@@ -67,22 +68,26 @@ var user = ""; //Defines a new empty variable which the user's input is going to
 //Move to home function
 function moveToHome(){
         while(currentPlace === "home") {
-                do {
+                do {	
+						$(document).ready(function() {
+						$("input").focus();
+						$("#main").append(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.<br>");
+						var userRaw = $("input[name=command]").val();
+						});
+				
                         /*Code to detect if the user's input is a string. The string doesn't get converted to lower case until we are sure that userRaw IS a string, because if the user leaves it blank then
                         we will get an error because you cannot call .toLowerCase() on null.*/
-					document.write(">")
-                        var userRaw = prompt("What is your move?", "(Suggestion: Use the help)<br>");
                         if (userRaw === null) {
                                 printGameOver();
                                 cancel = true;
                                 break;
                         } else if (typeof userRaw != "string"){
                                 inputInvalid = true;
-                                document.write(">Misunderstood command.<br>");
+                                $('#main').append(">Misunderstood command.<br>");
                         } else {
                         user = userRaw.toLowerCase();
                         inputInvalid = false;
-                        document.write(user+"<br>");
+                        $('#main').append(user+"<br>");
                         }
                 } while (inputInvalid);
                 
@@ -90,40 +95,40 @@ function moveToHome(){
                 if (cancel){
                         break;
                 }
-                                //Checks to see if the first five letters entered were drop - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
+                                //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
                                 if (user.slice(0,5) === "drop ") {
                                         remItem(user.slice(5));
                                 } else {
                                 //Else, does all the other checks to see what the user has typed.
                 switch(user){
                         case 'help':
-                                document.write(">Put your command in the prompt box. It could be anything, like loot [CONTAINER_NAME], examine [ITEM/PLACE_NAME], inv (short for inventory)[ITEM_NAME], or jump.<br>");
-                                document.write(">There are four types of things. For an example, the agave plants are ITEMs; you can put them in your inventory. the cave is a PLACE; you can go inside it.<br>"); 
-                                document.write(">CONTAINERs are lootable. You can get vital items from inside them.<br>");
-                                document.write(">ENTITYs are humans or animals. You can kill other ENTITYs.<br>");
-                                document.write(">If you use look around, you can see where everything is.<br>");
+                                $('#main').append(">Put your command in the prompt box. It could be anything, like loot [CONTAINER_NAME], examine [ITEM/PLACE_NAME], inv (short for inventory)[ITEM_NAME], or jump.<br>");
+                                $('#main').append(">There are four types of things. For an example, the agave plants are ITEMs; you can put them in your inventory. the cave is a PLACE; you can go inside it.<br>"); 
+                                $('#main').append(">CONTAINERs are lootable. You can get vital items from inside them.<br>");
+                                $('#main').append(">ENTITYs are humans or animals. You can kill other ENTITYs.<br>");
+                                $('#main').append(">If you use look around, you can see where everything is.<br>");
                         break;
                         case 'look around':
-                                document.write(">The agaves and the banana trees are everywhere, in the north (n) is the generator, the boat is in the southeast (se), and the cave is in the west (w)<br>");
+                                $('#main').append(">The agaves and the banana trees are everywhere, in the north (n) is the generator, the boat is in the southeast (se), and the cave is in the west (w)<br>");
                                 timeCheck();
                         break;
                         case 'jump':
-                                document.write(">You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.<br>");
+                                $('#main').append(">You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.<br>");
                                 timeCheck();
                         break;
                         case 'inv agave leaf':
                                 if (invCheck()) {
-                                        document.write(">Your pockets are full. You have to >drop [ITEM_NAME] before picking this item up<br>");
+                                        $('#main').append(">Your pockets are full. You have to >drop [ITEM_NAME] before picking this item up<br>");
                                 }
                                 else {
-                                        document.write(">You picked up a jagged agave leaf. This is a  weapon; However, it is only a 1/20 attack, not very good compared to a steel-tempered ulfberht.<br>");
+                                        $('#main').append(">You picked up a jagged agave leaf. This is a  weapon; However, it is only a 1/20 attack, not very good compared to a steel-tempered ulfberht.<br>");
                                         //Set hitpoints to 1, and set current weapon to agave leaf
                                         atk = [1, "agave leaf"];
                                         //Adds one to the time and checks it
                                         timeCheck();
                                         addInv("agave leaf");
 										//Uncomment next line for debugging the add function
-                                        //document.write(inv); 
+                                        //$('#main').append(inv); 
                                 }   
                         break;
                         case "quit":
@@ -134,19 +139,19 @@ function moveToHome(){
                         
                         //Checks all the places that can be moved to next.
                         case "move to generator":
-                                document.write("You walk over to the generator.<br>");
+                                $('#main').append("You walk over to the generator.<br>");
                                 currentPlace = "generator";
                                 moveToGenerator(); //Not implemented yet
                         break;
                         
                         case "move to cave":
-                                document.write("You walk over to the cave.<br>");
+                                $('#main').append("You walk over to the cave.<br>");
                                 currentPlace = "cave";
                                 moveToCave(); //Not implemented yet
                         break;
                         default :
                                                         //If the user typed none of the above, logs "Misunderstood command."
-                                document.write(">Misunderstood command.<br>");
+                                $('#main').append(">Misunderstood command.<br>");
                 }
                 } 
         }
@@ -171,10 +176,10 @@ function timeCheck(timePassed){
     }
     //Checks and warns the user when it is night time, and adds one to nightCount
         if (timeCount === 3) {
-            document.write(">Night is approaching<br>");
+            $('#main').append(">Night is approaching<br>");
     } else if (timeCount >= 4) { 
             nightCount += 1;
-            document.write(">It is night time. You have survived "+nightCount+" days<br>");
+            $('#main').append(">It is night time. You have survived "+nightCount+" days<br>");
             //Resets the timeCount back to 0;
             timeCount = 0;
                         checkDays();
@@ -198,11 +203,11 @@ function invCheck() {
 //Prints game over message to the user. Optional parameter "status"can be set to "dead"- if so, it prints the message ">You died!" and ">GAME OVER"
 function printGameOver(status) {
                 if (!status) {
-                        document.write(">GAME OVER<br>");
+                        $('#main').append(">GAME OVER<br>");
                 }
         else if (status === "dead") {
-            document.write(">You died!<br>");
-            document.write(">GAME OVER<br>");
+            $('#main').append(">You died!<br>");
+            $('#main').append(">GAME OVER<br>");
         } else if (status === "exhaust") {
         }
 }
@@ -231,7 +236,7 @@ function remItem(item){
                 } 
         }
         //Will not be executed if a match has been found because it will be unreachable by the 'return' 
-        document.write("You don't have that item in your inventory.<br>");
+        $('#main').append("You don't have that item in your inventory.<br>");
 }
 
 //Fight! NOT YET IMPLEMENTED
@@ -241,22 +246,22 @@ function fight(enemy,enemyHP) {
 //Time frame! If you spend 30 days on the island getting to the other island, you die of exhaustion. Use of && statements to make sure that the message only gets displayed once.
 function checkDays() {
         if (nightCount === 25 && timeCount === 0) {
-            cosole.log("You feel tired.");
+            $('#main').append("You feel tired.");
         } else if (nightCount === 29 && timeCount === 0) {
-                        document.write("Your body shakes, and you feel as if you cannot go on much longer...<br>");
+                        $('#main').append("Your body shakes, and you feel as if you cannot go on much longer...<br>");
                 } else if (nightCount === 29 && timeCount === 3) {
-                        document.write("You start vomiting with pain and agony. You cannot survive for more than an hour<br>")
+                        $('#main').append("You start vomiting with pain and agony. You cannot survive for more than an hour<br>");
                 } else if (nightCount === 30) {
-                        document.write("You crawl to a quiet place before you lay down and die.<br>")
+                        $('#main').append("You crawl to a quiet place before you lay down and die.<br>");
                         printGameOver();
                 }
 }
 
 //END OF DEFINING AREA
 
-document.write(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.<br>");
-moveToHome();
-        
+	
+    moveToHome();
+
 
 //Emails:
 //deluz@esedona.net - Gabriel de Luz (JS Dev)
