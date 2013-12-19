@@ -48,7 +48,7 @@ var hp = 30; //Player's health. When it gets to 0, the game stops (nextMove = fa
 var atk = [0.5, "unarmed"]; //Hitpoints/Weapon. atk[0] is the hitpoints out of 20, atk[1] is the weapon. 
 var nextMove = true; //If the game is to continue playing or not
 var alive = true; //Wether the player is alive. If it is false, the game stops.
-var inv = [0]; //Is an array of items in the player's inventory. See functions below for adding and removing items from an array.
+var inv = []; //Is an array of items in the player's inventory. See functions below for adding and removing items from an array.
 var currentPlace = "home"; //The players current place. By default it is set to home
 var inputInvalid = false; //Check's if the user's input is valid
 var cancel = false; //Checks if the user has pressed cancel on the prompt, then break out of the while loop.
@@ -82,7 +82,12 @@ function moveToHome(){
 		if (cancel){
 			break;
 		}
-	
+		
+		//Checks to see wether the user's input started with the substring 'drop'. On its own because you cannot use logical operators (===) in 'case' statements.
+		if (user.slice(0,4) === "drop") {
+			console.log("It worked!");
+		} else{
+		//If it doesn't match, then it runs the main switch with all the other options.
 		switch(user){
 			case 'help':
 				console.log(">Put your command in the prompt box. It could be anything, like loot [CONTAINER_NAME], examine [ITEM/PLACE_NAME], inv (short for inventory)[ITEM_NAME], or jump.");
@@ -111,7 +116,7 @@ function moveToHome(){
 					atk = [1, "agave leaf"];
 					timeCount += 1;
 					timeCheck();
-					addInv("agave leaf");
+					//addInv("agave leaf");
 				}   
 			break;
 			case "quit":
@@ -145,7 +150,7 @@ function moveToHome(){
 	
 	
 }	
-
+}
 //Move to Generator function
 /*
 function moveToGenerator(){
@@ -259,14 +264,23 @@ function printGameOver(status) {
 }
 
 //Adds an item to the inventory array.
-function addInv(item){
-	inv.push(item);
+//function addInv(item){
+//	var invLength = inv.length;
+//	inv[invLength] = item;
 	//Adds 1 to the number of items in the player's inventory.
-	inv[0] += 1;
-}
+//	inv[0] += 1;
+//}
 
 function remItem(item){
-	var indexOfRemItem = inv.indexOf(item)
+	for (i = 1; i <= inv.length; i++) {
+		if (inv[i] === item) {
+			break;
+		} else {
+			console.log(">Error - you do not have that item in your inventory.");
+			return;
+		}
+	}
+	var indexOfRemItem = inv.indexOf(item);
 }
 
 
