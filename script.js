@@ -242,11 +242,10 @@ function hpCheck(hp) {
 }
 
 //Fight! NEWLY IMPLEMENTED
-function fight(enemy,enemyHP,enemyLoot,fightMode) {
+function fight(enemy,enemyHP,enemyLoot) {
 	while(fightMode && alive) {
 		if (atk[1] === "unarmed") {
 			var attack = $("#main").append("Will you attack the " + enemy ", even though you have no weapon? Y/N");
-		}
 		} else {
 			var attack = $("#main").append("Will you attack the " + enemy + " with your " + atk[1] + "? Y/N");
 		}
@@ -260,11 +259,13 @@ function fight(enemy,enemyHP,enemyLoot,fightMode) {
 					if (invCheck()) {
                                         $('#main').append(">Your pockets are full.");
                                         fightMode = false;
+                                        break;
                                 	}
                                 } else {
                                         $('#main').append(">You gained " + enemyLoot + ". It came from the " + enemy + ".");
                                         addInv(enemyLoot);
                                         fightMode = false;
+                                        break;
                                 }
 			}
 			var enemyATK = Math.floor(Math.random * 2 + 7) + (enemyHp % 2);
@@ -283,6 +284,7 @@ function fight(enemy,enemyHP,enemyLoot,fightMode) {
 						if (probFlee > 0.625) {
 							$("#main").append("You got away scotch-free!");
 							fightMode = false;
+							break;
 						} else {
 							$("#main").append("The " + enemy + " pulled you back into battle.");
 							hp -= 15;
@@ -300,6 +302,7 @@ function fight(enemy,enemyHP,enemyLoot,fightMode) {
 					if (probFlee > 0.625) {
 						$("#main").append("You got away scotch-free!");
 						fightMode = false;
+						break;
 					} else {
 						$("#main").append("The " + enemy + " pulled you back into battle.");
 						hp-15;
@@ -308,6 +311,7 @@ function fight(enemy,enemyHP,enemyLoot,fightMode) {
 				} else {
 					$("#main").append("You let the " + enemy + " kill you.");
 					alive = false;
+					break;
 				}
 			}
 		}
