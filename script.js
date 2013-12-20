@@ -54,7 +54,7 @@ function loot(loot) {
 	if (inv.length + loot.length <= 10) {
 		inv.concat(loot);
 	} else {
-		$("#main").append
+		$("#main").append("Your pockets are full. You must drop " + ((inv.length + loot.length) - 10) + " items to loot the enemy.");
 	}
 }
         
@@ -144,16 +144,16 @@ function hpCheck(hp) {
 	}
 }
 
-//Fight! NEWLY IMPLEMENTED
+//Fight!
 function fight(enemy,enemyHP,enemyLoot) {
 	while(fightMode && alive) {
-		if (atk[1] === "unarmed") {//new
+		if (atk[1] === "unarmed") {
 			//If the user is unarmed, print this message and take the user's input.
 			var attack = $("#main").append("Will you attack the " + enemy ", even though you have no weapon? Y/N");
-		} else {//151
+		} else {
 			//If the user has a weapon equipped, print that.
 			var attack = $("#main").append("Will you attack the " + enemy + " with your " + atk[1] + "? Y/N");
-		}// else 154
+		}
 		if (fightCheckInput(attack)) {
 			//Validate the user's input and damage the enemy with the appropriate amount of hitpoints
 			$("#main").append("You hit the " + enemy + " for " + atk[0] + ".");
@@ -162,19 +162,19 @@ function fight(enemy,enemyHP,enemyLoot) {
 				//
 				$("#main").append("You killed the " + enemy + "!");
 				var loot = $("#main").append("Do you want to loot the dead " + enemy + "?");
-				if (fightCheckInput(loot)) {//new
-					if (invCheck()) {//new
+				if (fightCheckInput(loot)) {
+					if (invCheck()) {
                                         $('#main').append(">Your pockets are full.");
                                         fightMode = false;
                                         break;
-                                	}//167
-                                } else {///166
+                                	}
+                                } else {
                                         $('#main').append(">You gained " + enemyLoot + ". It came from the " + enemy + ".");
                                         addInv(enemyLoot);
                                         fightMode = false;
                                         break;
-                                }//else 172
-			}//162
+                                }
+			}
 			var enemyATK = Math.floor(Math.random * 2 + 7) + (enemyHp % 2);
 			hpCheck(hp);
 		} else {
