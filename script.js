@@ -12,32 +12,245 @@ var user = "";//Defines a new empty variable which the user's input is going to 
 var fightMode = false; //This makes you fight. While you fight, no time goes by. If this is put back at false, the fight stops
 var pots = 0; //Pots is short for potions. If you have potions, you can use them to regain life.
 //END OF VARIABLE AREA
-        
-        
+
+
 //DEFINING AREA!!!! THESE ARE FUNCTIONS AND ARE NOT ACTIVE UNTIL CALLED
 function getInput() {
 	$(document).ready(function() {
 		$("input[name=command]").focus();		
 		var userRaw = $("input[name=command]").val();
+		return userRaw;
 	});
-	return userRaw;
+	
 }     
 function printStart() {
 	$(document).ready(function() {
 		$("#main").append(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.<br>");
 	});
 }
+  
+function fightCheckInput(input) {
+		switch (input) {
+			case "yes":
+				return true;
+			case "y":
+				return true;
+			case "n":
+				return false;
+			case "N":
+				return false;
+			case "Y":
+				return true;
+			case "no":
+				return false;
+			default:
+			
+			$("#main").append(">Misunderstood command.");
+		}
+	}
+}        
+        
+function loot(loot) {
+	if (inv.length + loot.length <= 10) {
+		inv.concat(loot);
+	} else {
+		$("#main").append
+	}
+}
+        
+        
+
+//Checks the current time and warns the user when it is approaching night. Optional parameter to change how much time has passed. Default set to 1.
+function timeCheck(timePassed){
+    if (!timePassed) {
+                //If nothing was passed in the timePassed argument, it defaults to one.
+                timeCount += 1;
+                checkDays();
+    } else {
+        //If something was passed, += to timeCount.
+        timeCount += timePassed;
+                checkDays();
+    }
+    //Checks and warns the user when it is night time, and adds one to nightCount
+        if (timeCount === 3) {
+            $('#main').append(">Night is approaching<br>");
+    } else if (timeCount >= 4) { 
+            nightCount += 1;
+            $('#main').append(">It is night time. You have survived "+nightCount+" days<br>");
+           //Resets the timeCount back to 0;
+            timeCount = 0;
+                        checkDays();
+        }
+        }
+
+//Checks if the user is alive (does not include necessary steps to break out of current function)
+function aliveCheck() {
+        if (!alive) {
+                printGameOver("dead<br>");   
+        }
+}
+
+//RETURNS TRUE if inventory is full.
+function invCheck() { 
+        if (inv.length === 10) {
+                return true;
+        }
+}
+
+//Prints game over message to the user. Optional parameter "status"can be set to "dead"- if so, it prints the message ">You died!" and ">GAME OVER"
+function printGameOver(status) {
+                if (!status) {
+                        $('#main').append(">GAME OVER<br>");
+                }
+        else if (status === "dead") {
+            $('#main').append(">You died!<br>");
+            $('#main').append(">GAME OVER<br>");
+
+        } 
+}
+
+//Adds an item to the inventory array.
+function addInv(item){
+        inv.push(item);
+        //Adds 1 to the number of items in the player's inventory.
+}
+
+//Removes an item from the inventory
+function remItem(item){
+        //Loops through the array and sees if anything matches the user's item to be dropped
+        for (i = 0; i < item.length; i++) {
+                if (inv[i] === item) {
+                        //If yes, get the index of the item and remove it from the array (in .splice(), the second parameter is number of items to be removed)
+                        var indexOfRemItem = inv[i];
+                        inv.splice(indexOfRemItem,1);
+                        //If the current weapon is the item to be dropped, 
+                        if (atk[1] === item) {
+                                //If the item dropped was the currently equipped weapon, remove it from the atk aray and change the weapon to "unarmed", 0.5 hitpoints.
+                                atk[1] = "unarmed";
+                                atk[0] = 0.5;
+                        }
+                        return;
+                } 
+        }
+        //Will not be executed if a match has been found because it will be unreachable by the 'return' 
+        $('#main').append("You don't have that item in your inventory.<br>");
+}
+
+//HpCheck! Yeah!
+function hpCheck(hp) {
+	if(hp < 1) {
+		alive = false;
+		printGameOver("dead");
+	}
+}
+
+//Fight! NEWLY IMPLEMENTED
+function fight(enemy,enemyHP,enemyLoot) {
+	while(fightMode && alive) {
+		if (atk[1] === "unarmed") {//new
+			//If the user is unarmed, print this message and take the user's input.
+			var attack = $("#main").append("Will you attack the " + enemy ", even though you have no weapon? Y/N");
+		} else {//151
+			//If the user has a weapon equipped, print that.
+			var attack = $("#main").append("Will you attack the " + enemy + " with your " + atk[1] + "? Y/N");
+		}// else 154
+		if (fightCheckInput(attack)) {
+			//Validate the user's input and damage the enemy with the appropriate amount of hitpoints
+			$("#main").append("You hit the " + enemy + " for " + atk[0] + ".");
+			enemyHp -= atk[0];
+			if (enemyHP < 1) {
+				//
+				$("#main").append("You killed the " + enemy + "!");
+				var loot = $("#main").append("Do you want to loot the dead " + enemy + "?");
+				if (fightCheckInput(loot)) {//new
+					if (invCheck()) {//new
+                                        $('#main').append(">Your pockets are full.");
+                                        fightMode = false;
+                                        break;
+                                	}//167
+                                } else {///166
+                                        $('#main').append(">You gained " + enemyLoot + ". It came from the " + enemy + ".");
+                                        addInv(enemyLoot);
+                                        fightMode = false;
+                                        break;
+                                }//else 172
+			}//162
+			var enemyATK = Math.floor(Math.random * 2 + 7) + (enemyHp % 2);
+			hpCheck(hp);
+		} else {
+			if (pots > 0) {
+				var potion = $("#main").append ("Do you want to use a potion?Y/N");
+				if (fightCheckInput(potion)) {
+					pots -= 1;
+					hp += 20;
+					$("#main").append("You take a swig of your potion and gain 20 hp.");
+				} else {
+					var flee = $("#main").append("Would you like to flee from the " + enemy + "?");
+					if (fightCheckInput(flee)) {
+						var probFlee = Math.random;
+						if (probFlee > 0.625) {
+							$("#main").append("You got away scotch-free!");
+							fightMode = false;
+							break;
+						} else {
+							$("#main").append("The " + enemy + " pulled you back into battle.");
+							hp -= 15;
+							$("#main").append("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
+						}
+					} else {
+						$("#main").append("You let the " + enemy + " kill you.");
+						alive = false;
+					}
+				}
+			} else {
+				var flee = $("#main").append("Would you like to flee from the " + enemy + "?");
+				if (fightCheckInput(flee)) {
+					var probFlee = Math.random;
+					if (probFlee > 0.625) {
+						$("#main").append("You got away scotch-free!");
+						fightMode = false;
+						break;
+					} else {
+						$("#main").append("The " + enemy + " pulled you back into battle.");
+						hp-15;
+						$("#main").append("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
+					}
+				} else {
+					$("#main").append("You let the " + enemy + " kill you.");
+					alive = false;
+					break;
+				}
+			}
+		}
+	}
+}
+
+//Time frame! If you spend 30 days on the island getting to the other island, you die of exhaustion. Use of && statements to make sure that the message only gets displayed once.
+function checkDays() {
+        if (nightCount === 25 && timeCount === 0) {
+            $('#main').append("You feel tired.");
+        } else if (nightCount === 29 && timeCount === 0) {
+                        $('#main').append("Your body shakes, and you feel as if you cannot go on much longer...<br>");
+                } else if (nightCount === 29 && timeCount === 3) {
+                        $('#main').append("You start vomiting blood in pain and agony. You cannot survive for more than an hour<br>");
+                } else if (nightCount === 30) {
+                    $('#main').append("You crawl to a quiet place before you lay down and die.<br>");
+					printGameOver();
+                }
+}
 //Move to home function
 function moveToHome(){
 	printStart();
+	var newUserRaw = "";
     while(currentPlace === "home") {
+				
 				do {	
 						
-						var newUserRaw = getInput();
+						newUserRaw = getInput();
                         /*Code to detect if the user's input is a string. The string doesn't get converted to lower case until we are sure that userRaw IS a string, because if the user leaves it blank then
                         we will get an error because you cannot call .toLowerCase() on null.*/
 
-                        if (typeof userRaw != "string" || !userRaw){
+                        if (typeof userRaw !== string){
                                 inputInvalid = true;
                                 $('#main').append(">Misunderstood command.<br>");
                         } else {
@@ -102,8 +315,7 @@ function moveToHome(){
                                 //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
                                 printGameOver();
                                 return;
-                        break;
-                        
+                        //No break is needed here because return exits the function
                         //Checks all the places that can be moved to next.
                         case "move to generator":
                                 $('#main').append("You walk over to the generator.<br>");
@@ -121,219 +333,10 @@ function moveToHome(){
                                 //If the user typed none of the above, logs "Misunderstood command."
                                 $('#main').append(">Misunderstood command.<br>");
 
-                }
-		} 
+            }
+		}
     }
  }
-
-        
-        
-function fightCheckInput(input) {
-	if (input === null) {
-		$("#main").append(">Misunderstood command.");
-	} else if (typeof input != string) {
-		$("#main").append(">Misunderstood command.");
-	} else if (input != "yes" || input != "no" || input != "y" || input != "n" || input != "Y" || input != "N") {
-		$("#main").append(">Misunderstood command.");
-	} else {
-		switch (input) {
-			case "yes":
-				return true;
-			case "y":
-				return true;
-			case "n":
-				return false;
-			case "N":
-				return false;
-			case "Y":
-				return true;
-			case "no":
-				return false;
-		}
-	}
-}        
-        
-        
-        
-
-//Checks the current time and warns the user when it is approaching night. Optional parameter to change how much time has passed. Default set to 1.
-function timeCheck(timePassed){
-    if (!timePassed) {
-                //If nothing was passed in the timePassed argument, it defaults to one.
-                timeCount += 1;
-                checkDays();
-    } else {
-        //If something was passed, += to timeCount.
-        timeCount += timePassed;
-                checkDays();
-    }
-    //Checks and warns the user when it is night time, and adds one to nightCount
-        if (timeCount === 3) {
-            $('#main').append(">Night is approaching<br>");
-    } else if (timeCount >= 4) { 
-            nightCount += 1;
-            $('#main').append(">It is night time. You have survived "+nightCount+" days<br>");
-           //Resets the timeCount back to 0;
-            timeCount = 0;
-                        checkDays();
-        }
-        }
-
-//Checks if the user is alive (does not include necessary steps to break out of current function)
-function aliveCheck() {
-        if (!alive) {
-                printGameOver("dead<br>");   
-        }
-}
-
-//RETURNS TRUE if inventory is full.
-function invCheck() { 
-        if (inv.length === 10) {
-                return true;
-        }
-}
-
-//Prints game over message to the user. Optional parameter "status"can be set to "dead"- if so, it prints the message ">You died!" and ">GAME OVER"
-function printGameOver(status) {
-                if (!status) {
-                        $('#main').append(">GAME OVER<br>");
-                }
-        else if (status === "dead") {
-            $('#main').append(">You died!<br>");
-            $('#main').append(">GAME OVER<br>");
-
-        } else if (status === "exhaust") {
-        }
-}
-
-//Adds an item to the inventory array.
-function addInv(item){
-        inv.push(item);
-        //Adds 1 to the number of items in the player's inventory.
-}
-
-//Removes an item from the inventory
-function remItem(item){
-        //Loops through the array and sees if anything matches the user's item to be dropped
-        for (i = 0; i < item.length; i++) {
-                if (inv[i] === item) {
-                        //If yes, get the index of the item and remove it from the array (in .splice(), the second parameter is number of items to be removed)
-                        var indexOfRemItem = inv[i];
-                        inv.splice(indexOfRemItem,1);
-                        //If the current weapon is the item to be dropped, 
-                        if (atk[1] === item) {
-                                //If the item dropped was the currently equipped weapon, remove it from the atk aray and change the weapon to "unarmed", 0.5 hitpoints.
-                                atk[1] = "unarmed";
-                                atk[0] = 0.5;
-                        }
-                        return;
-                } 
-        }
-        //Will not be executed if a match has been found because it will be unreachable by the 'return' 
-        $('#main').append("You don't have that item in your inventory.<br>");
-}
-
-//HpCheck! Yeah!
-function hpCheck(hp) {
-	if(hp < 1) {
-		alive = false;
-		printGameOver("dead");
-	}
-}
-
-//Fight! NEWLY IMPLEMENTED
-function fight(enemy,enemyHP,enemyLoot) {
-	while(fightMode && alive) {
-		if (atk[1] === "unarmed") {
-			var attack = $("#main").append("Will you attack the " + enemy ", even though you have no weapon? Y/N");
-		} else {
-			var attack = $("#main").append("Will you attack the " + enemy + " with your " + atk[1] + "? Y/N");
-		}
-		if (fightCheckInput(attack)) {
-			$("#main").append("You hit the " + enemy + " for " + atk[0] + ".");
-			enemyHP -= atk[0];
-			if (enemyHP < 1) {
-				$("#main").append("You killed the " + enemy + "!");
-				var loot = $("#main").append("Do you want to loot the dead " + enemy + "?");
-				if (fightCheckInput(loot)) {
-					if (invCheck()) {
-                                        $('#main').append(">Your pockets are full.");
-                                        fightMode = false;
-                                        break;
-                                	}
-                                } else {
-                                        $('#main').append(">You gained " + enemyLoot + ". It came from the " + enemy + ".");
-                                        addInv(enemyLoot);
-                                        fightMode = false;
-                                        break;
-                                }
-			}
-			var enemyATK = Math.floor(Math.random * 2 + 7) + (enemyHp % 2);
-			hpCheck(hp);
-		} else {
-			if (pots > 0) {
-				var potion = $("#main").append ("Do you want to use a potion?Y/N");
-				if (fightCheckInput(potion)) {
-					pots -= 1;
-					hp += 20;
-					$("#main").append("You take a swig of your potion and gain 20 hp.");
-				} else {
-					var flee = $("#main").append("Would you like to flee from the " + enemy + "?");
-					if (fightCheckInput(flee)) {
-						var probFlee = Math.random;
-						if (probFlee > 0.625) {
-							$("#main").append("You got away scotch-free!");
-							fightMode = false;
-							break;
-						} else {
-							$("#main").append("The " + enemy + " pulled you back into battle.");
-							hp -= 15;
-							$("#main").append("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
-						}
-					} else {
-						$("#main").append("You let the " + enemy + " kill you.");
-						alive = false;
-					}
-				}
-			} else {
-				var flee = $("#main").append("Would you like to flee from the " + enemy + "?");
-				if (fightCheckInput(flee)) {
-					var probFlee = Math.random;
-					if (probFlee > 0.625) {
-						$("#main").append("You got away scotch-free!");
-						fightMode = false;
-						break;
-					} else {
-						$("#main").append("The " + enemy + " pulled you back into battle.");
-						hp-15;
-						$("#main").append("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
-					}
-				} else {
-					$("#main").append("You let the " + enemy + " kill you.");
-					alive = false;
-					break;
-				}
-			}
-		}
-	}
-}
-
-//Time frame! If you spend 30 days on the island getting to the other island, you die of exhaustion. Use of && statements to make sure that the message only gets displayed once.
-function checkDays() {
-        if (nightCount === 25 && timeCount === 0) {
-            $('#main').append("You feel tired.");
-        } else if (nightCount === 29 && timeCount === 0) {
-                        $('#main').append("Your body shakes, and you feel as if you cannot go on much longer...<br>");
-                } else if (nightCount === 29 && timeCount === 3) {
-                        $('#main').append("You start vomiting blood in pain and agony. You cannot survive for more than an hour<br>");
-                } else if (nightCount === 30) {
-                        $('#main').append("You crawl to a quiet place before you lay down and die.<br>");
-
-
-                        printGameOver();
-                }
-}
-
 //END OF DEFINING AREA
 
 moveToHome();
