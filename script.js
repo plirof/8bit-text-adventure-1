@@ -16,11 +16,11 @@ var pots = 0; //Pots is short for potions. If you have potions, you can use them
 
 //DEFINING AREA!!!! THESE ARE FUNCTIONS AND ARE NOT ACTIVE UNTIL CALLED
 function getInput() {
-	$(document).ready(function() {
-		$("input[name=command]").focus();		
-		var userRaw = $("input[name=command]").val();
+	//$(document).ready(function() {
+		$('#command').focus();		
+		var userRaw = $('#command').val();
 		return userRaw;
-	});
+	//});
 	
 }     
 function printStart() {
@@ -48,7 +48,7 @@ function fightCheckInput(input) {
 			$("#main").append(">Misunderstood command.");
 		}
 	}
-}        
+       
         
 function loot(loot) {
 	if (inv.length + loot.length <= 10) {
@@ -149,7 +149,7 @@ function fight(enemy,enemyHP,enemyLoot) {
 	while(fightMode && alive) {
 		if (atk[1] === "unarmed") {
 			//If the user is unarmed, print this message and take the user's input.
-			var attack = $("#main").append("Will you attack the " + enemy ", even though you have no weapon? Y/N");
+			var attack = $("#main").append("Will you attack the " + enemy + ", even though you have no weapon? Y/N");
 		} else {
 			//If the user has a weapon equipped, print that.
 			var attack = $("#main").append("Will you attack the " + enemy + " with your " + atk[1] + "? Y/N");
@@ -240,24 +240,17 @@ function checkDays() {
 }
 //Move to home function
 function moveToHome(){
-	printStart();
 	var newUserRaw = "";
-    while(currentPlace === "home") {
-				
+					
 				do {	
 						
-						newUserRaw = getInput();
+						var newUserRaw = getInput();
                         /*Code to detect if the user's input is a string. The string doesn't get converted to lower case until we are sure that userRaw IS a string, because if the user leaves it blank then
                         we will get an error because you cannot call .toLowerCase() on null.*/
 
-                        if (typeof userRaw !== string){
-                                inputInvalid = true;
-                                $('#main').append(">Misunderstood command.<br>");
-                        } else {
-                        user = userRaw.toLowerCase();
+                        user = newUserRaw.toLowerCase();
                         inputInvalid = false;
                         $('#main').append(user+"<br>");
-                        }
                 } while (inputInvalid);
                 
                 //If the user pressed cancel on the prompt box, break out of the current while loop.
@@ -336,10 +329,12 @@ function moveToHome(){
             }
 		}
     }
- }
+ 
+ 
+ 
 //END OF DEFINING AREA
 
-moveToHome();
+printStart();
 
 //Emails:
 //deluz@esedona.net - Gabriel de Luz (JS Dev)

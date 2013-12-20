@@ -1,33 +1,35 @@
 <html>
 	<head>
 		<title>Game</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="stylesheet2.css">
-		<script type="text/javascript" src="script.js"></script>
 	</head>
 	
 	<body>
-	<div id="header"><img src="8bitlogo.png"/></div>
-	<div id="main">	
-	</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script  language="javascript" src="script.js"></script>
+
+		<div id="header">
+			<img src="8bitlogo.png">
+		</div>
+		<div id="main">	
+		</div>
 	
-	
-	<div id="belowMain">
-	<form name="commandForm">
-			<p>></p>
-			<input type="text" name="command">
-		</form>	
-	<div id="button">
-	Submit
-	</div>
-	</div>
-	<div id="footer">
-	<p>
-	Matthew Taylor (Project Leader)<br>
-	Gabriel de Luz (JS Dev)<br>
-	Bram R. (JS Dev)<br>
-	
-	</p>
-	</div>
+		<div id="belowMain">
+			<form name="commandForm" onsubmit="moveToHome();">
+				<p>&gt;</p>
+				<input type="text" id="command">
+				<input type="submit">
+			</form>	
+			<div id="button">
+				Submit
+			</div>
+		</div>
+		<div id="footer">
+			<p>
+				Matthew Taylor (Project Leader)<br>
+				Gabriel de Luz (JS Dev)<br>
+				Bram R. (JS Dev)<br>
+			</p>
+		</div>
 	</body>
 </html>
