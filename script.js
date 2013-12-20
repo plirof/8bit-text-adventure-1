@@ -33,7 +33,7 @@ function moveToHome(){
     while(currentPlace === "home") {
 				do {	
 						
-						var userRaw = getInput()
+						var newUserRaw = getInput();
                         /*Code to detect if the user's input is a string. The string doesn't get converted to lower case until we are sure that userRaw IS a string, because if the user leaves it blank then
                         we will get an error because you cannot call .toLowerCase() on null.*/
 
@@ -128,7 +128,30 @@ function moveToHome(){
 
         
         
-        
+function fightCheckInput(input) {
+	if (input === null) {
+		$("#main").append(">Misunderstood command.");
+	} else if (typeof input != string) {
+		$("#main").append(">Misunderstood command.");
+	} else if (input != "yes" || input != "no" || input != "y" || input != "n" || input != "Y" || input != "N") {
+		$("#main").append(">Misunderstood command.");
+	} else {
+		switch (input) {
+			case "yes":
+				return true;
+			case "y":
+				return true;
+			case "n":
+				return false;
+			case "N":
+				return false;
+			case "Y":
+				return true;
+			case "no":
+				return false;
+		}
+	}
+}        
         
         
         
@@ -219,21 +242,21 @@ function hpCheck(hp) {
 }
 
 //Fight! NEWLY IMPLEMENTED
-function fight(enemy,enemyHP,enemyLoot,atk,hp,alive,fightMode) {
+function fight(enemy,enemyHP,enemyLoot,fightMode) {
 	while(fightMode && alive) {
 		if (atk[1] === "unarmed") {
-			var attack = confirm("Will you attack the " + enemy ", even though you have no weapon?");
+			var attack = $("#main").append("Will you attack the " + enemy ", even though you have no weapon? Y/N");
 		}
 		} else {
-			var attack = confirm("Will you attack the " + enemy + " with your " + atk[1] + "?");
+			var attack = $("#main").append("Will you attack the " + enemy + " with your " + atk[1] + "? Y/N");
 		}
-		if (attack) {
-			document.write("You hit the " + enemy + " for " + atk[0] + ".");
-			enemyHP = enemyHP - atk[0];
+		if (fightCheckInput(attack)) {
+			$("#main").append("You hit the " + enemy + " for " + atk[0] + ".");
+			enemyHP -= atk[0];
 			if (enemyHP < 1) {
-				document.write("You killed the " + enemy + "!");
-				var loot = confirm("Do you want to loot the dead " + enemy + "?");
-				if (loot) {
+				$("#main").append("You killed the " + enemy + "!");
+				var loot = $("#main").append("Do you want to loot the dead " + enemy + "?");
+				if (fightCheckInput(loot)) {
 					if (invCheck()) {
                                         $('#main').append(">Your pockets are full.");
                                         fightMode = false;
@@ -245,45 +268,45 @@ function fight(enemy,enemyHP,enemyLoot,atk,hp,alive,fightMode) {
                                 }
 			}
 			var enemyATK = Math.floor(Math.random * 2 + 7) + (enemyHp % 2);
-			hpCheck(hp)
+			hpCheck(hp);
 		} else {
 			if (pots > 0) {
-				var potion = confirm ("Do you want to use a potion?");
-				if (potion) {
-					pots-1;
-					hp+20;
-					document.write("You take a swig of your potion and gain 20 hp.");
+				var potion = $("#main").append ("Do you want to use a potion?Y/N");
+				if (fightCheckInput(potion)) {
+					pots -= 1;
+					hp += 20;
+					$("#main").append("You take a swig of your potion and gain 20 hp.");
 				} else {
-					var flee = confirm("Would you like to flee from the " + enemy + "?");
-					if (flee) {
+					var flee = $("#main").append("Would you like to flee from the " + enemy + "?");
+					if (fightCheckInput(flee)) {
 						var probFlee = Math.random;
 						if (probFlee > 0.625) {
-							document.write("You got away scotch-free!");
+							$("#main").append("You got away scotch-free!");
 							fightMode = false;
 						} else {
-							document.write("The " + enemy + " pulled you back into battle.");
-							hp-15;
-							document.write("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
+							$("#main").append("The " + enemy + " pulled you back into battle.");
+							hp -= 15;
+							$("#main").append("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
 						}
 					} else {
-						document.write("You let the " + enemy + " kill you.");
+						$("#main").append("You let the " + enemy + " kill you.");
 						alive = false;
 					}
 				}
 			} else {
-				var flee = confirm("Would you like to flee from the " + enemy + "?");
-				if (flee) {
+				var flee = $("#main").append("Would you like to flee from the " + enemy + "?");
+				if (fightCheckInput(flee)) {
 					var probFlee = Math.random;
 					if (probFlee > 0.625) {
-						document.write("You got away scotch-free!");
+						$("#main").append("You got away scotch-free!");
 						fightMode = false;
 					} else {
-						document.write("The " + enemy + " pulled you back into battle.");
+						$("#main").append("The " + enemy + " pulled you back into battle.");
 						hp-15;
-						document.write("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
+						$("#main").append("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
 					}
 				} else {
-					document.write("You let the " + enemy + " kill you.");
+					$("#main").append("You let the " + enemy + " kill you.");
 					alive = false;
 				}
 			}
@@ -303,7 +326,6 @@ function checkDays() {
                         $('#main').append("You crawl to a quiet place before you lay down and die.<br>");
 
 
-
                         printGameOver();
                 }
 }
@@ -316,4 +338,5 @@ moveToHome();
 //deluz@esedona.net - Gabriel de Luz (JS Dev)
 //mstaveleytaylor@gmail.com - Matthew Taylor (Project leader)
 //bobbie.rausch@icloud.com - Bram R. (JS dev)
-//Add yours here!
+//amritaclehane@gmail.com - Armita C. (JS Dev)
+//adam@adambanky.com - Adam Banky (JS Dev & Lead designer)
