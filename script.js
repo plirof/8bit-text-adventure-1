@@ -8,7 +8,9 @@ var inv = []; //Is an array of items in the player's inventory. See functions be
 var currentPlace = "home"; //The players current place. By default it is set to home
 var inputInvalid = false; //Check's if the user's input is valid
 var cancel = false; //Checks if the user has pressed cancel on the prompt, then break out of the while loop.
-var user = ""; //Defines a new empty variable which the user's input is going to be stored in.
+var user = "";//Defines a new empty variable which the user's input is going to be stored in.
+var fightMode = false; //This makes you fight. While you fight, no time goes by. If this is put back at false, the fight stops
+var pots = 0; //Pots is short for potions. If you have potions, you can use them to regain life.
 //END OF VARIABLE AREA
         
         
@@ -208,8 +210,85 @@ function remItem(item){
         $('#main').append("You don't have that item in your inventory.<br>");
 }
 
-//Fight! NOT YET IMPLEMENTED
-function fight(enemy,enemyHP) {
+//HpCheck! Yeah!
+function hpCheck(hp) {
+	if(hp < 1) {
+		alive = false;
+		printGameOver("dead");
+	}
+}
+
+//Fight! NEWLY IMPLEMENTED
+function fight(enemy,enemyHP,enemyLoot,atk,hp,alive,fightMode) {
+	while(fightMode && alive) {
+		if (atk[1] === "unarmed") {
+			var attack = confirm("Will you attack the " + enemy ", even though you have no weapon?");
+		}
+		} else {
+			var attack = confirm("Will you attack the " + enemy + " with your " + atk[1] + "?");
+		}
+		if (attack) {
+			document.write("You hit the " + enemy + " for " + atk[0] + ".");
+			enemyHP = enemyHP - atk[0];
+			if (enemyHP < 1) {
+				document.write("You killed the " + enemy + "!");
+				var loot = confirm("Do you want to loot the dead " + enemy + "?");
+				if (loot) {
+					if (invCheck()) {
+                                        $('#main').append(">Your pockets are full.");
+                                        fightMode = false;
+                                	}
+                                } else {
+                                        $('#main').append(">You gained " + enemyLoot + ". It came from the " + enemy + ".");
+                                        addInv(enemyLoot);
+                                        fightMode = false;
+                                }
+			}
+			var enemyATK = Math.floor(Math.random * 2 + 7) + (enemyHp % 2);
+			hpCheck(hp)
+		} else {
+			if (pots > 0) {
+				var potion = confirm ("Do you want to use a potion?");
+				if (potion) {
+					pots-1;
+					hp+20;
+					document.write("You take a swig of your potion and gain 20 hp.");
+				} else {
+					var flee = confirm("Would you like to flee from the " + enemy + "?");
+					if (flee) {
+						var probFlee = Math.random;
+						if (probFlee > 0.625) {
+							document.write("You got away scotch-free!");
+							fightMode = false;
+						} else {
+							document.write("The " + enemy + " pulled you back into battle.");
+							hp-15;
+							document.write("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
+						}
+					} else {
+						document.write("You let the " + enemy + " kill you.");
+						alive = false;
+					}
+				}
+			} else {
+				var flee = confirm("Would you like to flee from the " + enemy + "?");
+				if (flee) {
+					var probFlee = Math.random;
+					if (probFlee > 0.625) {
+						document.write("You got away scotch-free!");
+						fightMode = false;
+					} else {
+						document.write("The " + enemy + " pulled you back into battle.");
+						hp-15;
+						document.write("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
+					}
+				} else {
+					document.write("You let the " + enemy + " kill you.");
+					alive = false;
+				}
+			}
+		}
+	}
 }
 
 //Time frame! If you spend 30 days on the island getting to the other island, you die of exhaustion. Use of && statements to make sure that the message only gets displayed once.
@@ -219,7 +298,7 @@ function checkDays() {
         } else if (nightCount === 29 && timeCount === 0) {
                         $('#main').append("Your body shakes, and you feel as if you cannot go on much longer...<br>");
                 } else if (nightCount === 29 && timeCount === 3) {
-                        $('#main').append("You start vomiting with pain and agony. You cannot survive for more than an hour<br>");
+                        $('#main').append("You start vomiting blood in pain and agony. You cannot survive for more than an hour<br>");
                 } else if (nightCount === 30) {
                         $('#main').append("You crawl to a quiet place before you lay down and die.<br>");
 
