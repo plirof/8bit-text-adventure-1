@@ -1,6 +1,6 @@
 ##Welcome to GitHub
 Please prioritise anything on the issues list before working on anything else. Thank you
-####Remember to use comments to show other people how your code works
+####Ignore the folders at the top, they are for the jQuery UI. Do not change anything inside them, please!
 
 Contributors:
 Matthew Taylor (Project leader)
