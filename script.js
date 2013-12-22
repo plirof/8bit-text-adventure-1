@@ -6,14 +6,13 @@ var atk = [0.5, "unarmed"]; //Hitpoints/Weapon. atk[0] is the hitpoints out of 2
 var alive = true; //Wether the player is alive. If it is false, the game stops.
 var inv = []; //Is an array of items in the player's inventory. See functions below for adding and removing items from an array.
 var currentPlace = "home"; //The players current place. By default it is set to home
-var inputInvalid = false; //Check's if the user's input is valid
 var cancel = false; //Checks if the user has pressed cancel on the prompt, then break out of the while loop.
 var user = "";//Defines a new empty variable which the user's input is going to be stored in.
 var fightMode = false; //This makes you fight. While you fight, no time goes by. If this is put back at false, the fight stops
 var pots = 0; //Pots is short for potions. If you have potions, you can use them to regain life.
 var newInv = []; //Used in the autocomplete function
 var autoInv = []; //Used in the autocomplete function
-var homeRaw = ["inv agave leaf", "look around", "jump", "move to cave", "move to generator", "quit", "examine agave leaf", "help"];//Autocomplete functions for home
+var homeRaw = ["inv agave leaf", "look around", "jump", "move to cave", "move to generator", "quit", "examine agave leaf", "help", "clear", ""];//Autocomplete functions for home
 var lastText = "";//Used in the clear command
 //END OF VARIABLE AREA
 
@@ -69,10 +68,11 @@ function addText(text) {
 //Prints the starting message 
 function printStart() {
 	$(document).ready(function() {
-		addText(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.<br>");
+		addText(">You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.(Suggestion: type 'help')<br>");
 		$( "#command" ).autocomplete({
 		source: autoInv,
 		});
+		$('#command').focus();
 		
 	});
 }
@@ -93,7 +93,9 @@ function findCurrentPlace() {
 }
  
 //Checks if the user's input is either yes/y/Y/no/n/N/. If yes/y/Y, return true. n/N/no returns false. Default misunderstood command 
-function fightCheckInput(input) {
+function fightCheckInput() {
+	var input = getInput();
+	$("#command").val("Y/N");
 		switch (input) {
 			case "yes":
 				return true;
@@ -118,7 +120,7 @@ function loot(loot) {
 	if (inv.length + loot.length <= 10) {
 		inv.concat(loot);
 	} else {
-		addText("Your pockets are full. You must drop " + ((inv.length + loot.length) - 10) + " items to loot the enemy.");
+		addText(">Your pockets are full. You must drop " + ((inv.length + loot.length) - 10) + " items to loot the enemy.");
 	}
 }
         
@@ -148,7 +150,7 @@ function timeCheck(timePassed){
 //Checks if the user is alive (does not include necessary steps to break out of current function)
 function aliveCheck() {
         if (!alive) {
-                printGameOver("dead<br>");   
+                printGameOver("dead");   
         }
 }
 
@@ -198,7 +200,7 @@ function remItem(item){
                 } 
         }
         //Will not be executed if a match has been found because it will be unreachable by the 'return' 
-        addText("You don't have that item in your inventory.<br>");
+        addText(">You don't have that item in your inventory.<br>");
 }
 
 //HpCheck! Yeah!
@@ -214,19 +216,19 @@ function fight(enemy,enemyHP,enemyLoot) {
 	while(fightMode && alive) {
 		if (atk[1] === "unarmed") {
 			//If the user is unarmed, print this message and take the user's input.
-			var attack = addText("Will you attack the " + enemy + ", even though you have no weapon? Y/N");
+			var attack = addText(">Will you attack the " + enemy + ", even though you have no weapon? Y/N");
 		} else {
 			//If the user has a weapon equipped, print that.
-			var attack = addText("Will you attack the " + enemy + " with your " + atk[1] + "? Y/N");
+			var attack = addText(">Will you attack the " + enemy + " with your " + atk[1] + "? Y/N");
 		}
 		if (fightCheckInput(attack)) {
 			//Validate the user's input and damage the enemy with the appropriate amount of hitpoints
-			addText("You hit the " + enemy + " for " + atk[0] + ".");
+			addText(">You hit the " + enemy + " for " + atk[0] + ".");
 			enemyHp -= atk[0];
 			if (enemyHP < 1) {
 				//
-				addText("You killed the " + enemy + "!");
-				var loot = addText("Do you want to loot the dead " + enemy + "?");
+				addText(">You killed the " + enemy + "!");
+				var loot = addText(">Do you want to loot the dead " + enemy + "?");
 				if (fightCheckInput(loot)) {
 					if (invCheck()) {
                                         addText(">Your pockets are full.");
@@ -244,44 +246,44 @@ function fight(enemy,enemyHP,enemyLoot) {
 			hpCheck(hp);
 		} else {
 			if (pots > 0) {
-				var potion = addText ("Do you want to use a potion?Y/N");
+				var potion = addText (">Do you want to use a potion?Y/N");
 				if (fightCheckInput(potion)) {
 					pots -= 1;
 					hp += 20;
-					addText("You take a swig of your potion and gain 20 hp.");
+					addText(">You take a swig of your potion and gain 20 hp.");
 				} else {
-					var flee = addText("Would you like to flee from the " + enemy + "?");
+					var flee = addText(">Would you like to flee from the " + enemy + "?");
 					if (fightCheckInput(flee)) {
 						var probFlee = Math.random;
 						if (probFlee > 0.625) {
-							addText("You got away scotch-free!");
+							addText(">You got away scotch-free!");
 							fightMode = false;
 							break;
 						} else {
-							addText("The " + enemy + " pulled you back into battle.");
+							addText(">The " + enemy + " pulled you back into battle.");
 							hp -= 15;
-							addText("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
+							addText(">The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
 						}
 					} else {
-						addText("You let the " + enemy + " kill you.");
+						addText(">You let the " + enemy + " kill you.");
 						alive = false;
 					}
 				}
 			} else {
-				var flee = addText("Would you like to flee from the " + enemy + "?");
+				var flee = addText(">Would you like to flee from the " + enemy + "?");
 				if (fightCheckInput(flee)) {
 					var probFlee = Math.random;
 					if (probFlee > 0.625) {
-						addText("You got away scotch-free!");
+						addText(">You got away scotch-free!");
 						fightMode = false;
 						break;
 					} else {
-						addText("The " + enemy + " pulled you back into battle.");
+						addText(">The " + enemy + " pulled you back into battle.");
 						hp-15;
-						addText("The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
+						addText(">The " + enemy + " gets a cheap hit on you and you lose 15 hp (half of your default hp).");
 					}
 				} else {
-					addText("You let the " + enemy + " kill you.");
+					addText(">You let the " + enemy + " kill you.");
 					alive = false;
 					break;
 				}
@@ -295,27 +297,20 @@ function checkDays() {
         if (nightCount === 25 && timeCount === 0) {
             addText("You feel tired.");
         } else if (nightCount === 29 && timeCount === 0) {
-                        addText("Your body shakes, and you feel as if you cannot go on much longer...<br>");
+                        addText(">Your body shakes, and you feel as if you cannot go on much longer...<br>");
                 } else if (nightCount === 29 && timeCount === 3) {
-                        addText("You start vomiting blood in pain and agony. You cannot survive for more than an hour<br>");
+                        addText(">You start vomiting blood in pain and agony. You cannot survive for more than an hour<br>");
                 } else if (nightCount === 30) {
-                    addText("You crawl to a quiet place before you lay down and die.<br>");
+                    addText(">You crawl to a quiet place before you lay down and die.<br>");
 					printGameOver();
                 }
 }
 
 //Move to home function
 function moveToHome() {
-				do {	
-						
-						var newUserRaw = getInput();
-                        /*Code to detect if the user's input is a string. The string doesn't get converted to lower case until we are sure that userRaw IS a string, because if the user leaves it blank then
-                        we will get an error because you cannot call .toLowerCase() on null.*/
-
-                        user = newUserRaw.toLowerCase();
-                        inputInvalid = false;
-                        addTextNoLast("&gt;" + user + "<br>");
-                } while (inputInvalid);
+			var newUserRaw = getInput();
+            user = newUserRaw.toLowerCase();
+            addTextNoLast("&gt;" + user + "<br>");
             //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
     if (user.slice(0,5) === "drop ") {
         remItem(user.slice(5));
@@ -339,14 +334,15 @@ function moveToHome() {
                 addText("ENTITY<br>These are humans or animals. You can kill other ENTITYs.<br>");
 				
 				//Sets lastText equal to an error so if the user types in clear next time round then it displays an error.
-				lastText = "Error - cannot display the help text.";
+				lastText = ">Error - cannot display the help text.";
             break;
 			case "clear":
 				$("#main").empty();
 				addTextNoLast(lastText);
 			break;
 			case "examine agave leaf":
-				addText("You examine the sharp, spiky plant. It looks a bit like some kind of cactus, but it doesn't have many spikes");
+				addText(">You examine the sharp, spiky plant. It looks a bit like some kind of cactus, but it doesn't have many spikes");
+				timeCheck();
 			break;
             case 'look around':
                 addText(">The agaves and the banana trees are everywhere, in the north (n) is the generator, the boat is in the southeast (se), and the cave is in the west (w)<br>");
@@ -374,9 +370,10 @@ function moveToHome() {
                     //addText(inv); 
                 }   
             break;
-            case "quit":
+           case "quit":
                 //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
                 printGameOver();
+				addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.html'>here</a> to play again.");
                 return;
                 //No break is needed here because return exits the function
             //Checks all the places that can be moved to next.
