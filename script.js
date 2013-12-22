@@ -378,12 +378,12 @@ function moveToHome() {
                 //No break is needed here because return exits the function
             //Checks all the places that can be moved to next.
             case "move to generator":
-                addText("You walk over to the generator.<br>");
+                addText(">You walk over to the generator.<br>");
                 currentPlace = "generator";
                 moveToGenerator(); //Not implemented yet
             break;       
             case "move to cave":
-            addText("You walk over to the cave.<br>");
+            addText(">You walk over to the cave.<br>");
             currentPlace = "cave";
             moveToCave(); //Not implemented yet
             break;
