@@ -419,3 +419,4 @@ $(document).keydown(function(key) {
 //bobbie.rausch@icloud.com - Bram R. (JS dev)
 //amritaclehane@gmail.com - Armita C. (JS Dev)
 //adam@adambanky.com - Adam Banky (JS Dev & Lead designer)
+//khalildacoder@gmail.com - Khalil (Assistant Designer)
