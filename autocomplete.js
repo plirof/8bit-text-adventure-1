@@ -1,5 +1,4 @@
 //Autocomplete
-var inv = ["bacon", "agave leaf", "sword"];
 var newInv = [];
     for (i=0; i<inv.length; i++) {
         newInv.push("drop " + inv[i]);

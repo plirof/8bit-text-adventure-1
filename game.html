@@ -2,11 +2,15 @@
 	<head>
 		<title>Game</title>
 		<link rel="stylesheet" type="text/css" href="stylesheet2.css">
+		
+		<link rel="stylesheet" href="css-ui/dark-hive/jquery-ui-1.10.3.custom.css" />
+		<script src="js-ui/jquery-1.9.1.js"></script>
+		<script src="js-ui/jquery-ui-1.10.3.custom.min.js"></script>
+		<script src="script.js"></script>
 	</head>
 	
 	<body>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script  language="javascript" src="script.js"></script>
+		
 
 		<div id="header">
 			<img src="8bitlogo.png">
@@ -15,15 +19,10 @@
 		</div>
 	
 		<div id="belowMain">
-			<form name="commandForm" onsubmit="moveToHome();">
-				<p>&gt;</p>
-				<input type="text" id="command">
-				<input type="submit">
-			</form>	
-			<div id="button">
-				Submit
-			</div>
+			<p>&gt;</p>
+			<input type="text" id="command">
 		</div>
+		
 		<div id="footer">
 			<p>
 				Matthew Taylor (Project Leader)<br>
@@ -31,5 +30,6 @@
 				Bram R. (JS Dev)<br>
 			</p>
 		</div>
+		
 	</body>
 </html>

@@ -30,20 +30,16 @@ img {
 	float: right;
 }
 
-form {
-	display: inline;
-}
 
-form input[type="text"]{
+input[type="text"]{
 	background-color: #333333;
 	border: 0px;
 	color: white;
 	font-family: courier;
-	width: 85%;
 	font-size: 95%;
 }
 
-form input[type="text"]:focus{
+input[type="text"]:focus{
 	outline: none;
 }
 
@@ -53,6 +49,7 @@ form input[type="text"]:focus{
 	background-color: #333333;
 	width: auto;
 	padding: 4px 10px 1px 10px;
+	display: inline;
 }
 #belowMain p {
 	display: inline;
