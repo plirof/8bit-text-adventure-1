@@ -5,6 +5,7 @@ Please prioritise anything on the issues list before working on anything else. T
 Contributors:
 Matthew Taylor (Project leader)  
 Gabriel de Luz (JS Dev)  
+James Clarke (JS Dev)  
 Bram R. (JS Dev)
 
 
