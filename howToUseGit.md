@@ -17,7 +17,7 @@ The first thing you need to do when you setup git is add your name and email to 
 At this point, I also suggest making a shortcut to the `checkout` command so we can just type `co` instead, but this tutorial will use the `checkout` command just for clarity. To do this, type `$ git config --global alias.co checkout`  
 
 **Initializing a repository**  
-
+A repository on git is a lot like a repository on github. It is a cache of files which make up a project. In git, the repositories are the places where you can execute all your commands, so outside of a repository you cannot do much at all. A repository is stored in a single folder and any sub-folders or files are controlled by git. So if we had a folder called bacon and another one inside that called sandwich, if we made our bacon folder into a repository any files in the bacon folder as well as any files in the sandwich folder would be included in the repository. Now we will actually create one ourselves. For this you will need some basic  command line knowledge on how to navigate and make directories using `cd` and `mkdir`. 
 
 
 
