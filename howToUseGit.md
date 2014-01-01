@@ -11,9 +11,18 @@ Git is fairly easy to install. There are no prerequesites but there are many dif
 **Windows:** Again, use the simple installer. It can be found [here] (http://msysgit.github.com/ "Git windows installer"). During install you might be asked if you want to install the git bash (basically another command line that only works with git commands). I would strongly recommend this option because if you use git from the normal windows command line it is slightly irregular and you might have some trouble following along with some commands in this or other tutorials. After that open up the git bash which should have an orange diamond symbol. You will be prompted for input whenever you see a `$` on the screen, don't type unless this symbol precedes the cursor.
 
 **Setting up the config files**  
-The first thing you need to do when you setup git is add your name and email to the git config file. To do this, you will need to run the following commands:  
-`$ git config --global user.name "Your name here"  
-$ git config --global user.email bacon@example.com`  
+The first thing you need to do when you setup git is add your name and email to the git config file. To do this, you will need to run the following commands in the terminal if you are on mac or git bash if you are on windows (I will refer to it just as cmd from now on):   
+`$ git config --global user.name "Your name here"`  
+`$ git config --global user.email bacon@example.com`  
+At this point, I also suggest making a shortcut to the `checkout` command so we can just type `co` instead, but this tutorial will use the `checkout` command just for clarity. To do this, type `$ git config --global alias.co checkout`  
+
+**Initializing a repository**  
+
+
+
+
+
+
 
 
 
