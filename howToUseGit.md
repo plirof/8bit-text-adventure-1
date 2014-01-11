@@ -31,4 +31,53 @@ When adding files to the staging area, there is a shortcut that you can use that
 **Branches**  
 A branch is, again similar to that on github - you usually have master branch and you can create others to effectively make a copy of the master and experiment with it a bit, so if you mess up you can delete the branch, make a new one and start again without ruining any of the files in the master branch. If you are using the git bash on windows, you will notice that as soon as you typed the `git init` command in the folder, a little `(master)` appeared next to your file path. This, as you might have already guessed, shows the user the current branch they are on. If you are not using the git bash then you will have to use the following command: `git branch`. If you type it in now, you should see a 'master' branch and a star to the left of it. The star indicates the current branch, and if you had created any other branches then they would appear in that list *without* a star (unless you are currently on that branch, of course). Now we will go ahead and make a new branch. To do this, type: `git checkout -b secondary-branch`. This creates (`-b`) a branch called `secondary-branch` in the current repo. If you had made the shortcut to `checkout` before, you could have just typed `co` but as I said, I will use the full command just for clarity. Note also that the command above both creates a branch and then switches into it so we won't have to switch to it ourselves. Now we have created it we will make a change. Make a new file in the `firstRepo` folder and call it `readme.md`. This will be useful for us later when we push to github, because by default github displays the readme file on the homepage (as you can see from our project). The `.md` extension is the 'markdown' language, which is what I am using now to make this text look pretty. For now, just type in '==Welcome!==' just like that. That's basically a header for our file. Then save the file and go back to the cmd line. We are now going to commit the change with `git commit -am "Made a readme"`. Once you have done that, the next thing is to merge the experimental 'secondary-branch' into the 'master' branch. We must now switch back to the 'master' branch, so type: `git checkout master` to change to the 'master' (We can use this to change back and forth if we type `secondary-branch` instead of `master`). To actually merge it you will need to type: `git merge secondary-branch`. We don't need to type the target branch because git assumes that we want to merge with the branch we are currently in. To tidy everything up, we will delete the branch with `git branch -d secondary-branch`. 
 
-**More coming soon**
+**Adding a remote repo**  
+As I mentioned briefly at the beginning of the tutorial, a push in git is basically the same as a pull request in github - they both end up changing the code. You can think about it like this - in github, you are submitting a pull request because you are asking the owner of the repo to 'pull' a branch into their repo. In git, you are simply pushing code up to the remote repo and there is no human authentication required. *IMPORTANT!* A push can only be done to a repo that *YOU OWN*. A pull request is done purely from github to github repository, and you can only do it to other people's repos. So however the same they seem at first glance, they are fairly different. Anyway, down to business. To connect a local git repository with a github repository you will first need to make a repo using your github account. If you are already logged in, go to the github homepage and click the green button in the bottom-right and follow the steps. Remember the name you gave to the repo as you will not be able to connect with out it. Now, ope up your command line and type in this: `git remote add origin git://github.com/USERNAME/REPO-NAME.git`. Replace the `USERNAME` with your github username, and `REPO-NAME` with the name of the repo. *Note:* The `.git` extension is very important and git will complain if you don't add this. Basically, what this line of code does is adds a 'remote' repository with the name of 'origin' (you should always name your remote repo's origin unless you have to) with the target url you have specified. At this point if you get a `Access denied (publickey)` error then contact me and I will help you fix it. 
+
+**Pushing to Github**
+Pushing to github is quite simple - use the following command:
+```
+git push origin master
+```
+The `git push` part tells git that we are going to push to our remote repo named `origin` with the branch of `master` (master is the default git branch). At this point you will usually be required to authenticate so enter your git account details and it should successfully upload all your commits to the remote. Contact me if you get any errors.
+
+**Pulling from Github and merge conflicts**
+Pulling can cause quite a few problems, namely merge conflicts. Merge conflicts are where you try and merge two files into one where both the files have changed the same part. Bear in mind that if you have commited before you pull then these conflicts will not arise. I will show you an example of a merge conflict. First, go into github's website and change the file `bacon.txt` on line 1 so it says "This is from github". Next, go into the local version of the `bacon.txt` (i.e the one in git) and change line 1 so it says "This is from git". Now, if you try pulling the changes from github into your local repo with `git pull origin master` and open up the file `bacon.txt` you should see something has changed. There file should look something like this:
+```
+>>as62jch89
+This is from github
+====================
+This is from git
+>>au72jam01
+```
+The random gibberish will change from system to system so ignore that. Basically, git has detected that two files have changed one line. It displays the changes and you will have to fix them manually. So, if we want to keep what github says then we would delete everything between the two `>>`'s (inclusive) so all that is left is `This is from github` in the file (along with anything else you put in the file not related to the merge conflict). Similarly, delete everything apart from the `This is from git` if you want to keep the git part.
+
+**Creating a repository workflow**  
+This will go through the steps necessary to setup a git repository and connect it to a github repo.
+
+First, we will make a new folder in our gitstuff folder and initialize the git repository:
+```
+cd ~/gitstuff
+mkdir testRepo
+git init
+```
+Next, go into github and create a repo. For the purposes of this tutorial we will call ours testRepo. Go back into your command line and type:
+```
+git remote add origin git://github.com/yebudar/testRepo.git
+```
+All done! You are ready to use git.
+
+**Add, commit and push workflow**
+Ok, create a file in our `testRepo` folder. We will call it `workflow.txt`. Add whatever text you want into it, and then go into the command line and type:
+```
+git add .
+git commit -m "Create workflow.txt"
+```
+Ok, now to push to github:
+```
+git push origin master
+```
+Done!
+
+**Reference section**
+Coming soon
