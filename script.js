@@ -16,6 +16,7 @@ var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine a
 var generatorRaw = ["move to home", "inv banana", "examine generator"]
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
+var water = 5; //if zero you die and the game ends
 //END OF VARIABLE AREA
 
 //AUTOCOMPLETE AREA
@@ -178,7 +179,9 @@ function timeCheck(timePassed){
             addText("It is night time. You have survived "+nightCount+" days");
            //Resets the timeCount back to 0;
             timeCount = 0;
-                        checkDays();
+            checkDays();
+            water--;
+            checkWater();
         }
         }
 
@@ -187,6 +190,14 @@ function aliveCheck() {
         if (!alive) {
                 printGameOver("dead");   
         }
+}
+//checks if the user has enough water, if zero alive turns too false
+function checkWater() {
+  if (water < 1) {
+    alive = false;
+  } else if (water === 1||2){
+    addText("Find some water you are dying!!");
+  }
 }
 
 //RETURNS TRUE if inventory is full.
@@ -437,7 +448,74 @@ function moveToHome() {
      	}
 	}
 }
+//move to waterfall function
+function moveToWaterfall() {
+                                                var newUserRaw = getInput();
+                        user = newUserRaw.toLowerCase();
+                        addTextNoLast(user);
+            //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
+    if (user.slice(0,5) === "drop ") {
+        remItem(user.slice(5));
+    } else {
+        //Else, does all the other checks to see what the user has typed.
+        switch(user){
+            case 'help':
+                        printHelp();
+            break;
+            case "fill bottle":
+                        if(checkForItem(bottle) === true) {
+                            remItem(bottle);
+                            addInv(full_bottle);
+                            addText("filled a bottle.");
+                        }  else{
+                            addText("You don't have a bottle to fill.")
+                        }     
+                        timeCheck();
+            break;
+            case "wash":
+                        addText("You washed yourself but there is something strange in the water, there are little yellow stones.")
+                        timeCheck();
+            break;
+            case "look around":
+                        addText("You look around and you see that there is an island right next to the one your on in the south.");
+                        timeCheck();
+            break;
+            //Static case statements
+            case "jump":
+                        addText("You jump up for some reason you don't really know. You get some pretty nice air");
+                        timeCheck();
+            break;
+            case "show inv":
+                        printInv();
+            break;
+            case "clear":
+                        //Empties the main div and prints lastKnown text
+                        $("#main").empty();
+                        addTextNoLast(lastText);
+            break;
+            case "quit":
+                //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
+                printGameOver();
+                                addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
+                return;
+                //No break is needed here because return exits the function
+                
+            //Checks all the places that can be moved to next.
+            case "move to waterfall":
+                addText("You walk over to the waterfall.");
+                addText("Some info about the waterfall");
+                currentPlace = "waterfall";
+                firstVisit = true;
+                timeCheck();
+                //Do NOT call the moveTo**AREA1**() function!
+            break;       
+            default :
+            //If the user typed none of the above, logs "Misunderstood command."
+            addTextNoLast("Misunderstood command.");
 
+             }
+        }
+}
 //You examine the sharp, spiky plant. It looks a bit like some kind of cactus, but it doesn't have many spikes
 //The agaves and the banana trees are everywhere, in the north (n) is the generator, the boat is in the southeast (se), and the cave is in the west (w)<br>
 //You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.<br>
