@@ -482,6 +482,10 @@ function moveToGenerator() {
                 //No break is needed here because return exits the function
                 
             //Checks all the places that can be moved to next.
+            case "move to generator":
+                addText(">You slowly make your way over to the generator. As you approach it, a low humming sound can be heard, and<br>");
+                currentPlace = "generator";
+                moveToGenerator(); //Not implemented yet
             case "move to home":
                 addText("You walk over to the place you first woke up in...");
                 addText("Some info about the home area");
@@ -497,8 +501,6 @@ function moveToGenerator() {
 	}
 }
 
-			
-							
  
 //END OF DEFINING AREA
 
