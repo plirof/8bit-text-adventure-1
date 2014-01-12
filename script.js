@@ -96,19 +96,19 @@ function printStart() {
 
 //Prints the help message
 function printHelp() {
-	addTextNoLast("<br>clear<br>Clears all text on screen and displays last shown text.<br><br>");
-	addTextNoLast("loot [CONTAINER]<br>Loots the specified container.<br><br>");
-	addTextNoLast("examine [ITEM/WEAPON/PLACE]<br>Examines the specified item or place name.<br><br>"); 
-	addTextNoLast("inv [ITEM/WEAPON]<br>Short for inventory, adds the selected item or weapon to your inventory.<br><br>");
-	addTextNoLast("drop [ITEM/WEAPON]<br>Drops the selected item or weapon. It must be in your inventory before you can drop it. If you drop a weapon then it will be removed from your invetory and you cannot kill with it.<br><br>");
-	addTextNoLast("jump<br>Makes your character jump.<br><br>");
-	addTextNoLast("look around<br>Your character surveys the area. Using this, you can find out which areas you can get to.<br><br>");
-	addTextNoLast("move to [PLACE]<br>Moves your character to the specified PLACE. Only some areas are acessible from other areas.<br><br>");
-	addTextNoLast("Types of objects:<br><br>");
-	addTextNoLast("ITEM<br>E.G a banana is an ITEM. You can put them in your iventory, examine them, or drop them (You cannot eat them as of yet). <br><br>");
-	addTextNoLast("WEAPON<br>E.G a sword is a weapon. Some weapons can be items, for example an agave leaf.<br><br>");
-	addTextNoLast("PLACE<br>You can go inside these.<br><br>");
-	addTextNoLast("CONTAINER<br>You can loot these and gain ITEMS.<br><br>");
+	addTextNoLast("<br>clear<br>Clears all text on screen and displays last shown text.<br>");
+	addTextNoLast("loot [CONTAINER]<br>Loots the specified container.<br>");
+	addTextNoLast("examine [ITEM/WEAPON/PLACE]<br>Examines the specified item or place name.<br>"); 
+	addTextNoLast("inv [ITEM/WEAPON]<br>Short for inventory, adds the selected item or weapon to your inventory.<br>");
+	addTextNoLast("drop [ITEM/WEAPON]<br>Drops the selected item or weapon. It must be in your inventory before you can drop it. If you drop a weapon then it will be removed from your invetory and you cannot kill with it.<br>");
+	addTextNoLast("jump<br>Makes your character jump.<br>");
+	addTextNoLast("look around<br>Your character surveys the area. Using this, you can find out which areas you can get to.<br>");
+	addTextNoLast("move to [PLACE]<br>Moves your character to the specified PLACE. Only some areas are acessible from other areas.<br>");
+	addTextNoLast("Types of objects:<br>");
+	addTextNoLast("ITEM<br>E.G a banana is an ITEM. You can put them in your iventory, examine them, or drop them (You cannot eat them as of yet). <br>");
+	addTextNoLast("WEAPON<br>E.G a sword is a weapon. Some weapons can be items, for example an agave leaf.<br>");
+	addTextNoLast("PLACE<br>You can go inside these.<br>");
+	addTextNoLast("CONTAINER<br>You can loot these and gain ITEMS.<br>");
 	addTextNoLast("ENTITY<br>These are humans or animals. You can kill other ENTITYs.<br>");
 	
 }
