@@ -197,7 +197,16 @@ function invCheck(string, item) {
         	return false;
         }
 }
-
+//find item in inv. if item is found it returns true otherwise it returns false.
+function checkForItem(item) {
+        for (i = 0; i < item.length; i++) {
+                if (inv[i] === item) {
+                    return true;
+                } else{
+                    return false;
+                }
+        }
+}
 //Prints game over message to the user. Optional parameter "status"can be set to "dead"- if so, it prints the message ">You died!" and ">GAME OVER"
 function printGameOver(status) {
         if (!status) {
