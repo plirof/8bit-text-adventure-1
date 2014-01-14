@@ -25,7 +25,7 @@ function moveToCave() {
 				timeCheck();
 			break;
 			case "look around":
-				addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air and hear a drip, drip, drip deeper into the cave. Your heartbeat increases to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy form beings to move and you realise you've stumbled into a wolf's den. The wolf is NOT happy!");
+				addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air as you hear a drip, drip, drip emanating from deeper within the cave. Your heart skips a beat before increasing to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy rock slowly unfurls itself. You realise you've stumbled into a wolf's den. The wolf is NOT happy!");
 				addText("You now have two options. You can either face and FIGHT WOLF, or try to flee and move to home, knowing that the wolf might decide to chase you down for easy meat whilst your back is turned.")
 				timeCheck();
 			break;
