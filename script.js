@@ -397,6 +397,9 @@ function moveToHome() {
     } else {
         //Else, does all the other checks to see what the user has typed.
         switch(user){
+            case "hey bob":
+            	addText("I know where you live.");
+            break;
             case 'help':
 				printHelp();
             break;
