@@ -23,6 +23,11 @@ function moveTo**AREA**() {
 			
 				timeCheck();
 			break;
+			case "drink water":
+            			remItem("full_bottle")
+            			addInv("you drinked your water", "bottle", false, 0);
+            			water += 1;
+            		break;
 			case "look around":
 				addText("**LOOKAROUND**");
 				timeCheck();
