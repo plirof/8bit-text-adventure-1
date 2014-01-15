@@ -402,7 +402,12 @@ function moveToHome() {
             break;
             case "show inv":
             	printInv();
-            break;
+            break;	
+            		case "drink water":
+            			remItem("full_bottle")
+            			addInv("you drinked your water", "bottle", false, 0);
+            			water += 1;
+            		break;
 			case "examine agave leaf":
 				addText("You examine the sharp, spiky plant. It looks a bit like some kind of spineless cactus.");
 				timeCheck();
@@ -465,8 +470,13 @@ function moveToWaterfall() {
             case 'help':
                         printHelp();
             break;
+            case "drink water":
+            		remItem("full_bottle")
+            		addInv("you drinked your water", "bottle", false, 0);
+            		water += 1;
+            break;
             case "fill bottle":
-                        if(checkForItem(bottle) === true) {
+                        if(checkForItem("bottle") === true) {
                             remItem(bottle);
                             addInv("filled a bottle.", "full_bottle", false, 0);
                         }  else{
@@ -544,6 +554,11 @@ function moveToGenerator() {
 				addText("The generator ha a few wires missing but a low hum tells you that electricity is still running through parts of it. If only you had a screwdriver...");
 				timeCheck();
 			break;
+			case "drink water":
+            			remItem("full_bottle")
+            			addInv("you drinked your water", "bottle", false, 0);
+            			water += 1;
+            		break;
 			case "inv banana":
 				addText("You take a ripe banana from one of the nearby trees. As it fills your stomach your hunger somewhat diminishes.");
 				addInv("banana");
