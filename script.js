@@ -425,6 +425,9 @@ function moveToHome() {
 				$("#main").empty();
 				addTextNoLast(lastText);
 			break;
+			case "inv bottle":
+				addInv("You picked up a bottle.", "bottle", false, 0)	
+			break;
             case "quit":
                 //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
                 printGameOver();
@@ -465,8 +468,7 @@ function moveToWaterfall() {
             case "fill bottle":
                         if(checkForItem(bottle) === true) {
                             remItem(bottle);
-                            addInv(full_bottle);
-                            addText("filled a bottle.");
+                            addInv("filled a bottle.", "full_bottle", false, 0);
                         }  else{
                             addText("You don't have a bottle to fill.")
                         }     
