@@ -407,6 +407,7 @@ function moveToHome() {
             			remItem("full_bottle")
             			addInv("you drinked your water", "bottle", false, 0);
             			water += 1;
+            			timeCheck();
             		break;
 			case "examine agave leaf":
 				addText("You examine the sharp, spiky plant. It looks a bit like some kind of spineless cactus.");
@@ -474,6 +475,7 @@ function moveToWaterfall() {
             		remItem("full_bottle")
             		addInv("you drinked your water", "bottle", false, 0);
             		water += 1;
+            		timeCheck();
             break;
             case "fill bottle":
                         if(checkForItem("bottle") === true) {
@@ -558,6 +560,7 @@ function moveToGenerator() {
             			remItem("full_bottle")
             			addInv("you drinked your water", "bottle", false, 0);
             			water += 1;
+            			timeCheck();
             		break;
 			case "inv banana":
 				addText("You take a ripe banana from one of the nearby trees. As it fills your stomach your hunger somewhat diminishes.");
