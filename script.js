@@ -404,11 +404,16 @@ function moveToHome() {
             	printInv();
             break;	
             		case "drink water":
-            			remItem("full_bottle")
-            			addInv("you drinked your water", "bottle", false, 0);
-            			water += 1;
-            			timeCheck();
-            		break;
+   				if(checkForItem("full_bottle") === true){
+        				remItem("full_bottle")
+        				addInv("you drinked your water", "bottle", false, 0);
+        				water += 1;
+					timeCheck();
+       				}else {
+       					addText("You don't have a full bottle");
+			 		timeCheck();
+			 	}
+			break;
 			case "examine agave leaf":
 				addText("You examine the sharp, spiky plant. It looks a bit like some kind of spineless cactus.");
 				timeCheck();
@@ -472,11 +477,16 @@ function moveToWaterfall() {
                         printHelp();
             break;
             case "drink water":
-            		remItem("full_bottle")
-            		addInv("you drinked your water", "bottle", false, 0);
-            		water += 1;
-            		timeCheck();
-            break;
+   			if(checkForItem("full_bottle") === true){
+        			remItem("full_bottle")
+        			addInv("you drinked your water", "bottle", false, 0);
+        			water += 1;
+				timeCheck();
+       			}else {
+       				addText("You don't have a full bottle");
+			 	timeCheck();
+			 }
+	    break;
             case "fill bottle":
                         if(checkForItem("bottle") === true) {
                             remItem(bottle);
@@ -557,11 +567,16 @@ function moveToGenerator() {
 				timeCheck();
 			break;
 			case "drink water":
-            			remItem("full_bottle")
-            			addInv("you drinked your water", "bottle", false, 0);
-            			water += 1;
-            			timeCheck();
-            		break;
+   				if(checkForItem("full_bottle") === true){
+        				remItem("full_bottle")
+        				addInv("you drinked your water", "bottle", false, 0);
+        				water += 1;
+					timeCheck();
+       				}else {
+       					addText("You don't have a full bottle");
+			 		timeCheck();
+			 	}
+			break;
 			case "inv banana":
 				addText("You take a ripe banana from one of the nearby trees. As it fills your stomach your hunger somewhat diminishes.");
 				addInv("banana");
