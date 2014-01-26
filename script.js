@@ -523,7 +523,7 @@ function moveToWaterfall() {
             case "quit":
                 //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
                 printGameOver();
-                                addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
+                                addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.html'>here</a> to play again.");
                 return;
                 //No break is needed here because return exits the function
                 
