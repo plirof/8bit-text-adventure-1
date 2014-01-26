@@ -47,3 +47,11 @@ padding: auto;
 font-size: 25px;
 font-weight: bold;
 }
+
+body {
+        background-color:#CCCCCC;
+}
+a {
+        color: orange;
+        text-decoration: none;
+}
