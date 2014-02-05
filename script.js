@@ -17,7 +17,7 @@ var generatorRaw = ["move to home", "inv banana", "examine generator"]
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
-var fishTime = 0;//starts counter from the moment fish is caught
+var fishTime = Math.floor(Math.random()*3);//If fishTime is 3, it'll go bad. If below 3, it'll remain good.
 //END OF VARIABLE AREA
 
 //AUTOCOMPLETE AREA
@@ -186,13 +186,14 @@ function timeCheck(timePassed){
             fishCheck();
         }
         }
-function fishCheck(){
-	fishTime += 1;
-	if(fishTime===2){
-		addText("Soemthing rotten smells from your bag, You must have forgotten about the Fish.( fish has gone bad )");
+//Checks if the user's fish is still good
+function fishCheck(){ 
+	if(fishTime === 3){
+		addText("Something rotten smells from your bag-- you must've forgotten about the Fish.( fish has gone bad )");
 		remItem("fish");
+		} else {
+		addText("Your fish is still good.");	
 		}
-	}
 }
 
 //Checks if the user is alive (does not include necessary steps to break out of current function)
