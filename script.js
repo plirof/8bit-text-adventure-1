@@ -17,6 +17,7 @@ var generatorRaw = ["move to home", "inv banana", "examine generator"]
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
+var fishTime = 0;//starts counter from the moment fish is caught
 //END OF VARIABLE AREA
 
 //AUTOCOMPLETE AREA
@@ -182,8 +183,17 @@ function timeCheck(timePassed){
             checkDays();
             water--;
             checkWater();
+            fishCheck();
         }
         }
+function fishCheck(){
+	fishTime += 1;
+	if(fishTime===2){
+		addText("Soemthing rotten smells from your bag, You must have forgotten about the Fish.( fish has gone bad )");
+		remItem("fish");
+		}
+	}
+}
 
 //Checks if the user is alive (does not include necessary steps to break out of current function)
 function aliveCheck() {
@@ -399,6 +409,7 @@ function fish() {
 			fish = Math.floor(Math.random() * 2);
 			if (fish) {
 				addInv("You caught a fish. Eat it before it goes bad!","fish", false, 0);
+				timeCheck();
 			} else {
 				addText("The fish got away!");
 			}
