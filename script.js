@@ -183,16 +183,14 @@ function timeCheck(timePassed){
             checkDays();
             water--;
             checkWater();
-            fishChek();
+            fishCheck();
         }
         }
-function fishChek(){
+function fishCheck(){
 	fishTime += 1;
 	if(fishTime===2){
 		addText("Soemthing rotten smells from your bag, You must have forgotten about the Fish.( fish has gone bad )");
-		var x = inv.indexOf("fish");//removes "fish from inv"
-		if(x != -1){
-			inv.splice(x,1);
+		remItem("fish");
 		}
 	}
 }
