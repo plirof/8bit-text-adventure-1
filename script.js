@@ -121,7 +121,7 @@ function findCurrentPlace() {
 			moveToHome();
 		break;
 		case "cave":
-		
+			moveToCave();
 		break;
 		case "generator":
 			moveToGenerator();
