@@ -97,7 +97,7 @@ function printStart() {
 
 //Prints the help message
 function printHelp() {
-	addTextNoLast("<br>clear<br>Clears all text on screen and displays last shown text.<br>");
+	addTextNoLast("clear<br>Clears all text on screen and displays last shown text.<br>");
 	addTextNoLast("loot [CONTAINER]<br>Loots the specified container.<br>");
 	addTextNoLast("examine [ITEM/WEAPON/PLACE]<br>Examines the specified item or place name.<br>"); 
 	addTextNoLast("inv [ITEM/WEAPON]<br>Short for inventory, adds the selected item or weapon to your inventory.<br>");
@@ -430,6 +430,9 @@ function moveToHome() {
     } else {
         //Else, does all the other checks to see what the user has typed.
         switch(user){
+            case "hey bob":
+            	addText("I know where you live.");
+            break;
             case 'help':
 				printHelp();
             break;
