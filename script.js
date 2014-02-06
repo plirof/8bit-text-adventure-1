@@ -121,7 +121,7 @@ function findCurrentPlace() {
 			moveToHome();
 		break;
 		case "cave":
-		
+			moveToCave();
 		break;
 		case "generator":
 			moveToGenerator();
@@ -491,6 +491,12 @@ function moveToHome() {
                 timeCheck();
                 //Do NOT call the moveToGenerator() function!
             break;       
+            case "move to cave":
+            	addText("You walk into the cave.");
+            	currentPlace = "cave";
+            	firstVisit = true;
+            	timeCheck();
+            	break;
             case "inv banana":
             	addInv("You go to a banana tree and get a banana. It\'s perfectly yellow and tantalizingly good-scented.","banana", false, 0)
             break;
