@@ -7,6 +7,5 @@ Matthew Taylor (Project leader)
 Gabriel de Luz (JS Dev)  
 James Clarke (JS Dev)  
 Bram R. (JS Dev)  
-Goran F. (JS Dev)
-
-
+Goran F. (JS Dev)  
+Yazid N. (JS Dev)
