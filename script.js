@@ -496,7 +496,8 @@ function moveToHome() {
             	currentPlace = "cave";
             	firstVisit = true;
             	timeCheck();
-            	break;
+            	//Do NOT call the moveToCave() function!
+            break;
             case "inv banana":
             	addInv("You go to a banana tree and get a banana. It\'s perfectly yellow and tantalizingly good-scented.","banana", false, 0)
             break;
