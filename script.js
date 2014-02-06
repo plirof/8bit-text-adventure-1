@@ -13,7 +13,8 @@ var pots = 0; //Pots is short for potions. If you have potions, you can use them
 var newInv = []; //Used in the autocomplete function
 var autoInv = []; //Used in the autocomplete function
 var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf"];//Autocomplete functions for home
-var generatorRaw = ["move to home", "inv banana", "examine generator"]
+var generatorRaw = ["move to home", "inv banana", "examine generator"];
+var caveRaw = ["move to home"]; //Needs more added to it!
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
@@ -44,6 +45,9 @@ function getTags() {
 	break;
 	case "generator":
 		updateInv(generatorRaw);
+	break;
+	case "cave":
+		updateInv(caveRaw);
 	break;
 	}
 }
