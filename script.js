@@ -826,7 +826,7 @@ case "move to home":
 
       }
 }
-
+}
 //END OF DEFINING AREA
 
 //Prints the starting message
