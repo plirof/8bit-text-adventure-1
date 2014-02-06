@@ -11,12 +11,13 @@ function moveToCave() {
             case 'help':
 				printHelp();
             break;
-			case "fight wolf":
-				fight(wolf, 10, screwdriver)
+			case "**CASE1**":
+				
 			
 				timeCheck();
 			break;
 			case "**CASE2**":
+				
 			
 				timeCheck();
 			break;
@@ -26,12 +27,14 @@ function moveToCave() {
 			break;
 			case "look around":
 				addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air as you hear a drip, drip, drip emanating from deeper within the cave. Your heart skips a beat before increasing to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy rock slowly unfurls itself. You realise you've stumbled into a wolf's den. The wolf is NOT happy!");
-				addText("You now have two options. You can either face and FIGHT WOLF, or try to flee and move to home, knowing that the wolf might decide to chase you down for easy meat whilst your back is turned.")
+				addText("From the looks of it, it seems as if you only have ONE option! You need to muster up your courage and FIGHT this wolf in order to survive! Or, possibly run away.");
+				fight("wolf", 6, "note");
+				
 				timeCheck();
 			break;
 			//Static case statements
 			case "jump":
-				addText("You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.");
+				addText("You jump up for some odd reason, bumping your head in the cave. That really hurt!");
 				timeCheck();
 			break;
 			case "show inv":
