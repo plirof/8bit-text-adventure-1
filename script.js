@@ -14,7 +14,7 @@ var newInv = []; //Used in the autocomplete function
 var autoInv = []; //Used in the autocomplete function
 var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf"];//Autocomplete functions for home
 var generatorRaw = ["move to home", "inv banana", "examine generator"];
-var caveRaw = ["move to home"]; //Needs more added to it!
+var caveRaw = ["move to home", "examine the cave"]; //Needs more added to it!
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
@@ -811,7 +811,7 @@ addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.
                 //No break is needed here because return exits the function
                 
             //Checks all the places that can be moved to next.
-            case "move to cave":
+            case "examine the cave":
                 addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
                 addText("Some info about **AREA1**");
                 currentPlace = "cave";
