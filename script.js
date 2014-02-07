@@ -819,19 +819,20 @@ addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.
                 //No break is needed here because return exits the function
                 
             //Checks all the places that can be moved to next.
-            case "examine the cave":
+            case "move to home":
+                addText("You walk over to the place you first woke up in...");
+                addText("Some info about the home area");
+                currentPlace = "home";
+                firstVisit = false;
+                //Do NOT call the moveToHome() function!
+            break;
+            case "move closer to cave":
                 addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
-                addText("Some info about **AREA1**");
+                addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  explore the cave .");
                 currentPlace = "cave";
                 firstVisit = true;
                 timeCheck();
                 //Do NOT call the moveTo**AREA1**() function!
-case "move to home":
-                addText("You walk over to the place you first woke up in...");
-                addText("Some info about the home area");
-                currentPlace = "home";
-                firstVisit = true;
-                //Do NOT call the moveToHome() function!
             break;
             default :
             //If the user typed none of the above, logs "Misunderstood command."
