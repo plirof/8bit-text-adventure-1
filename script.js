@@ -14,7 +14,7 @@ var newInv = []; //Used in the autocomplete function
 var autoInv = []; //Used in the autocomplete function
 var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf"];//Autocomplete functions for home
 var generatorRaw = ["move to home", "inv banana", "examine generator"];
-var caveRaw = ["move to home", "examine the cave"]; //Needs more added to it!
+var caveRaw = ["explore the cave", "move to generator", "move closer to cave", "escape from the cave", "move to home"]; //Needs more added to it!
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
@@ -774,12 +774,20 @@ case "**CASE1**":
 
 timeCheck();
 break;
-case "**CASE2**":
+case "explore the cave":
+	$("#main").empty();
+	addTextNoLast(lastText);
+	addText("You try to keep yourself on the edges of the cave because you don't really know what is inside and with each of your step light fades away.As you move along, touching the walls and trying to figure out what to do, you stumble upon something. It seems to be a big pile of rocks blocking your way further ! You stop and think what to do next , then you look closely and notice a piece of cloth buried beneath those rocks.");
+        addText("Curiously you start to remove the rocks to find out what is beneath, as you dig your way thru the pile you notice that you are no longer holding rocks in your hands! You turn around to catch more light and you realize you a holding bones in your hands, there is a human skeleton scattered beneath your feet!");
+        addText("Feelings of despair and fear fly thru your head, you want to instinctively run , but you overcome your fear and you turn back facing the skeleton. Shiny thing catches your attention , you pick it up and notice that is a screwdriver! You think that is definitely worth to keep.");	
+	currentPlace = "cave";
 
-
-timeCheck();
+	timeCheck();
 break;
-case "**CASE3**":
+case "escape from the cave":
+	addText("You run far from the cave as fast as you can!");
+	currentPlace = "cave";
+	firstVisit = false;
 
 timeCheck();
 break;
