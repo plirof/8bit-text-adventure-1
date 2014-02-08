@@ -268,7 +268,7 @@ function addInv(string,item,weapon,damage){
 //Removes an item from the inventory
 function remItem(item){
         //Loops through the array and sees if anything matches the user's item to be dropped
-        for (i = 0; i < item.length; i++) {
+        for (i = 0; i < inv.length; i++) {
                 if (inv[i] === item) {
                         //If yes, get the index of the item and remove it from the array (in .splice(), the second parameter is number of items to be removed)
                         var indexOfRemItem = inv[i];
