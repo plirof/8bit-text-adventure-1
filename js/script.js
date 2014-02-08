@@ -14,7 +14,7 @@ var newInv = []; //Used in the autocomplete function
 var autoInv = []; //Used in the autocomplete function
 var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf"];//Autocomplete functions for home
 var generatorRaw = ["move to home", "inv banana", "examine generator"];
-var caveRaw = ["explore the cave", "move to generator", "move closer to cave", "escape from the cave", "move to home"]; //Needs more added to it!
+var caveRaw = ["explore the cave", "move to generator", "move closer to cave", "escape from the cave", "move to home", "inv screwdriver"]; //Needs more added to it!
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
@@ -777,13 +777,16 @@ break;
 case "explore the cave":
 	$("#main").empty();
 	addTextNoLast(lastText);
-	addText("You try to keep yourself on the edges of the cave because you don't really know what is inside and with each of your step light fades away.As you move along, touching the walls and trying to figure out what to do, you stumble upon something. It seems to be a big pile of rocks blocking your way further ! You stop and think what to do next , then you look closely and notice a piece of cloth buried beneath those rocks.");
+	addText("You try to keep yourself on the edges of the cave because you don't really know what is inside and with each of your step light fades away. As you move along, touching the walls and trying to figure out what to do, you stumble upon something. It seems to be a big pile of rocks blocking your way further! You stop and think what to do next, then you look closely and notice a piece of cloth buried beneath those rocks.");
         addText("Curiously you start to remove the rocks to find out what is beneath, as you dig your way thru the pile you notice that you are no longer holding rocks in your hands! You turn around to catch more light and you realize you a holding bones in your hands, there is a human skeleton scattered beneath your feet!");
-        addText("Feelings of despair and fear fly thru your head, you want to instinctively run , but you overcome your fear and you turn back facing the skeleton. Shiny thing catches your attention , you pick it up and notice that is a screwdriver! You think that is definitely worth to keep.");	
+        addText("Feelings of despair and fear fly thru your head, you want to instinctively run , but you overcome your fear and you turn back facing the skeleton. Then a shiny thing catches your attention and you rush to check what it is!");	
 	currentPlace = "cave";
 
 	timeCheck();
 break;
+case "inv screwdriver":
+	addInv("You picked up a screwdriver! That can be used as a weapon (5/20 attack), but in the back of your mind thoughts of generator start to appear.", "screwdriver", true, 5);
+	timeCheck();
 case "escape from the cave":
 	addText("You run far from the cave as fast as you can!");
 	currentPlace = "cave";
@@ -828,7 +831,7 @@ addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.
             break;
             case "move closer to cave":
                 addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
-                addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  explore the cave .");
+                addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
                 currentPlace = "cave";
                 firstVisit = true;
                 timeCheck();
