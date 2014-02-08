@@ -784,14 +784,19 @@ case "explore the cave":
 	timeCheck();
 break;
 case "inv screwdriver":
-	addInv("You picked up a screwdriver! That can be used as a weapon (5/20 attack), but in the back of your mind thoughts of generator start to appear.", "screwdriver", true, 5);
+	if(checkForItem("screwdriver")){// true = item is in inv
+		addText("You already have that item in inventory.");
+	} else {
+		addInv("You picked up a screwdriver! That can be used as a weapon (5/20 attack), but in the back of your mind thoughts of generator start to appear.", "screwdriver", true, 5);
+	}
 	timeCheck();
+break;
 case "escape from the cave":
 	addText("You run far from the cave as fast as you can!");
 	currentPlace = "cave";
 	firstVisit = false;
 
-timeCheck();
+	timeCheck();
 break;
 case "look around":
 addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air as you hear a drip, drip, drip emanating from deeper within the cave. Your heart skips a beat before increasing to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy rock slowly unfurls itself. You realise you've stumbled into a wolf's den. The wolf is NOT happy!");
