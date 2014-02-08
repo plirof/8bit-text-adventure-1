@@ -756,7 +756,7 @@ function moveToBank() {
 } 
 //Move to cave command. NOTE: STILL NEEDS MORE EDITING!
 function moveToCave() {
-var newUserRaw = getInput();
+			var newUserRaw = getInput();
                         user = newUserRaw.toLowerCase();
                         addTextNoLast(user);
             //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
