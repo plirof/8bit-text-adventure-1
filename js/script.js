@@ -14,7 +14,7 @@ var newInv = []; //Used in the autocomplete function
 var autoInv = []; //Used in the autocomplete function
 var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf"];//Autocomplete functions for home
 var generatorRaw = ["move to home", "inv banana", "examine generator"];
-var caveRaw = ["explore the cave", "move to generator", "move closer to cave", "escape from the cave", "move to home", "inv screwdriver"]; //Needs more added to it!
+var caveRaw = ["explore the cave", "move to generator", "move closer to cave", "escape from the cave", "move to home"]; //Needs more added to it!
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
@@ -191,13 +191,16 @@ function timeCheck(timePassed){
         }
         }
 //Checks if the user's fish is still good
-function fishCheck(){ 
-	if(fishTime === 3){
-		addText("Something rotten smells from your bag-- you must've forgotten about the Fish.( fish has gone bad )");
-		remItem("fish");
+function fishCheck(){
+	if(checkForItem("fish")){// If fish is in inv:
+		if(fishTime === 3){
+			addText("Something rotten smells from your bag-- you must've forgotten about the Fish.( fish has gone bad )");
+			remItem("fish");
 		} else {
-		addText("Your fish is still good.");	
+			addText("Your fish is still good.");	
 		}
+	}
+	return false;
 }
 
 //Checks if the user is alive (does not include necessary steps to break out of current function)
@@ -232,6 +235,17 @@ function checkForItem(item) {
     }
 	return false;
 }
+//makes sure option "inv someItem.. " is available only in specific part of the area.
+//example : checks if array caveRaw already have or not "inv screwdriver" option.
+function checkForRawItem(placeRaw, stringRaw) {
+                    for (i = 0; i < placeRaw.length; i++) {
+                        if (placeRaw[i] === stringRaw) {
+                            return true;
+                        }
+                    }
+                    placeRaw.push(stringRaw);// pushes option "inv someItem.."
+                    return false;
+                }
 //Prints game over message to the user. Optional parameter "status"can be set to "dead"- if so, it prints the message ">You died!" and ">GAME OVER"
 function printGameOver(status) {
         if (!status) {
@@ -495,7 +509,8 @@ function moveToHome() {
                 //Do NOT call the moveToGenerator() function!
             break;       
             case "move to cave":
-            	addText("You walk into the cave.");
+            	addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
+                addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
             	currentPlace = "cave";
             	firstVisit = true;
             	timeCheck();
@@ -793,8 +808,7 @@ case "inv screwdriver":
 break;
 case "escape from the cave":
 	addText("You run far from the cave as fast as you can!");
-	currentPlace = "cave";
-	firstVisit = false;
+	
 
 	timeCheck();
 break;
@@ -833,10 +847,9 @@ addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.
                 firstVisit = false;
                 //Do NOT call the moveToHome() function!
             break;
-            case "move closer to cave":
-                addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
-                addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
-                currentPlace = "cave";
+            case "move to waterfall":
+                addText("You walk over to waterfall");
+                currentPlace = "waterfall";
                 firstVisit = true;
                 timeCheck();
                 //Do NOT call the moveTo**AREA1**() function!
