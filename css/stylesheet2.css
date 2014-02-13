@@ -58,8 +58,9 @@ input[type="text"]:focus{
 }
 
 #footer {
+	margin: auto;
 	text-align: center;
-	margin-top: 2%;
+	margin-top: 1%;
 }
 /*autocomplete stuff*/
 .ui-autocomplete {

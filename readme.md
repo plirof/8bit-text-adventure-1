@@ -6,6 +6,6 @@ Contributors (once you have actualy contributed some code you will be added to t
 Matthew Taylor (Project leader)  
 Gabriel de Luz (JS Dev)  
 James Clarke (JS Dev)  
-Bram R. (JS Dev)
-
-
+Bram R. (JS Dev)  
+Goran F. (JS Dev)  
+Yazid N. (JS Dev)

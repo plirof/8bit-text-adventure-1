@@ -13,10 +13,12 @@ var pots = 0; //Pots is short for potions. If you have potions, you can use them
 var newInv = []; //Used in the autocomplete function
 var autoInv = []; //Used in the autocomplete function
 var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf"];//Autocomplete functions for home
-var generatorRaw = ["move to home", "inv banana", "examine generator"]
+var generatorRaw = ["move to home", "inv banana", "examine generator"];
+var caveRaw = ["explore the cave", "move to generator", "move closer to cave", "escape from the cave", "move to home", "inv screwdriver"]; //Needs more added to it!
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
+var fishTime = Math.floor(Math.random()*3);//If fishTime is 3, it'll go bad. If below 3, it'll remain good.
 //END OF VARIABLE AREA
 
 //AUTOCOMPLETE AREA
@@ -43,6 +45,9 @@ function getTags() {
 	break;
 	case "generator":
 		updateInv(generatorRaw);
+	break;
+	case "cave":
+		updateInv(caveRaw);
 	break;
 	}
 }
@@ -96,7 +101,7 @@ function printStart() {
 
 //Prints the help message
 function printHelp() {
-	addTextNoLast("<br>clear<br>Clears all text on screen and displays last shown text.<br>");
+	addTextNoLast("clear<br>Clears all text on screen and displays last shown text.<br>");
 	addTextNoLast("loot [CONTAINER]<br>Loots the specified container.<br>");
 	addTextNoLast("examine [ITEM/WEAPON/PLACE]<br>Examines the specified item or place name.<br>"); 
 	addTextNoLast("inv [ITEM/WEAPON]<br>Short for inventory, adds the selected item or weapon to your inventory.<br>");
@@ -120,7 +125,7 @@ function findCurrentPlace() {
 			moveToHome();
 		break;
 		case "cave":
-		
+			moveToCave();
 		break;
 		case "generator":
 			moveToGenerator();
@@ -182,8 +187,18 @@ function timeCheck(timePassed){
             checkDays();
             water--;
             checkWater();
+            fishCheck();
         }
         }
+//Checks if the user's fish is still good
+function fishCheck(){ 
+	if(fishTime === 3){
+		addText("Something rotten smells from your bag-- you must've forgotten about the Fish.( fish has gone bad )");
+		remItem("fish");
+		} else {
+		addText("Your fish is still good.");	
+		}
+}
 
 //Checks if the user is alive (does not include necessary steps to break out of current function)
 function aliveCheck() {
@@ -223,12 +238,15 @@ function printGameOver(status) {
         if (!status) {
                 addText("GAME OVER");
     	        addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
-        }
-        else if (status === "dead") {
+        } else if (status === "dead") {
             addText("You died!");
             addText("GAME OVER");
-			addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.")
-        } 
+			addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
+        } else if (status === "win") {
+            addText("You have survived the last" + nightCount + " days on a desolate island and found a way out. You won!");
+            addText("GAME OVER");
+            addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
+        }
 }
 
 //Adds an item to the inventory array.
@@ -382,8 +400,27 @@ function checkDays() {
                         addText("You start vomiting blood in pain and agony. You cannot survive for more than an hour");
                 } else if (nightCount === 30) {
                     addText("You crawl to a quiet place before you lay down and die.");
-					printGameOver();
-                }
+		    printGameOver();
+        }
+}
+
+//Fish!
+function fish() {
+	var fish = Math.floor(Math.random() * 2);
+	do {
+		addText("You cast your line.");
+		if (fish) {
+			addText("There seems to be a fish on the line!");
+			fish = Math.floor(Math.random() * 2);
+			if (fish) {
+				addInv("You caught a fish. Eat it before it goes bad!","fish", false, 0);
+				timeCheck();
+			} else {
+				addText("The fish got away!");
+			}
+		}
+		var line = addText("Will you cast the line? Y/N");
+	} while(fightCheckInput(line))
 }
 
 //Move to home function (default area)
@@ -397,12 +434,26 @@ function moveToHome() {
     } else {
         //Else, does all the other checks to see what the user has typed.
         switch(user){
+            case "hey bob":
+            	addText("I know where you live.");
+            break;
             case 'help':
 				printHelp();
             break;
             case "show inv":
             	printInv();
-            break;
+            break;	
+            		case "drink water":
+   				if(checkForItem("full_bottle") === true){
+        				remItem("full_bottle")
+        				addInv("you drinked your water", "bottle", false, 0);
+        				water += 1;
+					timeCheck();
+       				}else {
+       					addText("You don't have a full bottle");
+			 		timeCheck();
+			 	}
+			break;
 			case "examine agave leaf":
 				addText("You examine the sharp, spiky plant. It looks a bit like some kind of spineless cactus.");
 				timeCheck();
@@ -425,6 +476,9 @@ function moveToHome() {
 				$("#main").empty();
 				addTextNoLast(lastText);
 			break;
+			case "inv bottle":
+				addInv("You picked up a bottle.", "bottle", false, 0)	
+			break;
             case "quit":
                 //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
                 printGameOver();
@@ -441,6 +495,16 @@ function moveToHome() {
                 timeCheck();
                 //Do NOT call the moveToGenerator() function!
             break;       
+            case "move to cave":
+            	addText("You walk into the cave.");
+            	currentPlace = "cave";
+            	firstVisit = true;
+            	timeCheck();
+            	//Do NOT call the moveToCave() function!
+            break;
+            case "inv banana":
+            	addInv("You go to a banana tree and get a banana. It\'s perfectly yellow and tantalizingly good-scented.","banana", false, 0)
+            break;
             default :
             //If the user typed none of the above, logs "Misunderstood command."
             addTextNoLast("Misunderstood command.");
@@ -462,11 +526,21 @@ function moveToWaterfall() {
             case 'help':
                         printHelp();
             break;
+            case "drink water":
+   			if(checkForItem("full_bottle") === true){
+        			remItem("full_bottle")
+        			addInv("you drinked your water", "bottle", false, 0);
+        			water += 1;
+				timeCheck();
+       			}else {
+       				addText("You don't have a full bottle");
+			 	timeCheck();
+			 }
+	    break;
             case "fill bottle":
-                        if(checkForItem(bottle) === true) {
+                        if(checkForItem("bottle") === true) {
                             remItem(bottle);
-                            addInv(full_bottle);
-                            addText("filled a bottle.");
+                            addInv("filled a bottle.", "full_bottle", false, 0);
                         }  else{
                             addText("You don't have a bottle to fill.")
                         }     
@@ -496,7 +570,7 @@ function moveToWaterfall() {
             case "quit":
                 //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
                 printGameOver();
-                                addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
+                                addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.html'>here</a> to play again.");
                 return;
                 //No break is needed here because return exits the function
                 
@@ -541,6 +615,17 @@ function moveToGenerator() {
 			case "examine generator":
 				addText("The generator ha a few wires missing but a low hum tells you that electricity is still running through parts of it. If only you had a screwdriver...");
 				timeCheck();
+			break;
+			case "drink water":
+   				if(checkForItem("full_bottle") === true){
+        				remItem("full_bottle")
+        				addInv("you drinked your water", "bottle", false, 0);
+        				water += 1;
+					timeCheck();
+       				}else {
+       					addText("You don't have a full bottle");
+			 		timeCheck();
+			 	}
 			break;
 			case "inv banana":
 				addText("You take a ripe banana from one of the nearby trees. As it fills your stomach your hunger somewhat diminishes.");
@@ -587,8 +672,178 @@ function moveToGenerator() {
         }
 	}
 }
+//Move to bank command
+function moveToBank() {
+						var newUserRaw = getInput();
+                        user = newUserRaw.toLowerCase();
+                        addTextNoLast(user);
+            //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
+    if (user.slice(0,5) === "drop ") {
+        remItem(user.slice(5));
+    } else {
+        //Else, does all the other checks to see what the user has typed.
+        switch(user){
+            case 'help':
+				printHelp();
+            break;
+			case "examine boat":
+				addText("It seems that you could fix it, but you would need a board of wood.");
+				timeCheck();
+			break;
+			case "fix boat":
+				if (checkForItem("wooden_board") === true) {
+					remItem("wooden_board");
+					addText("It seems you\'re about to finish this hard, grueling journey. All you have to do is get on.");
+				} else {
+					addText("You do not have the items to repair the boat.");
+				}
+				timeCheck();
+			break;
+			case "get aboard boat":
+				addText("All of your time here has been coming to this moment. You are very releived that all of this nightmare is finally over.");
+				timeCheck();
+			break;
+			case "drink water":
+            			remItem("full_bottle")
+            			addInv("you drinked your water", "bottle", false, 0);
+            			water += 1;
+            		break;
+			case "look around":
+				addText("You can see the island you used to call home, a lot of fish below the surface, and the boat, which has a giant hole in the bottom, from your current vantage point.");
+				timeCheck();
+			break;
+			case "fish":
+				if (checkForItem("fishing_rod") === true) {
+					fish();
+				} else {
+					addText("You\'ll need a fishing rod to fish. You really wish you had a care package full of these types of tools.");
+				}
+			break;
+			//Static case statements
+			case "jump":
+				addText("You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.");
+				timeCheck();
+			break;
+			case "show inv":
+            	printInv();
+            break;
+			case "clear":
+				//Empties the main div and prints lastKnown text
+				$("#main").empty();
+				addTextNoLast(lastText);
+			break;
+            case "quit":
+                //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
+                printGameOver();
+				addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
+                return;
+                //No break is needed here because return exits the function
+                
+            //Checks all the places that can be moved to next.
+            case "move to **AREA1**":
+                addText("You walk over to the **AREA1**.");
+                addText("Some info about **AREA1**");
+                currentPlace = "**AREA1**";
+                firstVisit = true;
+                timeCheck();
+                //Do NOT call the moveTo**AREA1**() function!
+            break;       
+            default :
+            //If the user typed none of the above, logs "Misunderstood command."
+            addTextNoLast("Misunderstood command.");
 
- 
+     	}
+	}
+} 
+//Move to cave command. NOTE: STILL NEEDS MORE EDITING!
+function moveToCave() {
+var newUserRaw = getInput();
+                        user = newUserRaw.toLowerCase();
+                        addTextNoLast(user);
+            //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
+    if (user.slice(0,5) === "drop ") {
+        remItem(user.slice(5));
+    } else {
+        //Else, does all the other checks to see what the user has typed.
+        switch(user){
+            case 'help':
+printHelp();
+            break;
+case "**CASE1**":
+
+
+timeCheck();
+break;
+case "explore the cave":
+	$("#main").empty();
+	addTextNoLast(lastText);
+	addText("You try to keep yourself on the edges of the cave because you don't really know what is inside and with each of your step light fades away. As you move along, touching the walls and trying to figure out what to do, you stumble upon something. It seems to be a big pile of rocks blocking your way further! You stop and think what to do next, then you look closely and notice a piece of cloth buried beneath those rocks.");
+        addText("Curiously you start to remove the rocks to find out what is beneath, as you dig your way thru the pile you notice that you are no longer holding rocks in your hands! You turn around to catch more light and you realize you a holding bones in your hands, there is a human skeleton scattered beneath your feet!");
+        addText("Feelings of despair and fear fly thru your head, you want to instinctively run , but you overcome your fear and you turn back facing the skeleton. Then a shiny thing catches your attention and you rush to check what it is!");	
+	currentPlace = "cave";
+
+	timeCheck();
+break;
+case "inv screwdriver":
+	addInv("You picked up a screwdriver! That can be used as a weapon (5/20 attack), but in the back of your mind thoughts of generator start to appear.", "screwdriver", true, 5);
+	timeCheck();
+case "escape from the cave":
+	addText("You run far from the cave as fast as you can!");
+	currentPlace = "cave";
+	firstVisit = false;
+
+timeCheck();
+break;
+case "look around":
+addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air as you hear a drip, drip, drip emanating from deeper within the cave. Your heart skips a beat before increasing to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy rock slowly unfurls itself. You realise you've stumbled into a wolf's den. The wolf is NOT happy!");
+addText("From the looks of it, it seems as if you only have ONE option! You need to muster up your courage and FIGHT this wolf in order to survive! Or, possibly run away.");
+fight(wolf, 6, note);
+
+timeCheck();
+break;
+//Static case statements
+case "jump":
+addText("You jump up for some odd reason, bumping your head in the cave. That really hurt!");
+timeCheck();
+break;
+case "show inv":
+             printInv();
+            break;
+case "clear":
+//Empties the main div and prints lastKnown text
+$("#main").empty();
+addTextNoLast(lastText);
+break;
+            case "quit":
+                //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
+                printGameOver();
+addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
+                return;
+                //No break is needed here because return exits the function
+                
+            //Checks all the places that can be moved to next.
+            case "move to home":
+                addText("You walk over to the place you first woke up in...");
+                addText("Some info about the home area");
+                currentPlace = "home";
+                firstVisit = false;
+                //Do NOT call the moveToHome() function!
+            break;
+            case "move closer to cave":
+                addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
+                addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
+                currentPlace = "cave";
+                firstVisit = true;
+                timeCheck();
+                //Do NOT call the moveTo**AREA1**() function!
+            break;
+            default :
+            //If the user typed none of the above, logs "Misunderstood command."
+            addTextNoLast("Misunderstood command.");
+
+      }
+}
+}
 //END OF DEFINING AREA
 
 //Prints the starting message
