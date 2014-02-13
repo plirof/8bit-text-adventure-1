@@ -191,13 +191,17 @@ function timeCheck(timePassed){
         }
         }
 //Checks if the user's fish is still good
-function fishCheck(){ 
-	if(fishTime === 3){
-		addText("Something rotten smells from your bag-- you must've forgotten about the Fish.( fish has gone bad )");
-		remItem("fish");
+
+function fishCheck(){
+	if(checkForItem("fish")){// If fish is in inv:
+		if(fishTime === 3){
+			addText("Something rotten smells from your bag-- you must've forgotten about the Fish.( fish has gone bad )");
+			remItem("fish");
 		} else {
-		addText("Your fish is still good.");	
+			addText("Your fish is still good.");	
 		}
+	}
+	return false;
 }
 
 //Checks if the user is alive (does not include necessary steps to break out of current function)
@@ -225,14 +229,24 @@ function invCheck(string, item) {
 }
 //find item in inv. if item is found it returns true otherwise it returns false.
 function checkForItem(item) {
-        for (i = 0; i < item.length; i++) {
-                if (inv[i] === item) {
-                    return true;
-                } else{
+    for (i = 0; i < inv.length; i++) {
+        if (inv[i] === item) {
+            return true;
+        }
+    }
+	return false;
+}
+//makes sure option "inv someItem.. " is available only in specific part of the area.
+//example : checks if array caveRaw already have or not "inv screwdriver" option.
+function checkForRawItem(placeRaw, stringRaw) {
+                    for (i = 0; i < placeRaw.length; i++) {
+                        if (placeRaw[i] === stringRaw) {
+                            return true;
+                        }
+                    }
+                    placeRaw.push(stringRaw);// pushes option "inv someItem.."
                     return false;
                 }
-        }
-}
 //Prints game over message to the user. Optional parameter "status"can be set to "dead"- if so, it prints the message ">You died!" and ">GAME OVER"
 function printGameOver(status) {
         if (!status) {
@@ -269,7 +283,7 @@ function addInv(string,item,weapon,damage){
 //Removes an item from the inventory
 function remItem(item){
         //Loops through the array and sees if anything matches the user's item to be dropped
-        for (i = 0; i < item.length; i++) {
+        for (i = 0; i < inv.length; i++) {
                 if (inv[i] === item) {
                         //If yes, get the index of the item and remove it from the array (in .splice(), the second parameter is number of items to be removed)
                         var indexOfRemItem = inv[i];
@@ -497,6 +511,8 @@ function moveToHome() {
             break;       
             case "move to cave":
             	addText("You walk into the cave.");
+            	addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
+                addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
             	currentPlace = "cave";
             	firstVisit = true;
             	timeCheck();
@@ -755,95 +771,7 @@ function moveToBank() {
      	}
 	}
 } 
-//Move to cave command. NOTE: STILL NEEDS MORE EDITING!
-function moveToCave() {
-var newUserRaw = getInput();
-                        user = newUserRaw.toLowerCase();
-                        addTextNoLast(user);
-            //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
-    if (user.slice(0,5) === "drop ") {
-        remItem(user.slice(5));
-    } else {
-        //Else, does all the other checks to see what the user has typed.
-        switch(user){
-            case 'help':
-printHelp();
-            break;
-case "**CASE1**":
 
-
-timeCheck();
-break;
-case "explore the cave":
-	$("#main").empty();
-	addTextNoLast(lastText);
-	addText("You try to keep yourself on the edges of the cave because you don't really know what is inside and with each of your step light fades away. As you move along, touching the walls and trying to figure out what to do, you stumble upon something. It seems to be a big pile of rocks blocking your way further! You stop and think what to do next, then you look closely and notice a piece of cloth buried beneath those rocks.");
-        addText("Curiously you start to remove the rocks to find out what is beneath, as you dig your way thru the pile you notice that you are no longer holding rocks in your hands! You turn around to catch more light and you realize you a holding bones in your hands, there is a human skeleton scattered beneath your feet!");
-        addText("Feelings of despair and fear fly thru your head, you want to instinctively run , but you overcome your fear and you turn back facing the skeleton. Then a shiny thing catches your attention and you rush to check what it is!");	
-	currentPlace = "cave";
-
-	timeCheck();
-break;
-case "inv screwdriver":
-	addInv("You picked up a screwdriver! That can be used as a weapon (5/20 attack), but in the back of your mind thoughts of generator start to appear.", "screwdriver", true, 5);
-	timeCheck();
-case "escape from the cave":
-	addText("You run far from the cave as fast as you can!");
-	currentPlace = "cave";
-	firstVisit = false;
-
-timeCheck();
-break;
-case "look around":
-addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air as you hear a drip, drip, drip emanating from deeper within the cave. Your heart skips a beat before increasing to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy rock slowly unfurls itself. You realise you've stumbled into a wolf's den. The wolf is NOT happy!");
-addText("From the looks of it, it seems as if you only have ONE option! You need to muster up your courage and FIGHT this wolf in order to survive! Or, possibly run away.");
-fight(wolf, 6, note);
-
-timeCheck();
-break;
-//Static case statements
-case "jump":
-addText("You jump up for some odd reason, bumping your head in the cave. That really hurt!");
-timeCheck();
-break;
-case "show inv":
-             printInv();
-            break;
-case "clear":
-//Empties the main div and prints lastKnown text
-$("#main").empty();
-addTextNoLast(lastText);
-break;
-            case "quit":
-                //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
-                printGameOver();
-addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
-                return;
-                //No break is needed here because return exits the function
-                
-            //Checks all the places that can be moved to next.
-            case "move to home":
-                addText("You walk over to the place you first woke up in...");
-                addText("Some info about the home area");
-                currentPlace = "home";
-                firstVisit = false;
-                //Do NOT call the moveToHome() function!
-            break;
-            case "move closer to cave":
-                addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
-                addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
-                currentPlace = "cave";
-                firstVisit = true;
-                timeCheck();
-                //Do NOT call the moveTo**AREA1**() function!
-            break;
-            default :
-            //If the user typed none of the above, logs "Misunderstood command."
-            addTextNoLast("Misunderstood command.");
-
-      }
-}
-}
 //END OF DEFINING AREA
 
 //Prints the starting message
