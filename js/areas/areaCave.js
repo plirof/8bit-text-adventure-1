@@ -91,7 +91,6 @@ function moveToCave() {
 		default:
 			//If the user typed none of the above, logs "Misunderstood command."
 			addTextNoLast("Misunderstood command.");
-			addText("shitt cave piss");
 
 		}
 	}
