@@ -19,6 +19,8 @@ var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
 var fishTime = Math.floor(Math.random()*3);//If fishTime is 3, it'll go bad. If below 3, it'll remain good.
+var Random1To3 = Math.floor(Math.random() * 3 + 1);
+var generator = false; //if true the generator is working
 //END OF VARIABLE AREA
 
 //AUTOCOMPLETE AREA
@@ -632,6 +634,22 @@ function moveToGenerator() {
 				addText("The generator ha a few wires missing but a low hum tells you that electricity is still running through parts of it. If only you had a screwdriver...");
 				timeCheck();
 			break;
+			case "repair generator":
+                		if(checkForItem("screwdriver") === true){
+                        		if (Random1To3 < 2){
+                            			addText("You repaired the generator. And you hear a weird sound coming from the ship...");
+                            			generator = true;
+                            			timeCheck();
+                        	} else{
+                            		addText("you got elektrocuted and died.");
+                            		alive = false;
+                            		timeCheck();
+                        	}
+                		} else{
+                    			addText("you looked at the generator but you couldn't repair it. If only you had a screwdriver...");
+                    			timeCheck();
+                		}
+            		break;
 			case "drink water":
    				if(checkForItem("full_bottle") === true){
         				remItem("full_bottle")
