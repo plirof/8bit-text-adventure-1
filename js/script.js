@@ -142,18 +142,22 @@ function fightCheckInput() {
 		switch (input) {
 			case "yes":
 				return true;
+			break;
 			case "y":
 				return true;
+			break;
 			case "n":
 				return false;
+			break;
 			case "N":
 				return false;
+			break;
 			case "Y":
 				return true;
+			break;
 			case "no":
 				return false;
 			default:
-			
 			addTextNoLast("Misunderstood command.");
 		}
 	}
