@@ -926,14 +926,22 @@ function moveToBank() {
                 //No break is needed here because return exits the function
                 
             //Checks all the places that can be moved to next.
-            case "move to **AREA1**":
-                addText("You walk over to the **AREA1**.");
-                addText("Some info about **AREA1**");
-                currentPlace = "**AREA1**";
-                firstVisit = true;
-                timeCheck();
-                //Do NOT call the moveTo**AREA1**() function!
-            break;       
+            case "move to waterfall":
+            	
+		addText("You walk over to the waterfall.");
+		addText("Some info about the waterfall");
+		currentPlace = "waterfall";
+		firstVisit = true;
+		timeCheck();
+		//Do NOT call the moveTo**AREA1**() function!
+		break;
+	    case "move to home":
+		addText("You walk over to the place you first woke up in...");
+		addText("Some info about the home area");
+		currentPlace = "home";
+		firstVisit = true;
+		//Do NOT call the moveToHome() function!
+		break;       
             default :
             //If the user typed none of the above, logs "Misunderstood command."
             addTextNoLast("Misunderstood command.");
