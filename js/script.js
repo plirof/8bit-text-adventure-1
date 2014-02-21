@@ -589,15 +589,22 @@ function moveToCave() {
 			timeCheck();
 			break;
 
-		case "escape from the cave":
-			addText("You run far from the cave as fast as you can!");
+		case "dance":
+			addText("You dance randomly in the cave, making you miss home already.");
 			timeCheck();
 			break;
 		case "look around":
 			addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air as you hear a drip, drip, drip emanating from deeper within the cave. Your heart skips a beat before increasing to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy rock slowly unfurls itself. You realise you've stumbled into a wolf's den. The wolf is NOT happy!");
 			addText("From the looks of it, it seems as if you only have ONE option! You need to muster up your courage and FIGHT this wolf in order to survive! Or, possibly run away.");
+			if ("fight") {
 			fightMode = true;
 			fight("wolf", 6, "bones");
+			} else if ("run") {
+			addText("You took a sudden chance and fled for your life!");
+			movetoHome();
+			} else {
+			addText("Misunderstood command.");
+			}
 			//timeCheck();
 			break;
 			//Static case statements
