@@ -18,7 +18,7 @@ var caveRaw = ["explore the cave", "move to waterfall", "escape from the cave", 
 var waterfallRaw = ["move to home","move to generator","move to cave","move to bank","drink water","fill bottle"];
 var bankRaw = ["move to home","move to waterfall" ];// still needs addition...
 var lastText = "";//Used in the clear command
-var staticAutoInv = ["look around", "jump", "quit", "clear", "dance"]
+var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
 var fishTime = Math.floor(Math.random()*3);//If fishTime is 3, it'll go bad. If below 3, it'll remain good.
 var Random1To3 = Math.floor(Math.random() * 3 + 1);
@@ -589,22 +589,45 @@ function moveToCave() {
 			timeCheck();
 			break;
 
-		case "dance":
-			addText("You dance randomly in the cave, making you miss home already.");
+		case "**SOMETHING**":
+			addText("**SOMETHING**");
 			timeCheck();
 			break;
 		case "look around":
 			addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air as you hear a drip, drip, drip emanating from deeper within the cave. Your heart skips a beat before increasing to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy rock slowly unfurls itself. You realise you've stumbled into a wolf's den. The wolf is NOT happy!");
 			addText("From the looks of it, it seems as if you only have ONE option! You need to muster up your courage and FIGHT this wolf in order to survive! Or, possibly run away.");
-			if ("fight") {
-			fightMode = true;
-			fight("wolf", 6, "bones");
-			} else if ("run") {
-			addText("You took a sudden chance and fled for your life!");
-			movetoHome();
-			} else {
-			addText("Misunderstood command.");
-			}
+			function fightCheckInput() {
+	var input = getInput();
+	$("#command").val("Y/N");
+		switch (input) {
+			case "yes":
+				return true;
+				fightMode = true;
+				fight("wolf", 6, "bones")
+				
+			break;
+			case "y":
+				return true;
+				fightMode = true;
+				fight("wolf", 6, "bones")
+			break;
+			case "n":
+				return false;
+			break;
+			case "N":
+				return false;
+			break;
+			case "Y":
+				return true;
+				fightMode = true;
+				fight("wolf", 6, "bones")
+			break;
+			case "no":
+				return false;
+			default:
+			addTextNoLast("Misunderstood command.");
+		}
+	}
 			//timeCheck();
 			break;
 			//Static case statements
