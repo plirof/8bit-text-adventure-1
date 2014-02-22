@@ -584,7 +584,6 @@ function moveToCave() {
 
 			} else {
 				addInv("You picked up a screwdriver! That can be used as a weapon (5/20 attack), but in the back of your mind thoughts of generator start to appear.", "screwdriver", true, 5);
-				addText(atk);
 			}
 			timeCheck();
 			break;
