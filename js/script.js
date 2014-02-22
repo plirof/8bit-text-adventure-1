@@ -654,7 +654,7 @@ function moveToCave() {
 			//Checks all the places that can be moved to next.
 		case "move to home":
 			addText("You walk over to the place you first woke up in...");
-			addText("Some info about the home area");
+			addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 			currentPlace = "home";
 			firstVisit = false;
 			//Do NOT call the moveToHome() function!
@@ -745,7 +745,7 @@ function moveToWaterfall() {
             
             case "move to home":
 		addText("You walk over to the place you first woke up in...");
-		addText("Some info about the home area");
+		addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 		currentPlace = "home";
 		firstVisit = false;
 		//Do NOT call the moveToHome() function!
@@ -806,7 +806,7 @@ function moveToGenerator() {
             	printInv();
             break;
 			case "examine generator":
-				addText("The generator ha a few wires missing but a low hum tells you that electricity is still running through parts of it. If only you had a screwdriver...");
+				addText("The generator has a few wires missing but a low hum tells you that electricity is still running through parts of it. If only you had a screwdriver...");
 				timeCheck();
 			break;
 			case "repair generator":
@@ -866,7 +866,7 @@ function moveToGenerator() {
            
             case "move to home":
                 addText("You walk over to the place you first woke up in...");
-                addText("Some info about the home area");
+                addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
                 currentPlace = "home";
                 firstVisit = true;
                 //Do NOT call the moveToHome() function!
@@ -966,7 +966,7 @@ function moveToBank() {
 		break;
 	    case "move to home":
 		addText("You walk over to the place you first woke up in...");
-		addText("Some info about the home area");
+		addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 		currentPlace = "home";
 		firstVisit = true;
 		//Do NOT call the moveToHome() function!
