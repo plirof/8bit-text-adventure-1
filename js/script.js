@@ -806,7 +806,7 @@ function moveToGenerator() {
             	printInv();
             break;
 			case "examine generator":
-				addText("T dayshe generator has a few wires missing but a low hum tells you that electricity is still running through parts of it. If only you had a screwdriver...");
+				addText("The generator has a few wires missing but a low hum tells you that electricity is still running through parts of it. If only you had a screwdriver...");
 				timeCheck();
 			break;
 			case "repair generator":
