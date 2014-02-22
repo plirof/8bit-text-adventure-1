@@ -662,7 +662,7 @@ function moveToCave() {
 
 		case "move to waterfall":
 			addText("You walk over to the waterfall.");
-			addText("Some info about the waterfall");
+			addText("You finally reach the waterfall then you just sit down on a rock trying to clear your thoughts. It was a hard day for you so far, you are dirty, tired and thirsty , but despite all your troubles you find strength to smile , after all you found source of water! You decide to rest here for a while and consider your options, if you only had a bottle with you...");
 			currentPlace = "waterfall";
 			firstVisit = true;
 			timeCheck();
@@ -806,7 +806,7 @@ function moveToGenerator() {
             	printInv();
             break;
 			case "examine generator":
-				addText("The generator has a few wires missing but a low hum tells you that electricity is still running through parts of it. If only you had a screwdriver...");
+				addText("T dayshe generator has a few wires missing but a low hum tells you that electricity is still running through parts of it. If only you had a screwdriver...");
 				timeCheck();
 			break;
 			case "repair generator":
@@ -873,7 +873,7 @@ function moveToGenerator() {
             break;
             case "move to waterfall":
 		addText("You walk over to the waterfall.");
-		addText("Some info about the waterfall");
+		addText("You finally reach the waterfall then you just sit down on a rock trying to clear your thoughts. It was a hard day for you so far, you are dirty, tired and thirsty , but despite all your troubles you find strength to smile , after all you found source of water! You decide to rest here for a while and consider your options, if you only had a bottle with you...");
 		currentPlace = "waterfall";
 		firstVisit = true;
 		timeCheck();
@@ -958,9 +958,9 @@ function moveToBank() {
             case "move to waterfall":
             	
 		addText("You walk over to the waterfall.");
-		addText("Some info about the waterfall");
+		addText("You return back to the waterfall, remember to take some water with you since you are passing by.");
 		currentPlace = "waterfall";
-		firstVisit = true;
+		firstVisit = false;
 		timeCheck();
 		//Do NOT call the moveTo**AREA1**() function!
 		break;
@@ -968,7 +968,7 @@ function moveToBank() {
 		addText("You walk over to the place you first woke up in...");
 		addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 		currentPlace = "home";
-		firstVisit = true;
+		firstVisit = false;
 		//Do NOT call the moveToHome() function!
 		break;       
             default :
