@@ -796,10 +796,10 @@ function moveToWaterfall() {
 //Move to generator function
 function moveToGenerator() {
 			var newUserRaw = getInput();
-                        user = newUserRaw.toLowerCase();
+           days              user = newUserRaw.toLowerCase();
                         addTextNoLast(user);
             //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
-    if (user.slice(0,5) == days= "drop ") {
+    if (user.slice(0,5) === "drop ") {
         remItem(user.slice(5));
     } else {
         //Else, does all the other checks to see what the user has typed.
