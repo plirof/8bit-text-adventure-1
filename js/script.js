@@ -600,15 +600,17 @@ function moveToCave() {
 	$("#command").val("Y/N");
 		switch (input) {
 			case "yes":
-				return true;
 				fightMode = true;
-				fight("wolf", 6, "bones")
+				fight("wolf", 6, "bones");
+				return true;
+			
 				
 			break;
 			case "y":
-				return true;
 				fightMode = true;
-				fight("wolf", 6, "bones")
+				fight("wolf", 6, "bones");
+				return true;
+			
 			break;
 			case "n":
 				return false;
@@ -617,11 +619,14 @@ function moveToCave() {
 				return false;
 			break;
 			case "Y":
-				return true;
 				fightMode = true;
-				fight("wolf", 6, "bones")
+				fight("wolf", 6, "bones");
+				return true;
+			
 			break;
 			case "no":
+				addText("You ran far away and escaped the cave, not looking back a single second!");
+				moveToHome();
 				return false;
 			default:
 			addTextNoLast("Misunderstood command.");
