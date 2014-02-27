@@ -667,7 +667,7 @@ function moveToCave() {
 
 		case "move to waterfall":
 			addText("You walk over to the waterfall.");
-			addText("You finally reach the waterfall then you just sit down on a rock trying to clear your thoughts. It was a hard day for you so far, you are dirty, tired and thirsty , but despite all your troubles you find strength to smile , after all you found source of water! You decide to rest here for a while and consider your options, if you only had a bottle with you...");
+			addText("Finally reaching it, you sit down on a rock and attempt to clear your thoughts. It was a hard day for you so far; You're tired, dirty, thirsty - but despite all your troubles, you find the strength to smile at least. After all, you found some water! You decide to rest here for a while and consider your options. If only you had a bottle with you...");
 			currentPlace = "waterfall";
 			firstVisit = true;
 			timeCheck();
@@ -766,7 +766,7 @@ function moveToWaterfall() {
 		break; 
 	    case "move to cave":
 		addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
-		addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
+		addText("You notice light reaches far into the cave, since you got so far it would be a good idea to: explore the cave.");
 		addText("You walk into the cave.");
 		currentPlace = "cave";
 		firstVisit = false;
@@ -821,12 +821,12 @@ function moveToGenerator() {
                             			generator = true;
                             			timeCheck();
                         	} else{
-                            		addText("you got elektrocuted and died.");
+                            		addText("You got electrocuted and died!");
                             		alive = false;
                             		timeCheck();
                         	}
                 		} else{
-                    			addText("you looked at the generator but you couldn't repair it. If only you had a screwdriver...");
+                    			addText("You looked at the generator but you couldn't repair it. If only you had a screwdriver...");
                     			timeCheck();
                 		}
             		break;
