@@ -570,9 +570,9 @@ function moveToCave() {
 		case "explore the cave":
 			$("#main").empty();
 			addTextNoLast(lastText);
-			addText("You try to keep yourself on the edges of the cave because you don't really know what is inside and with each of your step light fades away. As you move along, touching the walls and trying to figure out what to do, you stumble upon something. It seems to be a big pile of rocks blocking your way further! You stop and think what to do next, then you look closely and notice a piece of cloth buried beneath those rocks.");
-			addText("Curiously you start to remove the rocks to find out what is beneath, as you dig your way thru the pile you notice that you are no longer holding rocks in your hands! You turn around to catch more light and you realize you a holding bones in your hands, there is a human skeleton scattered beneath your feet!");
-			addText("Feelings of despair and fear fly thru your head, you want to instinctively run , but you overcome your fear and you turn back facing the skeleton. Then a shiny thing catches your attention and you rush to check what it is!");
+			addText("You uncomfortably keep yourself on the sides of the cave - since you really don't know what's inside of it - and with each step that you take, light fades away quickly into the darkness behind you. As you move along (by touching the walls and figuring out what to do), you stumble upon something; It seems to be a big pile of rocks blocking your way further! You stop and survey the pile of rocks, then notice a piece of cloth buried underneath.");
+			addText("Curiously, you remove the rocks to find out what is beneath. And as you dug your way through the pile, you noticed that you were no longer holding rocks in your hands! You turned around to catch more light and realized that you were holding some bones in your hands - you found a human skeleton scattered beneath your feet!");
+			addText("Feeling a sudden despair and fear fly through your head, you want to instinctively run, but you overcome your fear and turn back facing the skeleton. Then a shiny thing catches your attention and you rush to check what it is!");
 			//makes sure option "inv screwdriver" get available here and not the moment user enter the cave.
 			checkForRawItem(caveRaw, "inv screwdriver");
 			timeCheck();
