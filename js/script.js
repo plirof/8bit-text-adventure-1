@@ -653,9 +653,15 @@ function moveToCave() {
 			break;
 
 		default:
+			//Checks to see if user's input is 'inv screwdriver' when first visiting. If so, it prints
+			//"Misunderstood command".
+			if(user === "inv screwdriver") {
+			if (firstVisit = true;) {
+			
 			//If the user typed none of the above, logs "Misunderstood command."
 			addTextNoLast("Misunderstood command.");
-
+			}
+			}
 		}
 	}
 }
