@@ -603,7 +603,7 @@ function moveToCave() {
 					case 'run':
 						addText("You ran outside the cave as fast as you could, not looking back for a second!");
 						currentPlace = "home";
-						firstVisit = true;
+						firstVisit = false;
 						timeCheck();
 						break;
 						
@@ -645,9 +645,9 @@ function moveToCave() {
 			addText("You walk over to the waterfall.");
 			addText("Finally reaching it, you sit down on a rock and attempt to clear your thoughts. It was a hard day for you so far; You're tired, dirty, thirsty - but despite all your troubles, you find the strength to smile at least. After all, you found some water! You decide to rest here for a while and consider your options. If only you had a bottle with you...");
 			currentPlace = "waterfall";
-			firstVisit = true;
+			firstVisit = false;
 			timeCheck();
-			//Do NOT call the moveTo**AREA1**() function!
+			//Do NOT call the moveToWaterFall() function!
 			break;
 
 		default:
@@ -753,9 +753,9 @@ function moveToWaterfall() {
 		
 		addText("You walk your way to the eastern bank of the island, distant image of the boat begins to be clearer. When you arrive at the bank, the condition of the boat does not impress you too much, there will be some repairing needed.");
 		currentPlace = "bank";
-		firstVisit = true;
+		firstVisit = false;
 		timeCheck();
-		//Do NOT call the moveToCave() function!
+		//Do NOT call the moveToBank() function!
 		break;
             default :
             //If the user typed none of the above, logs "Misunderstood command."
@@ -985,3 +985,4 @@ $(document).keydown(function(key) {
 //amritaclehane@gmail.com - Armita C. (JS Dev)
 //adam@adambanky.com - Adam Banky (JS Dev & Lead designer)
 //khalildacoder@gmail.com - Khalil (Assistant Designer)
+//yazidnoned@hotmail.com - Yazid (JS Dev)
