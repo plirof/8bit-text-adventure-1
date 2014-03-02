@@ -147,6 +147,18 @@ function findCurrentPlace() {
 		break;
 	}
 }
+
+//Area images dispalay
+var imgLoc = {// object containing image location in directory and HTML ID
+home : "images/home.gif",
+cave : "images/cave.gif",//image location
+ID : "area" //ID is the same for all because we want all images to be displayed in the same DIV
+};
+//function that enables image of areas to be displayed.
+function displayImage(dirLoc, ID) { // example: dirLoc would be : imgLoc.home , and ID would be imgLoc.ID  / using information from imgLoc object above. 
+              document.getElementById(ID).src = dirLoc;
+}
+
  
 //Checks if the user's input is either yes/y/Y/no/n/N/. If yes/y/Y, return true. n/N/no returns false. Default misunderstood command 
 function fightCheckInput() {
