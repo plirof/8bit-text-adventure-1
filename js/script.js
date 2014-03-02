@@ -570,9 +570,9 @@ function moveToCave() {
 		case "explore the cave":
 			$("#main").empty();
 			addTextNoLast(lastText);
-			addText("You try to keep yourself on the edges of the cave because you don't really know what is inside and with each of your step light fades away. As you move along, touching the walls and trying to figure out what to do, you stumble upon something. It seems to be a big pile of rocks blocking your way further! You stop and think what to do next, then you look closely and notice a piece of cloth buried beneath those rocks.");
-			addText("Curiously you start to remove the rocks to find out what is beneath, as you dig your way thru the pile you notice that you are no longer holding rocks in your hands! You turn around to catch more light and you realize you a holding bones in your hands, there is a human skeleton scattered beneath your feet!");
-			addText("Feelings of despair and fear fly thru your head, you want to instinctively run , but you overcome your fear and you turn back facing the skeleton. Then a shiny thing catches your attention and you rush to check what it is!");
+			addText("You uncomfortably keep yourself on the sides of the cave - since you really don't know what's inside of it - and with each step that you take, light fades away quickly into the darkness behind you. As you move along (by touching the walls and figuring out what to do), you stumble upon something; It seems to be a big pile of rocks blocking your way further! You stop and survey the pile of rocks, then notice a piece of cloth buried underneath.");
+			addText("Curiously, you remove the rocks to find out what is beneath. And as you dug your way through the pile, you noticed that you were no longer holding rocks in your hands! You turned around to catch more light and realized that you were holding some bones in your hands - you found a human skeleton scattered beneath your feet!");
+			addText("Feeling a sudden despair and fear fly through your head, you want to instinctively run, but you overcome your fear and turn back facing the skeleton. Then a shiny thing catches your attention and you rush to check what it is!");
 			//makes sure option "inv screwdriver" get available here and not the moment user enter the cave.
 			checkForRawItem(caveRaw, "inv screwdriver");
 			timeCheck();
@@ -595,38 +595,21 @@ function moveToCave() {
 		case "look around":
 			addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air as you hear a drip, drip, drip emanating from deeper within the cave. Your heart skips a beat before increasing to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy rock slowly unfurls itself. You realise you've stumbled into a wolf's den. The wolf is NOT happy!");
 			addText("From the looks of it, it seems as if you only have ONE option! You need to muster up your courage and FIGHT this wolf in order to survive! Or, possibly run away.");
-			function fightCheckInput() {
-	var input = getInput();
-	$("#command").val("Y/N");
-		switch (input) {
-			case "yes":
-				return true;
-				fightMode = true;
-				fight("wolf", 6, "bones")
-				
-			break;
-			case "y":
-				return true;
-				fightMode = true;
-				fight("wolf", 6, "bones")
-			break;
-			case "n":
-				return false;
-			break;
-			case "N":
-				return false;
-			break;
-			case "Y":
-				return true;
-				fightMode = true;
-				fight("wolf", 6, "bones")
-			break;
-			case "no":
-				return false;
-			default:
-			addTextNoLast("Misunderstood command.");
-		}
-	}
+				var newUserRaw = getInput();
+				choices = newUserRaw.toLowerCase();
+				switch(choices) {
+				case 'fight':
+					fight("wolf", 6, "bones");
+					fightMode = true;
+					break;
+					case 'run':
+						addText("You ran outside the cave as fast as you could, not looking back for a second!");
+						currentPlace = "home";
+						firstVisit = false;
+						timeCheck();
+						break;
+						
+			}
 			//timeCheck();
 			break;
 			//Static case statements
@@ -662,17 +645,25 @@ function moveToCave() {
 
 		case "move to waterfall":
 			addText("You walk over to the waterfall.");
-			addText("You finally reach the waterfall then you just sit down on a rock trying to clear your thoughts. It was a hard day for you so far, you are dirty, tired and thirsty , but despite all your troubles you find strength to smile , after all you found source of water! You decide to rest here for a while and consider your options, if you only had a bottle with you...");
+			addText("Finally reaching it, you sit down on a rock and attempt to clear your thoughts. It was a hard day for you so far; You're tired, dirty, thirsty - but despite all your troubles, you find the strength to smile at least. After all, you found some water! You decide to rest here for a while and consider your options. If only you had a bottle with you...");
 			currentPlace = "waterfall";
-			firstVisit = true;
+			firstVisit = false;
 			timeCheck();
-			//Do NOT call the moveTo**AREA1**() function!
+			//Do NOT call the moveToWaterFall() function!
 			break;
 
 		default:
+			//Checks to see if user's input is 'inv screwdriver' when first visiting. If so, it prints
+			//"Misunderstood command".
+			if(user === "inv screwdriver" && firstVisit = true) {
+			
 			//If the user typed none of the above, logs "Misunderstood command."
 			addTextNoLast("Misunderstood command.");
 
+			
+			} else {
+				addTextNoLast("Misunderstood command.");
+			}
 		}
 	}
 }
@@ -761,7 +752,7 @@ function moveToWaterfall() {
 		break; 
 	    case "move to cave":
 		addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
-		addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
+		addText("You notice light reaches far into the cave, since you got so far it would be a good idea to: explore the cave.");
 		addText("You walk into the cave.");
 		currentPlace = "cave";
 		firstVisit = false;
@@ -772,9 +763,9 @@ function moveToWaterfall() {
 		
 		addText("You walk your way to the eastern bank of the island, distant image of the boat begins to be clearer. When you arrive at the bank, the condition of the boat does not impress you too much, there will be some repairing needed.");
 		currentPlace = "bank";
-		firstVisit = true;
+		firstVisit = false;
 		timeCheck();
-		//Do NOT call the moveToCave() function!
+		//Do NOT call the moveToBank() function!
 		break;
             default :
             //If the user typed none of the above, logs "Misunderstood command."
@@ -791,10 +782,10 @@ function moveToWaterfall() {
 //Move to generator function
 function moveToGenerator() {
 			var newUserRaw = getInput();
-                        user = newUserRaw.toLowerCase();
+        	        user = newUserRaw.toLowerCase();
                         addTextNoLast(user);
             //Checks to see if the first five letters entered were drop and a space - If so, run remItem()function with the user's 5 letter onwards (after "drop ")
-    if (user.slice(0,5) == days= "drop ") {
+    if (user.slice(0,5) === "drop ") {
         remItem(user.slice(5));
     } else {
         //Else, does all the other checks to see what the user has typed.
@@ -816,12 +807,12 @@ function moveToGenerator() {
                             			generator = true;
                             			timeCheck();
                         	} else{
-                            		addText("you got elektrocuted and died.");
+                            		addText("You got electrocuted and died!");
                             		alive = false;
                             		timeCheck();
                         	}
                 		} else{
-                    			addText("you looked at the generator but you couldn't repair it. If only you had a screwdriver...");
+                    			addText("You looked at the generator but you couldn't repair it. If only you had a screwdriver...");
                     			timeCheck();
                 		}
             		break;
@@ -1004,3 +995,4 @@ $(document).keydown(function(key) {
 //amritaclehane@gmail.com - Armita C. (JS Dev)
 //adam@adambanky.com - Adam Banky (JS Dev & Lead designer)
 //khalildacoder@gmail.com - Khalil (Assistant Designer)
+//yazidnoned@hotmail.com - Yazid (JS Dev)
