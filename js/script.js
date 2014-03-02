@@ -100,6 +100,7 @@ function addText(text) {
 function printStart() {
 	$(document).ready(function() {
 		addText("You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.(Suggestion: type 'help')");
+		displayImage(imgLoc.home, imgLoc.ID);// displays home area image from the wery start of the game.
 		$( "#command" ).autocomplete({
 		source: autoInv,
 		});
@@ -151,7 +152,7 @@ function findCurrentPlace() {
 //Area images dispalay
 var imgLoc = {// object containing image location in directory and HTML ID
 home : "images/home.gif",
-cave : "images/cave.gif",//image location
+cave : "images/cavee.gif",//image location
 ID : "area" //ID is the same for all because we want all images to be displayed in the same DIV
 };
 //function that enables image of areas to be displayed.
@@ -542,6 +543,7 @@ function moveToHome() {
                 //Do NOT call the moveToGenerator() function!
             break;       
             case "move to cave":
+            	displayImage(imgLoc.cave, imgLoc.ID);// display area cave picture.
             	addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
                 addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
             	currentPlace = "cave";
@@ -648,6 +650,7 @@ function moveToCave() {
 			//No break is needed here because return exits the function
 			//Checks all the places that can be moved to next.
 		case "move to home":
+			displayImage(imgLoc.home, imgLoc.ID);
 			addText("You walk over to the place you first woke up in...");
 			addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 			currentPlace = "home";
@@ -747,6 +750,7 @@ function moveToWaterfall() {
             //Checks all the places that can be moved to next.
             
             case "move to home":
+            	displayImage(imgLoc.home, imgLoc.ID);
 		addText("You walk over to the place you first woke up in...");
 		addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 		currentPlace = "home";
@@ -763,6 +767,7 @@ function moveToWaterfall() {
 		//Do NOT call the moveToGenerator() function!
 		break; 
 	    case "move to cave":
+	    	displayImage(imgLoc.cave, imgLoc.ID);
 		addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
 		addText("You notice light reaches far into the cave, since you got so far it would be a good idea to: explore the cave.");
 		addText("You walk into the cave.");
@@ -868,6 +873,7 @@ function moveToGenerator() {
             //Checks all the places that can be moved to next.
            
             case "move to home":
+            	displayImage(imgLoc.home, imgLoc.ID);
                 addText("You walk over to the place you first woke up in...");
                 addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
                 currentPlace = "home";
@@ -968,6 +974,7 @@ function moveToBank() {
 		//Do NOT call the moveTo**AREA1**() function!
 		break;
 	    case "move to home":
+	    	displayImage(imgLoc.home, imgLoc.ID);
 		addText("You walk over to the place you first woke up in...");
 		addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 		currentPlace = "home";
