@@ -154,6 +154,9 @@ function findCurrentPlace() {
 var imgLoc = {// object containing image location in directory and HTML ID
 home : "images/home.gif",
 cave : "images/cavee.gif",//image location
+generator : "images/generator.gif",
+waterfall : "images/waterfall.gif",
+bank : "images/bank.gif",
 ID : "area" //ID is the same for all because we want all images to be displayed in the same DIV
 };
 //function that enables image of areas to be displayed.
@@ -536,6 +539,7 @@ function moveToHome() {
                 
             //Checks all the places that can be moved to next.
             case "move to generator":
+            	displayImage(imgLoc.generator, imgLoc.ID);
                 addText(">You slowly make your way over to the generator. As you approach it, a low humming sound can be heard, and<br>");
                 addText("It looks like it was on board some kind of boat before it washed up on the beach here. You see the banana trees with their fruits and your stomach tells you to take one. Apart from these two, there's not much you can do here.");
                 currentPlace = "generator";
@@ -659,6 +663,7 @@ function moveToCave() {
 			break;
 
 		case "move to waterfall":
+			displayImage(imgLoc.waterfall, imgLoc.ID);
 			addText("You walk over to the waterfall.");
 			addText("Finally reaching it, you sit down on a rock and attempt to clear your thoughts. It was a hard day for you so far; You're tired, dirty, thirsty - but despite all your troubles, you find the strength to smile at least. After all, you found some water! You decide to rest here for a while and consider your options. If only you had a bottle with you...");
 			currentPlace = "waterfall";
@@ -759,6 +764,7 @@ function moveToWaterfall() {
 		break;
 		
 	    case "move to generator":
+	    	displayImage(imgLoc.generator, imgLoc.ID);
 		addText(">You slowly make your way over to the generator. As you approach it, a low humming sound can be heard, and<br>");
 		addText("It looks like it was on board some kind of boat before it washed up on the beach here. You see the banana trees with their fruits and your stomach tells you to take one. Apart from these two, there's not much you can do here.");
 		currentPlace = "generator";
@@ -777,7 +783,7 @@ function moveToWaterfall() {
 		//Do NOT call the moveToCave() function!
 		break;
 	    case "move to bank":
-		
+		displayImage(imgLoc.bank, imgLoc.ID);
 		addText("You walk your way to the eastern bank of the island, distant image of the boat begins to be clearer. When you arrive at the bank, the condition of the boat does not impress you too much, there will be some repairing needed.");
 		currentPlace = "bank";
 		firstVisit = false;
@@ -876,6 +882,7 @@ function moveToGenerator() {
                 //Do NOT call the moveToHome() function!
             break;
             case "move to waterfall":
+            	displayImage(imgLoc.waterfall, imgLoc.ID);
 		addText("You walk over to the waterfall.");
 		addText("You finally reach the waterfall then you just sit down on a rock trying to clear your thoughts. It was a hard day for you so far, you are dirty, tired and thirsty , but despite all your troubles you find strength to smile , after all you found source of water! You decide to rest here for a while and consider your options, if you only had a bottle with you...");
 		currentPlace = "waterfall";
@@ -960,7 +967,7 @@ function moveToBank() {
                 
             //Checks all the places that can be moved to next.
             case "move to waterfall":
-            	
+            	displayImage(imgLoc.waterfall, imgLoc.ID);
 		addText("You walk over to the waterfall.");
 		addText("You return back to the waterfall, remember to take some water with you since you are passing by.");
 		currentPlace = "waterfall";
