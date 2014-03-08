@@ -22,6 +22,7 @@ var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
 var fishTime = Math.floor(Math.random()*3);//If fishTime is 3, it'll go bad. If below 3, it'll remain good.
 var Random1To3 = Math.floor(Math.random() * 3 + 1);
+var screwdriverAvailable = false; //Just makes sure the user can't pick up the screwdriver before he has 'explored the cave'.
 var generator = false; //if true the generator is working
 //END OF VARIABLE AREA
 
@@ -100,6 +101,7 @@ function addText(text) {
 function printStart() {
 	$(document).ready(function() {
 		addText("You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.(Suggestion: type 'help')");
+		displayImage(imgLoc.home, imgLoc.ID);// displays home area image from the wery start of the game.
 		$( "#command" ).autocomplete({
 		source: autoInv,
 		});
@@ -147,6 +149,18 @@ function findCurrentPlace() {
 		break;
 	}
 }
+
+//Area images dispalay
+var imgLoc = {// object containing image location in directory and HTML ID
+home : "images/home.gif",
+cave : "images/cavee.gif",//image location
+ID : "area" //ID is the same for all because we want all images to be displayed in the same DIV
+};
+//function that enables image of areas to be displayed.
+function displayImage(dirLoc, ID) { // example: dirLoc would be : imgLoc.home , and ID would be imgLoc.ID  / using information from imgLoc object above. 
+              document.getElementById(ID).src = dirLoc;
+}
+
  
 //Checks if the user's input is either yes/y/Y/no/n/N/. If yes/y/Y, return true. n/N/no returns false. Default misunderstood command 
 function fightCheckInput() {
@@ -530,6 +544,7 @@ function moveToHome() {
                 //Do NOT call the moveToGenerator() function!
             break;       
             case "move to cave":
+            	displayImage(imgLoc.cave, imgLoc.ID);// display area cave picture.
             	addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
                 addText("You notice light reaches far into the cave, sice you got so far it would be a good idea to  >explore the cave.");
             	currentPlace = "cave";
@@ -575,22 +590,22 @@ function moveToCave() {
 			addText("Feeling a sudden despair and fear fly through your head, you want to instinctively run, but you overcome your fear and turn back facing the skeleton. Then a shiny thing catches your attention and you rush to check what it is!");
 			//makes sure option "inv screwdriver" get available here and not the moment user enter the cave.
 			checkForRawItem(caveRaw, "inv screwdriver");
+			screwdriverAvailable = true;
 			timeCheck();
 			break;
 
 		case "inv screwdriver":
-			if (checkForItem("screwdriver")) { // true = item is in inv
-				addText("You already have that item in inventory.");
-
+			if (screwdriverAvailable) {
+				if (checkForItem("screwdriver")) { // true = item is in inv
+					addText("You already have that item in inventory.");
+	
+				} else {
+					addInv("You picked up a screwdriver! That can be used as a weapon (5/20 attack), but in the back of your mind thoughts of generator start to appear.", "screwdriver", true, 5);
+				}
+				timeCheck();
 			} else {
-				addInv("You picked up a screwdriver! That can be used as a weapon (5/20 attack), but in the back of your mind thoughts of generator start to appear.", "screwdriver", true, 5);
+				addTextNoLast("Misunderstood command. Hint: explore the cave!");
 			}
-			timeCheck();
-			break;
-
-		case "**SOMETHING**":
-			addText("**SOMETHING**");
-			timeCheck();
 			break;
 		case "look around":
 			addText("Just inside the entrance, you wait until your eyes begin to adjust to the darkness. You breath in the stale, damp air as you hear a drip, drip, drip emanating from deeper within the cave. Your heart skips a beat before increasing to match the tempo. As you begin to make out faint shadows of rocks and pillars, you experience a deathly shiver down your spine as one of the shadowy rocks near you begins to growl. The shadowy rock slowly unfurls itself. You realise you've stumbled into a wolf's den. The wolf is NOT happy!");
@@ -610,7 +625,6 @@ function moveToCave() {
 						break;
 						
 			}
-			//timeCheck();
 			break;
 			//Static case statements
 		case "jump":
@@ -636,6 +650,7 @@ function moveToCave() {
 			//No break is needed here because return exits the function
 			//Checks all the places that can be moved to next.
 		case "move to home":
+			displayImage(imgLoc.home, imgLoc.ID);
 			addText("You walk over to the place you first woke up in...");
 			addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 			currentPlace = "home";
@@ -735,6 +750,7 @@ function moveToWaterfall() {
             //Checks all the places that can be moved to next.
             
             case "move to home":
+            	displayImage(imgLoc.home, imgLoc.ID);
 		addText("You walk over to the place you first woke up in...");
 		addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 		currentPlace = "home";
@@ -751,6 +767,7 @@ function moveToWaterfall() {
 		//Do NOT call the moveToGenerator() function!
 		break; 
 	    case "move to cave":
+	    	displayImage(imgLoc.cave, imgLoc.ID);
 		addText("You wonder over to the mouth of the cave. Darkness seemed to unnaturally envelope the entrance, with your gaze unable to penetrate it. You suddenly have second thoughts about entering, but taking a deep breath you meekly start making your way. There might be something useful here, you think.");
 		addText("You notice light reaches far into the cave, since you got so far it would be a good idea to: explore the cave.");
 		addText("You walk into the cave.");
@@ -774,11 +791,6 @@ function moveToWaterfall() {
              }
         }
 }
-//You examine the sharp, spiky plant. It looks a bit like some kind of cactus, but it doesn't have many spikes
-//The agaves and the banana trees are everywhere, in the north (n) is the generator, the boat is in the southeast (se), and the cave is in the west (w)<br>
-//You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.<br>
-//addText(">You picked up a jagged agave leaf. This is a  weapon; However, it is only a 1/20 attack, not very good compared to a steel-tempered ulfberht.<br>", "agave leaf", false, 0); 
-//It looks like it was on board some kind of boat before it washed up on the beach here. You see the banana trees with their fruits and your stomach tells you to take one. Apart from these two, there's not much you can do here. 
 //Move to generator function
 function moveToGenerator() {
 			var newUserRaw = getInput();
@@ -856,6 +868,7 @@ function moveToGenerator() {
             //Checks all the places that can be moved to next.
            
             case "move to home":
+            	displayImage(imgLoc.home, imgLoc.ID);
                 addText("You walk over to the place you first woke up in...");
                 addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
                 currentPlace = "home";
@@ -956,6 +969,7 @@ function moveToBank() {
 		//Do NOT call the moveTo**AREA1**() function!
 		break;
 	    case "move to home":
+	    	displayImage(imgLoc.home, imgLoc.ID);
 		addText("You walk over to the place you first woke up in...");
 		addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
 		currentPlace = "home";
