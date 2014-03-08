@@ -17,7 +17,7 @@ img {
     overflow-y:auto;
 }
 #area{	
-	float: right;
+	float: top;
 	height: 70%;
 	width: 50%;
 }
