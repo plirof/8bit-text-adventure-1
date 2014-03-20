@@ -784,7 +784,7 @@ function moveToWaterfall() {
 		break;
 	    case "move to bank":
 		displayImage(imgLoc.bank, imgLoc.ID);
-		addText("You walk your way to the eastern bank of the island, distant image of the boat begins to be clearer. When you arrive at the bank, the condition of the boat does not impress you too much, there will be some repairing needed.");
+		addText("You walk your way to the eastern bank of the island, distant image of the boat begins to be clearer. When you arrive at the bank, the condition of themove to home boat does not impress you too much, there will be some repairing needed.");
 		currentPlace = "bank";
 		firstVisit = false;
 		timeCheck();
@@ -1017,3 +1017,4 @@ $(document).keydown(function(key) {
 //adam@adambanky.com - Adam Banky (JS Dev & Lead designer)
 //khalildacoder@gmail.com - Khalil (Assistant Designer)
 //yazidnoned@hotmail.com - Yazid (JS Dev)
+//goggy25@gmail.com - fundocro (JS Dev, Assistant Designer)
