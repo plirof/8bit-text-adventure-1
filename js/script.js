@@ -587,8 +587,6 @@ function moveToCave() {
 			timeCheck();
 			break;
 		case "explore the cave":
-			$("#main").empty();
-			addTextNoLast(lastText);
 			addText("You uncomfortably keep yourself on the sides of the cave - since you really don't know what's inside of it - and with each step that you take, light fades away quickly into the darkness behind you. As you move along (by touching the walls and figuring out what to do), you stumble upon something; It seems to be a big pile of rocks blocking your way further! You stop and survey the pile of rocks, then notice a piece of cloth buried underneath.");
 			addText("Curiously, you remove the rocks to find out what is beneath. And as you dug your way through the pile, you noticed that you were no longer holding rocks in your hands! You turned around to catch more light and realized that you were holding some bones in your hands - you found a human skeleton scattered beneath your feet!");
 			addText("Feeling a sudden despair and fear fly through your head, you want to instinctively run, but you overcome your fear and turn back facing the skeleton. Then a shiny thing catches your attention and you rush to check what it is!");
