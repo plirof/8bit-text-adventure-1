@@ -530,9 +530,6 @@ function moveToHome() {
 				$("#main").empty();
 				addTextNoLast(lastText);
 			break;
-			case "show inv":
-				printInv();
-	    		break;
 			case "inv bottle":
 				addInv("You picked up a bottle.", "bottle", false, 0)	
 			break;
