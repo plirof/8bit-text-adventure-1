@@ -12,11 +12,11 @@ var fightMode = false; //This makes you fight. While you fight, no time goes by.
 var pots = 0; //Pots is short for potions. If you have potions, you can use them to regain life.
 var newInv = []; //Used in the autocomplete function
 var autoInv = []; //Used in the autocomplete function
-var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf", "drink water", "inv bottle"];//Autocomplete functions for home
-var generatorRaw = ["move to home", "inv banana", "examine generator","move to waterfall", "repair generator", "drink water"];
-var caveRaw = ["explore the cave", "move to waterfall", "move to home"];
-var waterfallRaw = ["move to home","move to generator","move to cave","move to bank","drink water","fill bottle", "wash"];
-var bankRaw = ["move to home","move to waterfall", "fix boat", "examine boat", "drink water", "fish" ];// still needs addition...
+var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf", "drink water", "inv bottle", "show inv"];//Autocomplete functions for home
+var generatorRaw = ["move to home", "inv banana", "examine generator","move to waterfall", "repair generator", "drink water", "show inv"];
+var caveRaw = ["explore the cave", "move to waterfall", "move to home", "show inv"];
+var waterfallRaw = ["move to home","move to generator","move to cave","move to bank", "show inv", "drink water","fill bottle", "wash"];
+var bankRaw = ["move to home","move to waterfall", "fix boat", "show inv", "examine boat", "drink water", "fish" ];// still needs addition...
 var lastText = "";//Used in the clear command
 var staticAutoInv = ["look around", "jump", "quit", "clear"]
 var water = 5; //if zero you die and the game ends
@@ -530,6 +530,9 @@ function moveToHome() {
 				$("#main").empty();
 				addTextNoLast(lastText);
 			break;
+			case "show inv":
+				printInv();
+	    		break;
 			case "inv bottle":
 				addInv("You picked up a bottle.", "bottle", false, 0)	
 			break;
