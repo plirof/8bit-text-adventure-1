@@ -520,7 +520,9 @@ function moveToHome() {
 			//Static case statements
 			case "jump":
 				addText("You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.");
-				addText("By jumping you catch a reflexion off something in the distance. You jump again and now you are sure that something is behind a rock partly buried in the sand. You approach the thing and notice that it is a plastic bottle, something definitely worth stashing in inventory!");
+				addText("By jumping you catch a reflexion off something in the distance.");
+				addText("You jump again and now you are sure that something is behind a rock partly buried in the sand.");
+				addText("You approach the thing and notice that it is a plastic bottle, something definitely worth stashing in inventory!");
 				timeCheck();
 			break;
 			case "clear":
