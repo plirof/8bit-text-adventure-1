@@ -301,6 +301,12 @@ function printGameOver(status) {
 
 //Adds an item to the inventory array.
 function addInv(string,item,weapon,damage){
+	for(var x = 0;x<inv.length;x++){
+		if(inv[x]===item){
+			addText("You already have that item in inventory.");
+			return;
+		}
+	}
 	if (inv.length < 10) {
         inv.push(item);
         //Updates autocomplete tags
@@ -718,7 +724,7 @@ function moveToWaterfall() {
 	    break;
             case "fill bottle":
                         if(checkForItem("bottle") === true) {
-                            remItem(bottle);
+                            remItem("bottle");
                             addInv("filled a bottle.", "full_bottle", false, 0);
                         }  else{
                             addText("You don't have a bottle to fill.")
