@@ -12,7 +12,7 @@ var fightMode = false; //This makes you fight. While you fight, no time goes by.
 var pots = 0; //Pots is short for potions. If you have potions, you can use them to regain life.
 var newInv = []; //Used in the autocomplete function
 var autoInv = []; //Used in the autocomplete function
-var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf", "drink water"];//Autocomplete functions for home
+var homeRaw = ["inv agave leaf", "move to cave", "move to generator", "examine agave leaf", "drink water", "inv bottle"];//Autocomplete functions for home
 var generatorRaw = ["move to home", "inv banana", "examine generator","move to waterfall", "repair generator", "drink water"];
 var caveRaw = ["explore the cave", "move to waterfall", "move to home"];
 var waterfallRaw = ["move to home","move to generator","move to cave","move to bank","drink water","fill bottle", "wash"];
@@ -520,6 +520,7 @@ function moveToHome() {
 			//Static case statements
 			case "jump":
 				addText("You jump up for some reason you don't really know. You get some pretty nice air, and you see that there is an island right next to the one your on in the south.");
+				addText("By jumping you catch a reflexion off something in the distance. You jump again and now you are sure that something is behind a rock partly buried in the sand. You approach the thing and notice that it is a plastic bottle, something definitely worth stashing in inventory!");
 				timeCheck();
 			break;
 			case "clear":
