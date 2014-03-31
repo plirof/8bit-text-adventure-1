@@ -157,7 +157,7 @@ cave : "images/cavee.gif",//image location
 generator : "images/generator.gif",
 waterfall : "images/waterfall.gif",
 bank : "images/bank.gif",
-ID : "area" //ID is the same for all because we want all images to be displayed in the same DIV
+ID : "area-pic" //ID is the same for all because we want all images to be displayed in the same DIV
 };
 //function that enables image of areas to be displayed.
 function displayImage(dirLoc, ID) { // example: dirLoc would be : imgLoc.home , and ID would be imgLoc.ID  / using information from imgLoc object above. 
