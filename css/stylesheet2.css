@@ -12,14 +12,9 @@ img {
 #main {
 	background-color:#333333;
 	height: 73%;
-	width: auto;
+	width: 80%;
 	padding: 2px 10px 2px 10px;
     overflow-y:auto;
-}
-#area{	
-	float: top;
-	height: 70%;
-	width: 50%;
 }
 
 #button{
@@ -49,13 +44,12 @@ input[type="text"]{
 input[type="text"]:focus{
 	outline: none;
 }
-
 #belowMain {
 	display: block;
 	margin-top: 4px;
 	background-color: #333333;
-	width: auto;
-	padding-bottom: 1px;
+	width: 80%;
+	padding: 2px 10px 2px 10px;
 }
 #belowMain p {
 	display: inline;
@@ -66,6 +60,16 @@ input[type="text"]:focus{
 	margin: auto;
 	text-align: center;
 	margin-top: 1%;
+}
+#left {
+    display: block;
+    float: right;
+    height: 37%;
+    width: 18%;
+}
+#area-pic {
+    height: 100%;
+    width: 100%;
 }
 /*autocomplete stuff*/
 .ui-autocomplete {
