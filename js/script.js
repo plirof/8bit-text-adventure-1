@@ -538,7 +538,10 @@ function moveToHome() {
 				addTextNoLast(lastText);
 			break;
 			case "inv bottle":
-				addInv("You picked up a bottle.", "bottle", false, 0)	
+				if(checkForRawItem(homeRaw, "inv bottle")===true){
+					addInv("You picked up a bottle.", "bottle", false, 0);
+				}else{addText("Misunderstood command.");}
+					
 			break;
             case "quit":
                 //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
