@@ -161,7 +161,7 @@ ID : "area-pic" //ID is the same for all because we want all images to be displa
 };
 //function that enables image of areas to be displayed.
 function displayImage(dirLoc, ID) { // example: dirLoc would be : imgLoc.home , and ID would be imgLoc.ID  / using information from imgLoc object above. 
-              document.getElementById(ID).src = dirLoc;
+    /*document.getElementById(ID).src = dirLoc;*/
 }
 
  
@@ -1007,6 +1007,23 @@ function moveToBank() {
 
 //Prints the starting message
 printStart();
+
+document.onload = function(){
+    var menustate = false,
+        menu = $("#menu"),
+        activator = $("#menu-activator");
+    function menuSwitcher(){
+        console.log("toggled");
+        menustate = menustate===false?true:false;
+        if (menustate===true){
+            menu.style.visibility = "hidden";
+        } else {
+            menu.style.visibility = "";
+        }
+    }
+    activator.onclick = menuSwitcher;
+};  
+
 
 //If the user pressed the enter key get the input and use the autocomplete function
 $(document).keydown(function(key) {
