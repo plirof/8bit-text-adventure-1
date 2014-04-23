@@ -78,23 +78,23 @@ function getInput() {
 
 //Adds the text to the screen and scrolls down (if need be). Also assigns text to lastText variable for the clear option.
 function addText(text) {
-	$("#main").append(text+"<br>");
-    $("#main").scrollTop($("#main")[0].scrollHeight); //scrolls down
-    $("#main").append("&gt;");
+	$("#output").append(text+"<br>");
+    $("#output").scrollTop($("#output")[0].scrollHeight); //scrolls down
+    $("#output").append("&gt;");
 	lastText = text;
  }
  
 //Same as addText, but doesn't assign it to the variable lastText (used for misunderstood commands etc) 
  function addTextNoLast(text) {
-	$("#main").append(text+"<br>");
-    $("#main").scrollTop($("#main")[0].scrollHeight); //scrolls down
-    $("#main").append("&gt;");
+	$("#output").append(text+"<br>");
+    $("#output").scrollTop($("#output")[0].scrollHeight); //scrolls down
+    $("#output").append("&gt;");
  }
  
  function addTextNoBreak(text) {
- 	$("#main").append(text);
-    $("#main").scrollTop($("#main")[0].scrollHeight); //scrolls down
-    $("#main").append("&gt;");
+ 	$("#output").append(text);
+    $("#output").scrollTop($("#output")[0].scrollHeight); //scrolls down
+    $("#output").append("&gt;");
  }
  
 //Prints the starting message 
@@ -534,7 +534,7 @@ function moveToHome() {
 			break;
 			case "clear":
 				//Empties the main div and prints lastKnown text
-				$("#main").empty();
+				$("#output").empty();
 				addTextNoLast(lastText);
 			break;
 			case "inv bottle":
@@ -653,7 +653,7 @@ function moveToCave() {
 
 		case "clear":
 			//Empties the main div and prints lastKnown text
-			$("#main").empty();
+			$("#output").empty();
 			addTextNoLast(lastText);
 			break;
 
@@ -754,7 +754,7 @@ function moveToWaterfall() {
             break;
             case "clear":
                         //Empties the main div and prints lastKnown text
-                        $("#main").empty();
+                        $("#output").empty();
                         addTextNoLast(lastText);
             break;
             case "quit":
@@ -873,7 +873,7 @@ function moveToGenerator() {
 			break;
 			case "clear":
 				//Empties the main div and prints lastKnown text
-				$("#main").empty();
+				$("#output").empty();
 				addTextNoLast(lastText);
 			break;
             case "quit":
@@ -967,7 +967,7 @@ function moveToBank() {
             break;
 			case "clear":
 				//Empties the main div and prints lastKnown text
-				$("#main").empty();
+				$("#output").empty();
 				addTextNoLast(lastText);
 			break;
             case "quit":

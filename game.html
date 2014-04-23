@@ -1,45 +1,73 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>Game</title>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet2.css">
+		<title>A Text Adventure</title>
+        
+        <!-- Stylesheets -->
+		<link rel="stylesheet" type="text/css" href="css/stylesheet1.css">
 	    <link rel="icon" href="images/favicon.png" type="image/icon">
 		<link rel="stylesheet" href="css-ui/dark-hive/jquery-ui-1.10.3.custom.css" />
+        
+        <!-- Scripts -->
 		<script src="js-ui/jquery-1.9.1.js"></script>
 		<script src="js-ui/jquery-ui-1.10.3.custom.min.js"></script>
 		<script src="js/script.js"></script>
 		
 	</head>
-	
 	<body>
-		
-
-		<div id="header">
-			<img src="images/8bitlogo.png">
-		</div>
-        <div id="left">
-            <img id="area-pic"/>
-            <center>
-						Matthew Taylor (Project leader)<br>
-						Gabriel de Luz (JS Dev)<br>
-						James Clarke (JS Dev)<br>
-						Bram Rausch (JS Dev)<br>
-						Goran F. (JS Dev)<br>
-						Yazid N. (JS Dev)<br>
-						Version 1.1.0
-            </center>
+		<div id="container">
+            <div id="header">
+                <span id="title">A Text Adventrue</span>
+                <div id="menu">
+                    <div id="authors">
+                        <ul>
+                            <li>
+                                Matthew Taylor (Project leader)
+                            </li>
+                            <li>
+                                Gabriel de Luz (JS Dev)
+                            </li>
+                            <li>
+                                James Clarke (JS Dev)
+                            </li>
+                            <li>
+                                Bram Rausch (JS Dev)
+                            </li>
+                            <li>
+                                Goran F. (JS Dev)
+                            </li>
+                            <li>
+                                Yazid N. (JS Dev)
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="eula">
+                        
+                    </div>
+                    <div id="Brief">
+                        
+                    </div>
+                    <div id="version">
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="game">
+                <div id="output">
+                    
+                </div>
+                <div id="input">
+                    <span>&gt;</span><input type="text" id="command">	
+                </div>
+            </div>
+            <div id="footer">
+                <span id="byline">A Game By 8BIT</span>
+                <a href="https://github.com/Techhead55/text-adventure">
+                    <div id="githubReferral">
+                        Fork Us On GitHub
+                    </div>
+                </a>
+            </div>
         </div>
-		<div id="main">
-		</div>
-	
-		<div id="belowMain">
-			<p>&gt;</p>
-
-			<input type="text" id="command">			
-		</div>
-		
-			<table id="footer">
-                
-			</table>
-		
 	</body>
 </html>
