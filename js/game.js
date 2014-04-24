@@ -91,15 +91,15 @@ function addText(text) {
     $("#output").append("&gt;");
  }
  
- function addTextNoBreak(text) {
- 	$("#output").append(text);
+function addTextNoBreak(text) {
+    $("#output").append(text);
     $("#output").scrollTop($("#output")[0].scrollHeight); //scrolls down
     $("#output").append("&gt;");
- }
+}
  
 //Prints the starting message 
 function printStart() {
-	$(document).ready(function() {
+	$(document).ready(function () {
 		addText("You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.(Suggestion: type 'help')");
 		displayImage(imgLoc.home, imgLoc.ID);// displays home area image from the wery start of the game.
 		$( "#command" ).autocomplete({
@@ -161,7 +161,7 @@ ID : "area-pic" //ID is the same for all because we want all images to be displa
 };
 //function that enables image of areas to be displayed.
 function displayImage(dirLoc, ID) { // example: dirLoc would be : imgLoc.home , and ID would be imgLoc.ID  / using information from imgLoc object above. 
-    /*document.getElementById(ID).src = dirLoc;*/
+              /*document.getElementById(ID).src = dirLoc;*/
 }
 
  
@@ -1007,23 +1007,6 @@ function moveToBank() {
 
 //Prints the starting message
 printStart();
-
-document.onload = function(){
-    var menustate = false,
-        menu = $("#menu"),
-        activator = $("#menu-activator");
-    function menuSwitcher(){
-        console.log("toggled");
-        menustate = menustate===false?true:false;
-        if (menustate===true){
-            menu.style.visibility = "hidden";
-        } else {
-            menu.style.visibility = "";
-        }
-    }
-    activator.onclick = menuSwitcher;
-};  
-
 
 //If the user pressed the enter key get the input and use the autocomplete function
 $(document).keydown(function(key) {
