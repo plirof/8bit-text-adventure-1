@@ -71,30 +71,30 @@ getTags();
 
 //Gets the user's input on a press of the return key.
 function getInput() {
-		$('#command').focus();		
-		var userRaw = $('#command').val();
+		$('#game-input').focus();		
+		var userRaw = $('#game-input').val();
 		return userRaw;
 }     
 
 //Adds the text to the screen and scrolls down (if need be). Also assigns text to lastText variable for the clear option.
 function addText(text) {
-	$("#output").append(text+"<br>");
-    $("#output").scrollTop($("#output")[0].scrollHeight); //scrolls down
-    $("#output").append("&gt;");
+	$("#game-output").append(text+"<br>");
+    $("#game-output").scrollTop($("#game-output")[0].scrollHeight); //scrolls down
+    $("#game-output").append("&gt;");
 	lastText = text;
  }
  
 //Same as addText, but doesn't assign it to the variable lastText (used for misunderstood commands etc) 
  function addTextNoLast(text) {
-	$("#output").append(text+"<br>");
-    $("#output").scrollTop($("#output")[0].scrollHeight); //scrolls down
-    $("#output").append("&gt;");
+	$("#game-output").append(text+"<br>");
+    $("#game-output").scrollTop($("#game-output")[0].scrollHeight); //scrolls down
+    $("#game-output").append("&gt;");
  }
  
 function addTextNoBreak(text) {
-    $("#output").append(text);
-    $("#output").scrollTop($("#output")[0].scrollHeight); //scrolls down
-    $("#output").append("&gt;");
+    $("#game-output").append(text);
+    $("#game-output").scrollTop($("#game-output")[0].scrollHeight); //scrolls down
+    $("#game-output").append("&gt;");
 }
  
 //Prints the starting message 
@@ -102,10 +102,10 @@ function printStart() {
 	$(document).ready(function () {
 		addText("You wake up on a small island. This island is so small that you can see every bank from your current vantage point. There is a broken boat, a generator (that your not sure if works), banana trees, sharp-edged agave plants and a cave that looks unexplored.(Suggestion: type 'help')");
 		displayImage(imgLoc.home, imgLoc.ID);// displays home area image from the wery start of the game.
-		$( "#command" ).autocomplete({
+		$( "#game-input" ).autocomplete({
 		source: autoInv,
 		});
-		$('#command').focus();
+		$('#game-input').focus();
 		
 	});
 }
@@ -168,7 +168,7 @@ function displayImage(dirLoc, ID) { // example: dirLoc would be : imgLoc.home , 
 //Checks if the user's input is either yes/y/Y/no/n/N/. If yes/y/Y, return true. n/N/no returns false. Default misunderstood command 
 function fightCheckInput() {
 	var input = getInput();
-	$("#command").val("Y/N");
+	$("#game-input").val("Y/N");
 		switch (input) {
 			case "yes":
 				return true;
@@ -534,7 +534,7 @@ function moveToHome() {
 			break;
 			case "clear":
 				//Empties the main div and prints lastKnown text
-				$("#output").empty();
+				$("#game-output").empty();
 				addTextNoLast(lastText);
 			break;
 			case "inv bottle":
@@ -653,7 +653,7 @@ function moveToCave() {
 
 		case "clear":
 			//Empties the main div and prints lastKnown text
-			$("#output").empty();
+			$("#game-output").empty();
 			addTextNoLast(lastText);
 			break;
 
@@ -754,7 +754,7 @@ function moveToWaterfall() {
             break;
             case "clear":
                         //Empties the main div and prints lastKnown text
-                        $("#output").empty();
+                        $("#game-output").empty();
                         addTextNoLast(lastText);
             break;
             case "quit":
@@ -873,7 +873,7 @@ function moveToGenerator() {
 			break;
 			case "clear":
 				//Empties the main div and prints lastKnown text
-				$("#output").empty();
+				$("#game-output").empty();
 				addTextNoLast(lastText);
 			break;
             case "quit":
@@ -967,7 +967,7 @@ function moveToBank() {
             break;
 			case "clear":
 				//Empties the main div and prints lastKnown text
-				$("#output").empty();
+				$("#game-output").empty();
 				addTextNoLast(lastText);
 			break;
             case "quit":
@@ -1015,7 +1015,7 @@ $(document).keydown(function(key) {
 
 		$("input").val("");
 		getTags();
-		$( "#command" ).autocomplete({
+		$( "#game-input" ).autocomplete({
 		source: autoInv
 		});
 	}
