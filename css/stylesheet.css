@@ -1,6 +1,11 @@
 a {
     text-decoration: none;
 }
+input[type=text] {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0px;
+}
 #header {
     position: fixed;
     top: 0px;
@@ -33,10 +38,37 @@ a {
 #game-output {
     font-size: 20px;
     overflow-y: scroll;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-top: 40px;
 }
 #game-input-container {
     font-size: 20px;
-    overflow-y: scroll;
+    color: #FFF;
+    background-color: #717171;
+    height: 40px;
+    outline: none !important;
+    border: none !important;
+    line-height: 40px;
+}
+#game-input {
+    position: absolute;
+    left: 40px;
+    appearance:none;
+    height: 40px;
+    padding: 0px;
+    margin: 0px;
+    outline: none;
+    line-height: 40px;
+    text-align: center;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 24px;
+}
+#game-input-icon {
+    left: 0px;
+    width: 40px;
+    height: 0px;
+    line-height: 40px;
 }
 #title {
     color: #000;
