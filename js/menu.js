@@ -1,4 +1,4 @@
-window.onload = function(){
+function desktopCss(){
     $("#menu").hover(function() {
         $(this).animate({
             marginLeft: "-300px"
@@ -57,13 +57,16 @@ window.onload = function(){
     document.getElementById("game").style.height = (window.innerHeight-70)+"px";
     document.getElementById("game-output").style.height = (window.innerHeight-360)+"px";
     document.getElementById("game-input").style.width = (window.innerWidth-90)+"px";
+    window.onresize = function(){
+        document.getElementById("game-output-display").style.width = (window.innerWidth-50)+"px";
+        document.getElementById("header").style.width = (window.innerWidth-50)+"px";
+        document.getElementById("footer").style.width = (window.innerWidth-50)+"px";
+        document.getElementById("game").style.width = (window.innerWidth-50)+"px";
+        document.getElementById("game").style.height = (window.innerHeight-70)+"px";
+        document.getElementById("game-output").style.height = (window.innerHeight-360)+"px";
+        document.getElementById("game-input").style.width = (window.innerWidth-90)+"px";
+    };
 };
-window.onresize = function(){
-    document.getElementById("game-output-display").style.width = (window.innerWidth-50)+"px";
-    document.getElementById("header").style.width = (window.innerWidth-50)+"px";
-    document.getElementById("footer").style.width = (window.innerWidth-50)+"px";
-    document.getElementById("game").style.width = (window.innerWidth-50)+"px";
-    document.getElementById("game").style.height = (window.innerHeight-70)+"px";
-    document.getElementById("game-output").style.height = (window.innerHeight-360)+"px";
-    document.getElementById("game-input").style.width = (window.innerWidth-90)+"px";
-};
+enquire.register("only screen", function(){
+    window.onload = desktopCss;
+});

@@ -593,7 +593,6 @@ function moveToHome() {
             case "move to generator":
             	displayImage(imgLoc.generator, imgLoc.ID);
                 addText(">You slowly make your way over to the generator. As you approach it, a low humming sound can be heard, and<br>");
-                addText(">You slowly make your way over to the generator. As you approach it, a low humming sounaddd can be heard, and<br>");
                 addText("It looks like it was on board some kind of boat before it washed up on the beach here. You see the banana trees with their fruits and your stomach tells you to take one. Apart from these two, there's not much you can do here.");
                 currentPlace = "generator";
                 firstVisit = true;
