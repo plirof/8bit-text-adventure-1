@@ -1,3 +1,41 @@
+(function game(){
+    var data = {
+        time: {
+            daySegment: 0,
+            day: 0
+        },
+        player: {
+            healthPoints: 30,
+            hydration: 5,
+            inventory: [
+                
+            ],
+            attack: {
+                baseHitpoints: 0.5,
+                weapon: {
+                    name: "none",
+                    hitpoints: 0
+                }
+            },
+            location: "home",
+            commamdHistory: [
+                
+            ],
+            healthPots: 0
+        },
+        io: {
+            outputLog: [
+                
+            ],
+            output: function(){
+                
+            }, 
+            input: function(){
+                
+            }
+        }
+    };
+})();
 //VARIABLE AREA!!!!!!!!!!
 var timeCount = 0; //Counter for time of day. Time count 1 is morning, 2 midday, 3 evening, and when the counter gets to 4 nightCounter += 1
 var nightCount = 0; //Number of nights played.
@@ -42,7 +80,7 @@ function updateInv(array) {
 	autoInv = newArray.sort();
 }
 
-//Ges the current place and gets the appropriate autocomplete tags
+//Gets the current place and gets the appropriate autocomplete tags
 function getTags() {
 	switch (currentPlace) {
 	case "home":
@@ -73,12 +111,13 @@ getTags();
 function getInput() {
 		$('#game-input').focus();		
 		var userRaw = $('#game-input').val();
+        $('#game-input').val = "";
 		return userRaw;
 }     
 
 //Adds the text to the screen and scrolls down (if need be). Also assigns text to lastText variable for the clear option.
 function addText(text) {
-	$("#game-output").append(text+"<br>");
+	$("#game-output").append(text+"<br><br>");
     $("#game-output").scrollTop($("#game-output")[0].scrollHeight); //scrolls down
     $("#game-output").append("&gt;");
 	lastText = text;
@@ -86,7 +125,7 @@ function addText(text) {
  
 //Same as addText, but doesn't assign it to the variable lastText (used for misunderstood commands etc) 
  function addTextNoLast(text) {
-	$("#game-output").append(text+"<br>");
+	$("#game-output").append(text+"<br><br>");
     $("#game-output").scrollTop($("#game-output")[0].scrollHeight); //scrolls down
     $("#game-output").append("&gt;");
  }
@@ -188,7 +227,7 @@ function fightCheckInput() {
 			case "no":
 				return false;
 			default:
-			addTextNoLast("Misunderstood command.");
+			addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 		}
 	}
        
@@ -546,7 +585,7 @@ function moveToHome() {
             case "quit":
                 //Calls printGameOver() and then and exits the function. (using return makes the rest of the function unreachable)
                 printGameOver();
-				addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.hmtml'>here</a> to play again.");
+				addText("Click <a href='index.html'>here</a> to go home, or click <a href='game.html'>here</a> to play again.");
                 return;
                 //No break is needed here because return exits the function
                 
@@ -554,6 +593,7 @@ function moveToHome() {
             case "move to generator":
             	displayImage(imgLoc.generator, imgLoc.ID);
                 addText(">You slowly make your way over to the generator. As you approach it, a low humming sound can be heard, and<br>");
+                addText(">You slowly make your way over to the generator. As you approach it, a low humming sounaddd can be heard, and<br>");
                 addText("It looks like it was on board some kind of boat before it washed up on the beach here. You see the banana trees with their fruits and your stomach tells you to take one. Apart from these two, there's not much you can do here.");
                 currentPlace = "generator";
                 firstVisit = true;
@@ -574,7 +614,7 @@ function moveToHome() {
             break;
             default :
             //If the user typed none of the above, logs "Misunderstood command."
-            addTextNoLast("Misunderstood command.");
+            addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 
      	}
 	}
@@ -690,11 +730,11 @@ function moveToCave() {
 				
 			
 				//If the user typed none of the above, logs "Misunderstood command."
-				addTextNoLast("Misunderstood command.");
+				addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 
 			
 			} else {
-				addTextNoLast("Misunderstood command.");
+				addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 			}
 		}
 	}
@@ -804,7 +844,7 @@ function moveToWaterfall() {
 		break;
             default :
             //If the user typed none of the above, logs "Misunderstood command."
-            addTextNoLast("Misunderstood command.");
+            addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 
              }
         }
@@ -905,7 +945,7 @@ function moveToGenerator() {
 
             default :
             //If the user typed none of the above, logs "Misunderstood command."
-            addTextNoLast("Misunderstood command.");
+            addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 
         }
 	}
@@ -997,7 +1037,7 @@ function moveToBank() {
 		break;       
             default :
             //If the user typed none of the above, logs "Misunderstood command."
-            addTextNoLast("Misunderstood command.");
+            addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 
      	}
 	}

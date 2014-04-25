@@ -55,7 +55,7 @@ window.onload = function(){
     document.getElementById("game").style.width = (window.innerWidth-50)+"px";
     document.getElementById("game-output-display").style.width = (window.innerWidth-50)+"px";
     document.getElementById("game").style.height = (window.innerHeight-70)+"px";
-    document.getElementById("game-output").style.height = (window.innerHeight-260)+"px";
+    document.getElementById("game-output").style.height = (window.innerHeight-360)+"px";
     document.getElementById("game-input").style.width = (window.innerWidth-90)+"px";
 };
 window.onresize = function(){
@@ -64,6 +64,6 @@ window.onresize = function(){
     document.getElementById("footer").style.width = (window.innerWidth-50)+"px";
     document.getElementById("game").style.width = (window.innerWidth-50)+"px";
     document.getElementById("game").style.height = (window.innerHeight-70)+"px";
-    document.getElementById("game-output").style.height = (window.innerHeight-260)+"px";
+    document.getElementById("game-output").style.height = (window.innerHeight-360)+"px";
     document.getElementById("game-input").style.width = (window.innerWidth-90)+"px";
 };
