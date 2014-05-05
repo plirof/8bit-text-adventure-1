@@ -1,0 +1,12 @@
+{
+	"manifest_version": 2,
+	"name": "Text Adventure",
+	"description": "Text adventure made by: the 8bit codecademy beginners group, Can you live on a island with wolfs? try it and try to survive.",
+	"version": "0.1",
+	"app": {
+	"background": {
+		"scripts": ["app.js"]
+	}
+}
+	"icons":{"16": "icon16.jpg", "128": "icon128.jpg"}
+}
