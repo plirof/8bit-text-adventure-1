@@ -8,5 +8,4 @@
 		"scripts": ["app.js"]
 	}
 }
-	"icons":{"16": "icon16.jpg", "128": "icon128.jpg"}
 }
