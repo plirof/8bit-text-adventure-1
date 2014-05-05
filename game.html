@@ -1,45 +1,92 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>Game</title>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet2.css">
+		<title>A Text Adventure</title>
+        
+        <!-- Stylesheets -->
+		<link rel="stylesheet" type="text/css" href="css/stylesheet_screen.css" media="only screen">
 	    <link rel="icon" href="images/favicon.png" type="image/icon">
 		<link rel="stylesheet" href="css-ui/dark-hive/jquery-ui-1.10.3.custom.css" />
+        
+        <!-- Scripts -->
 		<script src="js-ui/jquery-1.9.1.js"></script>
 		<script src="js-ui/jquery-ui-1.10.3.custom.min.js"></script>
-		<script src="js/script.js"></script>
+        <script src="js-ui/enquire.js"></script>
+		<script src="js/menu.js"></script>
+        <script src="js/game.js"></script>
 		
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        
 	</head>
-	
 	<body>
-		
-
-		<div id="header">
-			<img src="images/8bitlogo.png">
-		</div>
-        <div id="left">
-            <img id="area-pic"/>
-            <center>
-						Matthew Taylor (Project leader)<br>
-						Gabriel de Luz (JS Dev)<br>
-						James Clarke (JS Dev)<br>
-						Bram Rausch (JS Dev)<br>
-						Goran F. (JS Dev)<br>
-						Yazid N. (JS Dev)<br>
-						Version 1.1.0
-            </center>
+		<div id="container">
+            <div id="header">
+                <span id="title">A Text Adventure</span>
+            </div>
+            <div id="menu">
+                <div id="menu-side">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <div id="menu-sub">
+                    <div id="authors" class="segment">
+                        <div class="menu-title">Authors</div>
+                        <div class="menu-content">
+                            Matthew Taylor (Project leader)<br>
+                            Gabriel de Luz (JS Dev)<br>
+                            James Clarke (JS Dev)<br>
+                            Bram Rausch (JS Dev)<br>
+                            Goran F. (JS Dev)<br>
+                            Yazid N. (JS Dev)<br>
+                        </div>
+                    </div>
+                    <div id="eula" class="segment">
+                        <div class="menu-title">EULA</div>
+                        <div class="menu-content">
+                            
+                        </div>
+                    </div>
+                    <div id="Brief" class="segment">
+                        <div class="menu-title">Brief</div>
+                        <div class="menu-content">
+                            
+                        </div>
+                    </div>
+                    <div id="version" class="segment">
+                        <div class="menu-title">Version</div>
+                        <div class="menu-content">
+                            
+                        </div>
+                    </div>
+                    <div id="changelog" class="segment">
+                        <div class="menu-title">Changelog</div>
+                        <div class="menu-content">
+                            
+                        </div>
+                    </div>
+                    <div class="segment">
+                        <img id="logo" src="images/8bitlogo.png" width="200px" style="position: fixed; bottom: 15px !important; right: -250px;">
+                    </div>
+                </div>
+                </div>
+            <div id="game">
+                <div id="game-output">
+                    
+                </div>
+                <div id="game-input-container">
+                    <div id="game-input-icon">&gt;</div><input type="text" placeholder="Enter commands here" id="game-input">	
+                </div>
+                <div id="game-output-display">
+                    
+                </div>
+            </div>
+            <div id="footer">
+                <span id="byline">A Game By 8BIT</span> <span style="padding-right: 20px;padding-left: 20px;">|</span>
+                <a href="https://github.com/codecademy-beginners/text-adventure">
+                    Fork Us On GitHub
+                </a>
+            </div>
         </div>
-		<div id="main">
-		</div>
-	
-		<div id="belowMain">
-			<p>&gt;</p>
-
-			<input type="text" id="command">			
-		</div>
-		
-			<table id="footer">
-                
-			</table>
-		
 	</body>
 </html>
