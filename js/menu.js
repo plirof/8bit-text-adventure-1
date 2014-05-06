@@ -12,8 +12,12 @@ function desktopCss(){
         $("#game").animate({
             width: ""+(window.innerWidth-300)
         }, 300 );
-        $(".menu-content").animate({
-            textIndent: "-50px"
+        $(".segment").animate({
+            width: "300px",
+            marginLeft: "-50px"
+        }, 300 );
+        $(".menu-title").animate({
+            width: "300px",
         }, 300 );
         $("#game-input").animate({
             width: ""+(window.innerWidth-340)
@@ -37,8 +41,12 @@ function desktopCss(){
         $("#footer").animate({
             width: ""+(window.innerWidth-50)
         }, 300 );
-        $(".menu-content").animate({
-            textIndent: "0px"
+        $(".segment").animate({
+            width: "250px",
+            marginLeft: "0px"
+        }, 300 );
+        $(".menu-title").animate({
+            width: "250px",
         }, 300 );
         $("#game-input").animate({
             width: ""+(window.innerWidth-90)

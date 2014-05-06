@@ -1,3 +1,4 @@
+//Start of refactoring process
 (function game(){
     var data = {
         time: {
@@ -64,6 +65,19 @@ var screwdriverAvailable = false; //Just makes sure the user can't pick up the s
 var generator = false; //if true the generator is working
 //END OF VARIABLE AREA
 
+//Debug Section, a simple function for people working on new game content to check the game info
+function debug(){
+    console.log("%cGame Variables", "color: red;");
+    console.log("Time count: %c"+timeCount, "color: LightSkyBlue;");
+    console.log("Night count: %c"+nightCount, "color: LightSkyBlue;");
+    console.log("Health Points: %c"+hp, "color: LightSkyBlue;");
+    console.log("Atack Points & Weapon: %c"+atk[0]+", "+atk[1], "color: LightSkyBlue;");
+    console.log("Alive: "+alive, "color: LightSkyBlue;");
+    console.log("Current Location: %c"+currentPlace, "color: LightSkyBlue;");
+    console.log("Potions: %c"+pots, "color: LightSkyBlue;");
+    console.log("Water Level: %c"+water, "color: LightSkyBlue;");
+    console.log("Is the generator working?: %c"+generator, "color: LightSkyBlue;");
+}
 //AUTOCOMPLETE AREA
 
 //Updates the autocomplete with items from the user's inventory (used for drop commands)
@@ -611,6 +625,9 @@ function moveToHome() {
             case "inv banana":
             	addInv("You go to a banana tree and get a banana. It\'s perfectly yellow and tantalizingly good-scented.","banana", false, 0)
             break;
+            case "debug":
+                debug();
+            break;
             default :
             //If the user typed none of the above, logs "Misunderstood command."
             addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
@@ -721,7 +738,9 @@ function moveToCave() {
 			timeCheck();
 			//Do NOT call the moveToWaterFall() function!
 			break;
-
+        case "debug":
+            debug();
+            break;
 		default:
 			//Checks to see if user's input is 'inv screwdriver' when first visiting. If so, it prints
 			//"Misunderstood command".
@@ -834,14 +853,16 @@ function moveToWaterfall() {
 		//Do NOT call the moveToCave() function!
 		break;
 	    case "move to bank":
-		displayImage(imgLoc.bank, imgLoc.ID);
-		addText("You walk your way to the eastern bank of the island, distant image of the boat begins to be clearer. When you arrive at the bank, the condition of themove to home boat does not impress you too much, there will be some repairing needed.");
-		currentPlace = "bank";
-		firstVisit = false;
-		timeCheck();
-		//Do NOT call the moveToBank() function!
-		break;
-            default :
+            displayImage(imgLoc.bank, imgLoc.ID);
+            addText("You walk your way to the eastern bank of the island, distant image of the boat begins to be clearer. When you arrive at the bank, the condition of themove to home boat does not impress you too much, there will be some repairing needed.");
+            currentPlace = "bank";
+            firstVisit = false;
+            timeCheck();
+            break;
+        case "debug":
+            debug();
+            break;
+        default :
             //If the user typed none of the above, logs "Misunderstood command."
             addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 
@@ -934,17 +955,19 @@ function moveToGenerator() {
             break;
             case "move to waterfall":
             	displayImage(imgLoc.waterfall, imgLoc.ID);
-		addText("You walk over to the waterfall.");
-		addText("You finally reach the waterfall then you just sit down on a rock trying to clear your thoughts. It was a hard day for you so far, you are dirty, tired and thirsty , but despite all your troubles you find strength to smile , after all you found source of water! You decide to rest here for a while and consider your options, if you only had a bottle with you...");
-		currentPlace = "waterfall";
-		firstVisit = true;
-		timeCheck();
-		//Do NOT call the moveTo**AREA1**() function!
-		break;
-
-            default :
-            //If the user typed none of the above, logs "Misunderstood command."
-            addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
+                addText("You walk over to the waterfall.");
+                addText("You finally reach the waterfall then you just sit down on a rock trying to clear your thoughts. It was a hard day for you so far, you are dirty, tired and thirsty , but despite all your troubles you find strength to smile , after all you found source of water! You decide to rest here for a while and consider your options, if you only had a bottle with you...");
+                currentPlace = "waterfall";
+                firstVisit = true;
+                timeCheck();
+                //Do NOT call the moveTo**AREA1**() function!
+                break;
+            case "debug":
+                debug();
+            break;
+            default:
+                //If the user typed none of the above, logs "Misunderstood command."
+                addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 
         }
 	}
@@ -1027,14 +1050,17 @@ function moveToBank() {
 		//Do NOT call the moveTo**AREA1**() function!
 		break;
 	    case "move to home":
-	    	displayImage(imgLoc.home, imgLoc.ID);
-		addText("You walk over to the place you first woke up in...");
-		addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
-		currentPlace = "home";
-		firstVisit = false;
-		//Do NOT call the moveToHome() function!
-		break;       
-            default :
+            displayImage(imgLoc.home, imgLoc.ID);
+            addText("You walk over to the place you first woke up in...");
+            addText("This island is so small that you can see every bank from your current vantage point.In your near distance there is  a broken boat, a generator, banana trees, sharp-edged agave plants and a cave.");
+            currentPlace = "home";
+            firstVisit = false;
+            //Do NOT call the moveToHome() function!
+            break; 
+        case "debug":
+            debug();
+        break;
+        default :
             //If the user typed none of the above, logs "Misunderstood command."
             addTextNoLast('Misunderstood command "'+user+'", use the command "help" for a list of available commands.');
 
@@ -1048,15 +1074,17 @@ function moveToBank() {
 printStart();
 
 //If the user pressed the enter key get the input and use the autocomplete function
+function processRequest(){
+    findCurrentPlace();
+    $("input").val("");
+    getTags();
+    $( "#game-input" ).autocomplete({
+        source: autoInv
+    });
+}
 $(document).keydown(function(key) {
-	if (parseInt(key.which,10) === 13) {
-		findCurrentPlace();
-
-		$("input").val("");
-		getTags();
-		$( "#game-input" ).autocomplete({
-		source: autoInv
-		});
+    if (parseInt(key.which,10) === 13) {
+		processRequest();
 	}
 });
 
