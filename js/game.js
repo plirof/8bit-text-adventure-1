@@ -200,7 +200,8 @@ ID : "game-output-display" //ID is the same for all because we want all images t
 };
 //function that enables image of areas to be displayed.
 function displayImage(dirLoc, ID) { // example: dirLoc would be : imgLoc.home , and ID would be imgLoc.ID  / using information from imgLoc object above. 
-    document.getElementById(ID).style.background = "url(../"+dirloc+") no-repeat center center";
+    //document.getElementById(ID).style.background = "url(../"+dirloc+") no-repeat center center";
+    document.getElementById(ID).src = dirLoc;
 }
 
  
