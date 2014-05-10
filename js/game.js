@@ -82,40 +82,16 @@ function debug(){
 
 //Updates the autocomplete with items from the user's inventory (used for drop commands)
 function updateInv(array) {
-	newInv = [];
-	autoInv = [];
-	for (i=0; i<inv.length; i++) {
-        newInv.push("drop " + inv[i]);
-	}
-	for (i=0; i<staticAutoInv.length; i++) {
-		newInv.push(staticAutoInv[i]);
-	}
-	var newArray = array.concat(newInv);
-	autoInv = newArray.sort();
+	inv.forEach(function(val){
+        array.push("drop " + val);
+    });
+	autoInv = array.concat(staticAutoInv).sort();
 }
-
 //Gets the current place and gets the appropriate autocomplete tags
 function getTags() {
-	switch (currentPlace) {
-	case "home":
-		updateInv(homeRaw);
-		break;
-	case "generator":
-		updateInv(generatorRaw);
-		break;
-	case "cave":
-		updateInv(caveRaw);
-		break;
-	case "bank":
-		updateInv(bankRaw);
-		break;
-	case "waterfall":
-		updateInv(waterfallRaw);
-		break;
-	}
+    updateInv(eval(currentPlace+"Raw"));
 }
-//Calls the function to initialise the autocomplete function
-getTags();
+getTags(); // Initialises auto complete
 
 //END OF AUTOCOMPLETE AREA
 

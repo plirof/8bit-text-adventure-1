@@ -25,6 +25,4 @@ function desktopCss(){
     $("#menu").hover(onhover, offhover(300));
     window.onresize = offhover(0);
 };
-enquire.register("only screen and (min-width : 600px)", function(){
-    window.onload = desktopCss;
-});
+window.onload = desktopCss;

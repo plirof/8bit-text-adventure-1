@@ -2,26 +2,23 @@
 <html>
 	<head>
 		<title>A Text Adventure</title>
-        
         <!-- Stylesheets -->
 		<link rel="stylesheet" type="text/css" href="css/stylesheet_desktop.css" 
-              media="only screen and (min-width : 600px)" />                                                                
-        <link rel="stylesheet" type="text/css" href="css/stylesheet_mobile.css" 
-              media="only screen and (min-device-width : 320px) and (max-device-width : 480px)">
+              media="only screen and (min-width : 600px) and (min-height : 700px)" />                                                                
+        <link rel="stylesheet" type="text/css" href="css/stylesheet_mobile_portrait.css" 
+              media="only screen and (max-width : 599px), only screen and (min-device-width : 320px) and (max-device-width : 480px)">
+        <link rel="stylesheet" type="text/css" href="css/stylesheet_mobile_landscape.css" 
+              media="only screen and (max-height : 699px), only screen (max-device-height : 699px)">
 	    <link rel="icon" href="images/favicon.png" type="image/icon">
 		<link rel="stylesheet" href="css-ui/dark-hive/jquery-ui-1.10.3.custom.css" />
-        
         <!-- Scripts -->
 		<script src="js-ui/jquery-1.9.1.js"></script>
 		<script src="js-ui/jquery-ui-1.10.3.custom.min.js"></script>
-        <script src="js-ui/enquire.js"></script>
 		<script src="js/menu.js"></script>
         <script src="js/game.js"></script>
-		
         <!-- Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        
 	</head>
 	<body>
 		<div id="container">
@@ -86,8 +83,8 @@
                 </div>
             </div>
             <div id="footer">
-                <span id="byline">A Game By <a href="https://github.com/codecademy-beginners">8BIT</a></span> <span style="padding-right: 20px;padding-left: 20px;">|</span>
-                <a href="https://github.com/codecademy-beginners/text-adventure">
+                <span id="byline">A Game By <a href="https://github.com/codecademy-beginners" target="_blank">8BIT</a></span> <span style="padding-right: 20px;padding-left: 20px;">|</span>
+                <a href="https://github.com/codecademy-beginners/text-adventure" target="_blank">
                     Fork Us On GitHub
                 </a>
             </div>

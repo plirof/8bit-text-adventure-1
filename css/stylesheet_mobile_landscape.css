@@ -1,0 +1,83 @@
+a {
+    text-decoration: none;
+}
+::-webkit-scrollbar { 
+    display: none; 
+}
+scrollbar { 
+    display: none; 
+}
+input[type=text] {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0px;
+}
+#header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 30px;
+    width: 100%;
+    background-color: #FFF;
+    font-family: 'Raleway', 'sans-serif';
+    text-align: center;
+}
+#title {
+    font-size: 20px;
+    line-height: 30px;
+}
+#footer {
+    display: none;
+}
+#game {
+    position: fixed;
+    top: 30px;
+    left: 0px;
+    font-family: 'Raleway', 'sans-serif';
+    text-align: left;
+    background-color: #d4d4d4;
+    width: 100%;
+    height: Calc(100% - 30px);
+}
+#game-output {
+    height: Calc(100% - 60px);
+    font-size: 20px;
+    overflow-y: scroll;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+#game-output-display {
+    display: none;
+}
+#game-input-container {
+    position: fixed;
+    background-color: #717171;
+    height: 30px;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    outline: none !important;
+    border: none !important;
+    line-height: 30px;
+}
+#game-input {
+    position: absolute;
+    left: 0px;
+    appearance:none;
+    height: 30px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    outline: none;
+    line-height: 30px;
+    text-align: center;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 20px;
+}
+#game-input-icon {
+    display: none;
+}
+#menu {
+    display: none;
+}
